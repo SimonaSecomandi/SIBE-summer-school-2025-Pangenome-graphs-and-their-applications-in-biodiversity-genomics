@@ -69,3 +69,7 @@ The file is organized like this:
 For the backbone reference, the pipeline currently doesn't support the presence of both haplotypes in the form bTaeGut1.1 and bTaeGut1.2. The coordinate space can only be based on a single haplotype and the variants inside the pangenome will be always referenced to the backbone reference, therefore it would not be possible to retrieve a VCF file with diploid genotype calls (e.g. 0/1) since one of the two haplotype it is indeed the reference. However, the pipeline will work using the IDs **bTaeGut1_hap1** and **bTaeGut1_hap2**. These will be considered as separate samples, but it's always convenient to include the alternate haplotype of the main reference as you will retain information about their variability for downstream analysis (e.g. reconstruction on an extinct species genome).
 
 In addition to the chosen reference, one may specify additional assemblies with coordinates that can serve as a reference for graph decomposition. 
+
+# References
+
+1. Hickey, Glenn, et al. "Pangenome graph construction from genome alignments with Minigraph-Cactus." Nature biotechnology 42.4 (2024): 663-673.
