@@ -57,7 +57,7 @@ To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://g
 We will create a pangenome for **chromosome 12** of two different **Zebra finch (*Taeniopygia guttata*)** individuals publicly available on NCBI.
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/Zebra%20Finches_Michael_Lawton_Flickr.jpg" alt="drawing" width="300"/>
-*Two Zebra finches. Credits: [Flickr/Michael Lawton](https://www.flickr.com/photos/michaellawton/5712718319)*<br />
+Two Zebra finches. Credits: [Flickr/Michael Lawton](https://www.flickr.com/photos/michaellawton/5712718319)
 
 The **backbone reference** will be the new T2T reference genome [bTaeGut7.mat](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_048771995.1/), specifically the maternal haplotype. We will also include the paternal haplotype [bTaeGut7.pat](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_048772025.1/) and another chromosome-level individual: [bTaeGut2.hap1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_051427915.1/) and [bTaeGut2.hap2](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_051428105.1/).
 
