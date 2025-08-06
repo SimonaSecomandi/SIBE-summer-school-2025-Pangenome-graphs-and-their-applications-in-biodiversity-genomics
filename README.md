@@ -56,7 +56,7 @@ To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://g
 
 We will create a pangenome for **chromosome 12** of two different **Zebra finch (*Taeniopygia guttata*)** individuals publicly available on NCBI.
 
-<img src="[drawing.jpg](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/finches.jpg)" alt="drawing" width="50"/>
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/finches.jpg" alt="drawing" width="50"/>
 
 ![](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/finches.jpg)
 
