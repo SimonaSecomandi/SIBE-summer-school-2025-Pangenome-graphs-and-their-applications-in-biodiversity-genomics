@@ -15,7 +15,7 @@ This course will...
 1. Pangenome construction
     1. Fasta input files
     2. bTaeGut.seqfile input file
-    
+
 ## 0. First steps
 
 ### 0.1 Files and folders
@@ -42,7 +42,9 @@ Other tools can be found here:
 
 ## 1. Pangenome construction
 
-To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>1</sup>
+To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>1</sup>. The pipeline can be run as a whole or run step by step. 
+
+#### Main steps of the MC pipeline:
 
 1. A user-selected reference genome is used as the initial backbone
 2. The reference is progressively augmented with structural variation from the other genomes by minigraph, a sequence-to-graph aligner, as a graph constructor. The resulting graph is SV only (>50 bp)
@@ -52,23 +54,37 @@ To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://g
 
 ## 1.1 Fasta input files
 
+We will create a pangenome for **chromosome 12** of two different **Zebra finch (*Taeniopygia guttata*)** individuals publicly available on NCBI.
 
+![Zebra finch picture](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/finches.webp)
+
+*Credits: [Flickr/Michael Lawton](https://www.flickr.com/photos/michaellawton/5712718319)*
+
+The **backbone reference** will be the new T2T reference genome [bTaeGut7.mat](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_048771995.1/), specifically the maternal haplotype. We will also include the paternal haplotype [bTaeGut7.pat](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_048772025.1/) and another chromosome-level individual: [bTaeGut2.hap1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_051427915.1/) and [bTaeGut2.hap2](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_051428105.1/).
+
+Differently from ProgressiveCactus, **MC ignores soft-masked bases**, so there is no need to repeat mask the genomes. For both, hard-masking is not recommended.
 
 ## 1.2 bTaeGut.seqfile input file 
 
-The main input file for the MC pipeline is the [SeqFile.txt]() file. Similarly to Progressive Cactus, this file contains the paths to all the fasta files we want to include in the pangenome. The main difference with the Progressive Cactus imput file is the absence of a guide three (Newick format), which is usually the first row in the Cactus file.
+The main input file for the MC pipeline is the [SeqFile.txt]() file. Similarly to Progressive Cactus, this file contains the paths to all the fasta files we want to include in the pangenome. The main difference with the Progressive Cactus imput file is the absence of a guide three (Newick format), which is usually the first row in the Cactus file. 
 
 The file is organized like this:
 
 | GenomeID.hap  | path/to/fasta |
 | ------------- |:-------------:|
-| bTaeGut1.1    | ~/2_fasta_files/..fasta |
-| bTaeGut1.2    | ~/2_fasta_files/..fasta |
-....etc
+| bTaeGut7_hap1 | ~/2_fasta_files/bTaeGut7.mat_NC_133037.1_chr12.fasta |
+| bTaeGut7_hap2 | ~/2_fasta_files/bTaeGut7.pat_CM109762.1_chr12.fasta |
+| bTaeGut2.1 | ~/2_fasta_files/bTaeGut2.hap1_CM121069.1_chr12.fasta |
+| bTaeGut2.2 | ~/2_fasta_files/bTaeGut2.hap2_CM121111.1_chr12.fasta |
 
-For the backbone reference, the pipeline currently doesn't support the presence of both haplotypes in the form bTaeGut1.1 and bTaeGut1.2. The coordinate space can only be based on a single haplotype and the variants inside the pangenome will be always referenced to the backbone reference, therefore it would not be possible to retrieve a VCF file with diploid genotype calls (e.g. 0/1) since one of the two haplotype it is indeed the reference. However, the pipeline will work using the IDs **bTaeGut1_hap1** and **bTaeGut1_hap2**. These will be considered as separate samples, but it's always convenient to include the alternate haplotype of the main reference as you will retain information about their variability for downstream analysis (e.g. reconstruction on an extinct species genome).
+For the backbone reference, the pipeline currently doesn't support the presence of both haplotypes in the form bTaeGut1.1 and bTaeGut1.2. The coordinate space can only be based on a single haplotype and the variants inside the pangenome will be always referenced to the backbone reference, therefore it would not be possible to retrieve a VCF file with diploid genotype calls (e.g. 0/1) since one of the two haplotype it is indeed the reference. However, the pipeline will work using the IDs **bTaeGut1_hap1** and **bTaeGut1_hap2**. These will be considered as separate samples, but it's always convenient to include the alternate haplotype of the main reference as you will retain information about their variability for downstream analysis (e.g. read mapping and variant calling).
 
-In addition to the chosen reference, one may specify additional assemblies with coordinates that can serve as a reference for graph decomposition. 
+In addition to the chosen reference, one may specify additional assemblies with coordinates that can serve as a reference for graph decomposition, i.e. the pipeline will generate a VCF file referenced to the backbone reference and the additional references (see below).
+
+## 1.3 Running the MC pipeline
+
+Running the pipeline is pretty straight forwars. Run the following command in the main directory:
+
 
 # References
 
