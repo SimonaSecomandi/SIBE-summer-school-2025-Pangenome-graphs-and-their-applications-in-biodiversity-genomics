@@ -2,6 +2,8 @@
 
 This repository contains the script and files for the pratical part of the course "Pangenome graphs and their application to biodiversity genomics" held the 8th of September 2025 in Ferrara, Italy, as part of the [SIBE summer school](https://sites.google.com/view/sibesummerschool/home-page).
 
+The title of this course recalls our recent pangenomics review (Secomandi et al., 2025)<sup>1</sup> and citations can be find in the following text. 
+
 ## Introduction
 
 This course will...
@@ -41,14 +43,14 @@ Other tools can be found here:
 
 ## 1. Pangenome construction
 
-To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>1</sup>. The pipeline can be run as a whole or run step by step. 
+To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>2</sup>. The pipeline can be run as a whole or run step by step. 
 
-#### Main steps of the MC pipeline:
+#### Main steps of the MC pipeline<sup>1</sup>:
 
 1. A user-selected reference genome is used as the initial backbone
-2. The reference is progressively augmented with structural variation from the other genomes by minigraph, a sequence-to-graph aligner, as a graph constructor. The resulting graph is SV only (>50 bp)
+2. The reference is progressively augmented with structural variation from the other genomes by minigraph<sup>3</sup>, a sequence-to-graph aligner, as a graph constructor. The resulting graph is SV only (>50 bp)
 3. All assemblies are aligned back to the graph with a minimap2-like algorithm that generates base-level alignments for each reference chromosome separately.
-4. A modified version of the reference-free aligner [Progressive Cactus](https://github.com/ComparativeGenomicsToolkit/cactus) is used to combine the alignments into base-level pangenome graphs that contain variants of all sizes
+4. A modified version of the reference-free aligner Progressive Cactus<sup>4</sup> is used to combine the alignments into base-level pangenome graphs that contain variants of all sizes
 5. Chromosomal graphs are then combined and post-processed to reduce path complexity by collapsing redundant sequences. 
 
 ## 1.1 Fasta input files
@@ -80,7 +82,7 @@ The file is organized like this:
 * The **backbone reference** (we will use *bTaeGut7.hap1*) can only be a single haplotype and **IT NEEDS TO BE CHROMOSOME-LEVEL**. Its chromosomes will be used as a template to align the other's genomes chromosomes/scaffolds and generate chromosomes graphs that will be then merged. This genome will be the main reference for the output VCF (containing the variants inside the pangenome) and will not appear as sample in the VCF. It will be also used as reference for downsteam analyses. 
 * The pipeline currently does not support the presence of both haplotypes of the backbone individual in the form bTaeGut7.1 and bTaeGut7.2. The coordinate space for chromosome compartimentalization can only be based on a single haplotype (the backbone genome). However, the pipeline will work using the IDs **bTaeGut1_hap1** (backbone ref) and **bTaeGut1_hap2** (divergent haplotype of the backbone genome). These will be considered as separate samples, but it's always convenient to include the alternate haplotype of the main reference as you will retain information about their variability for downstream analyses (e.g. read mapping and variant calling). In the output VCF file, bTaeGut1_hap2 will appear as haploid (e.g. 0 instead of 1/0).
 
-* In addition to the backbone reference, one may **specify additional assemblies as reference** when running the MC pipeline. The graph will be referenced to the backbone genome, but the additional genome's paths will serve as a reference for graph decomposition, for example, i.e. the pipeline will generate multiple VCF files, one referenced to the backbone reference and the others to the additional references (see the ```--reference``` flag below). The chromosome compartimentalization will still rely on the backbone references's chromosomes.
+* In addition to the backbone reference, one may **specify additional assemblies as reference** when running the MC pipeline. The graph will be referenced to the backbone genome, but the additional genome's paths will serve as a reference for graph decomposition, for example, i.e. the pipeline will generate multiple VCF files, one referenced to the backbone reference and the others to the additional references (see below). The chromosome compartimentalization will still rely on the backbone references's chromosomes.
 
 ## 1.3 Running the MC pipeline
 
@@ -99,13 +101,13 @@ cactus-pangenome \
 --vcf \
 --vcfReference bPatFas1_hap1 bPatFas1_hap2 \
 --filter 1 \
---gfa filter clip full \
+--gfa clip filter \
 --gbz filter \
 --giraffe filter \
---vg clip filter full \
---xg clip filter full \
---odgi full \
---viz clip filter full \
+--vg clip filter \
+--xg clip filter \
+--odgi clip full \
+--viz full \
 
 ```
 * ```cactus-pangenome```: calls the MC pipeline 
@@ -118,6 +120,7 @@ Multiple flags can be set:
 * ```--outName```: output prefixes
 * ```--logFile```: path where to store the log file
 * ```--reference```: the reference you want to use as a backbone followed by the other you want to use as reference for the output VCF
+* ```--refContigs```: the reference chromosomes you want MC to base the chromosomes compartimentalization. In our case it's just ```chr12``` of bTaeGut7_hap1
 * ```--otherContigs``` (optional): tells MC to also consider unassembled scaffolds when generating the graph. They will be grouped in the same subgraph before merging the chromosomes. The name is used-defined. **Here is commented since we only have one chromosome.**
 * ```--vcf```: tells MC to generate VCFs files referenced to the ```--vcfReference``` genomes 
 
@@ -127,83 +130,106 @@ In the following tags you can specify on which type of graph you want to operate
 3. **filter graph**: used for ```vg giraffe```, contains only nodes trasversed by X number of haplotypes (10% in the HPRC human pangenome)
 
 * ```--filter 1```: removes nodes covered by less that 1 haplotype. We will use 1 since the 10% of our 4 haplotypes would be 0.4 
-* ```--gfa clip filter full```: output the graphs in the text-based Graphical Fragment Assembly (GFA) format, which si the default format. This format is typically the most compatible for exchanging graphs between ```vg``` and other pangenome tools
+* ```--gfa clip filter```: output the graphs in the text-based Graphical Fragment Assembly (GFA) format, which si the default format. This format is typically the most compatible for exchanging graphs between ```vg``` and other pangenome tools
 * ```--gbz filter```: generate the .gbz graph file for these type of graphs. The filter grah in .gbz format is needed for ```vg giraffe```.
 * ```--giraffe filter```: generate ```vg giraffe``` indexes for the filter graph (default)
-* ```--vg clip filter full```:  generate the graphs in the Variation Graph (VG, .vg) format, usefull to use with the vg toolkit
-* ```--xg clip filter full```: generate the .xg index file for these type of graphs. It's a compressed, indexed representation of a variation graph, specifically optimized for fast path and graph traversal operations
+* ```--vg clip filter```:  generate the graphs in the Variation Graph (VG, .vg) format, usefull to use with the vg toolkit
+* ```--xg clip filter```: generate the .xg index file for these type of graphs. It's a compressed, indexed representation of a variation graph, specifically optimized for fast path and graph traversal operations
 *  ```--og full```: generate the graph in the ```odgi``` format  ```.og```. Usefull when running operations using ```odgi```
 * ```--viz full```: generate an ```odgi viz``` 1D .png for each chromosome. ```odgi``` works better with full graphs, the presence off all sequences doesn't hinder the visualization.
 
 If you have multiple chromosome you can also add ```--chrom-og```  and ```--chrom-vg``` to generate ```.og``` and ```.vg``` files for each chromosome. If you forget to set some of these flags don't worry, you can always generate ```.vg```, ```.og```, and other files later on.
 
-## Emphasis
+## Outputs
 
-*This text will be italic*
-_This will also be italic_
+## 2. Pangenome evaluation
 
-**This text will be bold**  
-__This will also be bold__
+### 2.1 Statistics 
+After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
-_You **can** combine them_
+```bgzip -d -@ 32 5.1_MC18/5.1_MC18.gfa.gz``` <br />
+```odgi build -t 32 -g 5.1_MC18/5.1_MC18.gfa -o 5.1_MC18/5.1_MC18.gfa.og``` <br />
+```printf "Generating stats for 5.1_MC18/5.1_MC18.gfa.og"``` <br />
+```odgi stats -t 32 -S -i 5.1_MC18/5.1_MC18.gfa.og > 5.1_MC18/5.1_MC18.gfa.og.stats```
 
-## Lists
+**The output:**
 
-### Unordered
+You can ```cat``` the output from ```odgi stats``` and look at the content:
 
-* Item 1
-* Item 2
-* Item 2a
-* Item 2b
-    * Item 3a
-    * Item 3b
+```cat 5.1_MC18/5.1_MC18.gfa.og.stats```
 
-### Ordered
+| length|nodes|edges|paths|steps|
+| ----- |:----:|:----:|:----:|:----:|
+| 1661172842|107376702|146402494|0|0
 
-1. Item 1
-2. Item 2
-3. Item 3
-    1. Item 3a
-    2. Item 3b
+The graph has:
+- **Length of X bp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph.
+- X nodes
+- X edges 
 
-## Images
+*Is the pangenome graph bigger than the original reference sequence?* 
 
-![This is an alt text.](/image/sample.webp "This is a sample image.")
+**YES!!**
 
-## Links
+Original size: X vs. Pangenome size: X
 
-You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
+*The size of a pangenome graph depends on the genome size of the respective species but is bound to be larger, as it incorporates accessory sequences from other individuals, and it is also influenced by the number and diversity of the individuals contributing to the pangenome as well as by the construction pipeline<sup>1</sup> *
 
-## Blockquotes
+*Of how much the reference was augmented by the other sequences?* 
 
-> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
->
->> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+The other sequences augmented the graph by X bp (X %). 
 
-## Tables
+### 2.2 Subsampling and visualization 
 
-| Left columns  | Right columns |
-| ------------- |:-------------:|
-| left foo      | right foo     |
-| left bar      | right bar     |
-| left baz      | right baz     |
+Visualization is important to get an idea of the structure of the graph and the variability among the different genomes.
 
-## Blocks of code
+#### odgi viz<sup>5</sup>
 
-```
-let message = 'Hello world';
-alert(message);
-```
+In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder XX. Odgi viz was generated on the full graph as explained before and a .png file for each chromosome (one in our particular case) was generated. The input for odgi viz was the -og chromosome object.
 
-## Inline code
+Let's look at it. Each line represents a different chromosome' path with their genome.ID in the right side. Each path is coloured when passing through a node and edges representing variantion are represented by black lines in the bottom of the figure.
 
-This web site is using `markedjs/marked`.
+#### SequenceTubeMap<sup>6</sup>
 
-# References
+Another useful tool for visualizing pangenome graphs is SequenceTubeMap. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is visualized differently and it can be inspected interactively.
 
-1. Hickey, Glenn, et al. "Pangenome graph construction from genome alignments with Minigraph-Cactus." Nature biotechnology 42.4 (2024): 663-673.
+To visualize a specific vg file without uploading it on the webpage, it is possible to launch a server which provides the data to SequenceTubeMap<sup>6</sup>. In this course we will use the web interface for simplicity. 
+
+First, we will chunk the graph in a smaller piece to be able to upload it online (the limit is X Mb).
+
+1. Run this command on the graph: 
+
+```vg chunk -t 64 -c 20 -x 5.1_MC18.d4.xg -p bPatFas1_hap1#0#chr1:10000000-100010000 -O vg > Chr1_10k.d4.vg```
+
+The output would be: ...
+
+2. Prepare the graph for SequenceTubeMap. These commands are included in the prepare_vg.sh script in [SequenceTubeMap repository](https://github.com/vgteam/sequenceTubeMap/tree/master/scripts)
+
+```vg convert "${1}" -x >"${1}.xg```
+```vg gbwt -x "${1}" -v "${1%.vg}.vcf.gz" -o "${1}.gbwt``` #do i need this??
+
+You can find it in the folder on this github repository, download it directly from her the the computer.
+
+2. Go to the [sequenceTubeMap demo page](https://vgteam.github.io/sequenceTubeMap/). Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change the "mounted" with "upload" > select the file from the Download folder. 
+
+Inspect the graph:
+- How many variants do you see?
+- ....
+
+## 3. Pangenome-embedded variants
+
+*We looked at the variants inside the pangenome, but how can I look at them in a canonical way and use them for downstream analysis?*
+
+The MC pipeline produces VCF files referenced to the backbone reference and other genomes you specified in the command. You can find information about the VCF format [here](https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+
+The process through which the variants are defined is called **graph decomposition**, the process of breaking down a pangenome graph into smaller, more manageable subgraphs or components (snarls or bubbles).
+
+The file names are: X.vcf and X.vcf
+
+You might have noticed "raw" VCF files. These are those directly outputted by vg deconstruct inside that are then normalized and postprocessed automatically.
+
+Let's look at the VCF referenced to out backbone reference. Run the following command:
+
+bcftools view -H 5.1_MC18.raw.vcf.gz | head
 
 
-# References
-
-1. Hickey, Glenn, et al. "Pangenome graph construction from genome alignments with Minigraph-Cactus." Nature biotechnology 42.4 (2024): 663-673.
