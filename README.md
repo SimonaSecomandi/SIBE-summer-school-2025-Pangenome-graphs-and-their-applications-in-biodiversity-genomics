@@ -72,8 +72,8 @@ The file is organized like this:
 
 | GenomeID.hap  | path/to/fasta |
 | ------------- |:-------------:|
-| bTaeGut7_hap1 | 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta |
-| bTaeGut7_hap2 | 1_fasta_files/bTaeGut7_pat_chr22_CM109772.1.fasta |
+| bTaeGut7_mat| 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta |
+| bTaeGut7_pat | 1_fasta_files/bTaeGut7_pat_chr22_CM109772.1.fasta |
 | bTaeGut2.1 | 1_fasta_files/bTaeGut2_hap2_chr22_CM121079.1.fasta |
 | bTaeGut2.2 | 1_fasta_files/bTaeGut2_hap2_chr22_CM121121.1.fasta |
 
