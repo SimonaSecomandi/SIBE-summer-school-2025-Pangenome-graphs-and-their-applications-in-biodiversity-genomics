@@ -2,7 +2,8 @@
 
 This repository contains the script and files for the pratical part of the course "Pangenome graphs and their application to biodiversity genomics" held the 8th of September 2025 in Ferrara, Italy, as part of the [SIBE summer school](https://sites.google.com/view/sibesummerschool/home-page).
 
-The title of this course recalls our recent pangenomics review (Secomandi et al., 2025)<sup>1</sup> and citations can be find in the following text. 
+The title of this course recalls our recent pangenomics review:
+[Secomandi, S., Gallo, G., et al. Pangenome graphs and their applications in biodiversity genomics. Nat. Genet. 57, 13–26 (2025)](https://www.nature.com/articles/s41588-024-02029-6)
 
 ## Introduction
 
@@ -137,7 +138,7 @@ Multiple flags can be set:
 
 In the following tags you can specify on which type of graph you want to operate on. Three type of graphs can be generated from the MC pipeline: 
 1. **full graph**: all sequenced are included (default MC output)
-2. **clip graph**: sequences not aligned the the SV-only graph produced by Minigraph and other sequences are removed to have a "cleaner" graph. Clipping is necessary to reduce the complexity of the graph and make downstream analysis more feasible. For example, the very repetitive centromeric regions are clipped away and this is necessary to avoid the generation of comple loops that will hinder read mapping.
+2. **clip graph**: sequences not aligned the the SV-only graph produced by Minigraph and other sequences are removed to have a "cleaner" graph. 
 3. **filter graph**: used for ```vg giraffe```, contains only nodes trasversed by X number of haplotypes (10% in the HPRC human pangenome)
 
 * ```--filter 1```: removes nodes covered by less that 1 haplotype. We will use 1 since the 10% of our 4 haplotypes would be 0.4 
@@ -222,11 +223,12 @@ You can ```cat``` the output from ```odgi stats``` and look at the content:
 | 5904335|491480|670290|9|1198027
 
 The graph has:
-- **Length of 5.9 Mbp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph, i.e. if you concatenate all node sequences, you would get ~5.9 Mbp of sequence
-- **491k nodes** (i.e. the building blocks of the graph --> each node corresponds to a contiguous DNA sequence)
-- **670k edges** (i.e. the connections between the nodes --> edges describe how sequences can traverse from one node to another)
-- **9 paths** (i.e. the number of sequences)
-- **1.19 M steps** (i.e.)
+- **Length of 5.9 Mbp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph &rarr; if you concatenate all node sequences, you would get ~5.9 Mbp of sequence
+- **491k nodes**: the building blocks of the graph &rarr; each node corresponds to a contiguous DNA sequence
+- **670k edges**:the connections between the nodes &rarr; edges describe how sequences can traverse from one node to another
+- **9 paths**: a “path” usually corresponds to a genome/assembly/chromosome provided as input. See below for the explanation on why there are 9 paths instead of 4. 
+- **1.19 M steps**: the total number of node visits across all paths
+
 ___
 
 ####  QUESTION 1: *is the pangenome graph bigger than the original reference sequence?* 
@@ -243,13 +245,12 @@ Look at the .fai index file:
 | ----- |:----:|:----:|:----:|:----:|
 chr22	| 5052704 |	7 | 70 | 71
 
-In this index file, the chromosome size is the second column.
+In this index file, the chromosome size is in the second column.
 
 * Original size of the backbone chromosome: **5.05 Mbp**
 * Pangenome size: **5.9 Mbp**
 
 #### ANSWER:  The pangenome size is bigger than the original reference. 
-
 ______
 
 ####  QUESTION 2: *of how much the reference was augmented by the other sequences?* 
@@ -259,7 +260,7 @@ ______
 #### ANSWER: The other chromosomes augmented the reference by 0.9 Mbp
 ___
 
-####  QUESTION 3: *Why we have 4 input sequences and 9 paths? Shouldn't there be 4 paths?* 
+####  QUESTION 3: *Why do we have 4 input sequences but 9 paths? Shouldn’t there be only 4 paths?* 
 
 Let's look at the paths inside the graph. You can list the paths with ```odgi paths```:
 
@@ -283,15 +284,15 @@ bTaeGut7_pat#0#chr22[6348-4838699]
 
 The format is: ```sample#hap#chrom#coords[start-end]```
 
-* *bTaeGut7_mat#0#chr22* = **Path 1** &rarr; The backbone reference is in one piece (used to map the other chromosomes) 
+* *bTaeGut7_mat#0#chr22* = **Path 1** &rarr; the backbone reference is in one piece (used to map the other chromosomes) 
 * bTaeGut7_pat#0#chr22[6348-4838699] = **Path 2** &rarr; the alternate haplotype of the backbone reference is aligning in a big piece with start coordinate at 6348 bp and end coordinate at 4838699 bp
 * bTaeGut2#1#chr22#0[*] = **Paths 3-8** &rarr; haplotype 1 of the second individual is not aligning contigously and it's split on 6 different pieces
 * bTaeGut2#2#chr22#0[0-4660045] = **Path 9** &rarr; haplotype 2 of the second individual is also aligning in a big piece
 
-#### ANSWER: if the sequences doesn't align contiguously to the backbone reference (e.g. in the presence of structural variation) the other chromosomes might be split in multiple segments and counted as different paths, 9 in our case. Functionally, all bTaeGut2#1#chr22#0[*] lines together represent one biological chromosome, but they are split across multiple path segments.
+#### ANSWER: if the sequences doesn't align contiguously to the backbone reference (e.g. in the presence of repetitive regions) the other chromosomes might be split in multiple segments and counted as different paths, 9 in our case. Functionally, all bTaeGut2#1#chr22#0[*] lines together represent one biological chromosome, but they are split across multiple path segments.
 ___
 
-#### QUESTION 4: *is this happening also in the full graph or is it the result of the clipping?*
+#### QUESTION 4: *Does this occur in the full graph too, or only after clipping?*
 
 Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```):
 
@@ -321,6 +322,4 @@ bTaeGut7_pat#0#chr22
 #### ANSWER: in the full graph we have exactly 4 paths and the sequence length is way bigger than the clipped (6.9 Mbp). 
 
 * **Full graph**: keeps each input chromosome/haplptype as a single continuous path, 4 in total
-* **Clip graph**: removed sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 7 separate path segments. The overall graph length is also smaller than the full (~6.9 Mbp &rarr; ~5.9 Mbp)) 
-
-
+* **Clip graph**: removed sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 7 separate path segments. The overall graph length is also smaller than the full (~6.9 Mbp &rarr; ~5.9 Mbp))
