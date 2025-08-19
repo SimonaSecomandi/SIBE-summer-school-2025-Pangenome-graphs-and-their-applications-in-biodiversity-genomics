@@ -53,6 +53,9 @@ To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://g
 4. A modified version of the reference-free aligner Progressive Cactus<sup>4</sup> is used to combine the alignments into base-level pangenome graphs that contain variants of all sizes
 5. Chromosomal graphs are then combined and post-processed to reduce path complexity by collapsing redundant sequences. 
 
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/figures/Figure1_Hickey_G_et_al.jpg" alt="drawing" width="300"/> <br/>
+*Credits: [Hickey at al 2023](https://www.nature.com/articles/s41587-023-01793-w)*<br />
+
 ### 1.1 Fasta input files
 
 We will create a pangenome for **chromosome 12** of two different **Zebra finch (*Taeniopygia guttata*)** individuals publicly available on NCBI.
