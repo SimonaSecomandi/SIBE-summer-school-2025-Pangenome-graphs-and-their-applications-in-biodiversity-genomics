@@ -72,7 +72,7 @@ The file is organized like this:
 
 | GenomeID.hap  | path/to/fasta |
 | ------------- |:-------------:|
-| bTaeGut7_mat| 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta |
+| bTaeGut7_mat | 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta |
 | bTaeGut7_pat | 1_fasta_files/bTaeGut7_pat_chr22_CM109772.1.fasta |
 | bTaeGut2.1 | 1_fasta_files/bTaeGut2_hap2_chr22_CM121079.1.fasta |
 | bTaeGut2.2 | 1_fasta_files/bTaeGut2_hap2_chr22_CM121121.1.fasta |
@@ -86,6 +86,12 @@ The file is organized like this:
 
 ### 1.3 Running the MC pipeline
 
+*The pipeline will take ~13 minutes to finish using 8 threads and 8 GB RAM.*
+
+Activate the Cactus python environment:
+
+```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
+
 Run the following command in the main directory:
 
 ```
@@ -93,7 +99,7 @@ cactus-pangenome \
 2_bTaeGut_pangenome/jobStore \
 1_fasta_files/bTaeGut.seqfile \
 --outDir 2_bTaeGut_pangenome \
---outName 2_bTaeGut_pangenome \
+--outName bTaeGut_pangenome \
 --logFile 2_bTaeGut_pangenome/bTaeGut.log \
 --reference bTaeGut7_mat bTaeGut7_pat \
 --refContigs chr22 \
@@ -128,7 +134,7 @@ Multiple flags can be set:
 
 In the following tags you can specify on which type of graph you want to operate on. Three type of graphs can be generated from the MC pipeline: 
 1. **full graph**: all sequenced are included (default MC output)
-2. **clip graph**: sequences not aligned the the SV-only graph produced by Minigraph and other sequences are removed to have a "cleaner" graph. 
+2. **clip graph**: sequences not aligned the the SV-only graph produced by Minigraph and other sequences are removed to have a "cleaner" graph. Clipping is necessary to reduce the complexity of the graph and make downstream analysis more feasible. For example, the very repetitive centromeric regions are clipped away and this is necessary to avoid the generation of comple loops that will hinder read mapping.
 3. **filter graph**: used for ```vg giraffe```, contains only nodes trasversed by X number of haplotypes (10% in the HPRC human pangenome)
 
 * ```--filter 1```: removes nodes covered by less that 1 haplotype. We will use 1 since the 10% of our 4 haplotypes would be 0.4 
@@ -146,39 +152,39 @@ If you have multiple chromosome you can also add ```--chrom-og```  and ```--chro
 
 #### Graphs
 
-```2_bTaeGut_pangenome.sv.gfa.gz```: SV-only graph output by Minigraph<br/>
-```2_bTaeGut_pangenome.sv.gfa.fa.gz```: SVs included in the above Minigraph  graph in fasta format<br/>
-```2_bTaeGut_pangenome.full.hal```: Cactus's native alignment format, can be used to convert to MAF (multiple Alignment Files) and use it for liftovers, create tracks on the UCSC browser or perfom conservation analyses, among others<br/>
-```2_bTaeGut_pangenome.gfa.gz```: default ```clip``` graph in the default GFA format<br/>
-```2_bTaeGut_pangenome.xg```: .xg index for the default ```clip``` graph<br/>
-```2_bTaeGut_pangenome.og```: default ```clip``` graph in the ```odgi``` format<br/>
-```2_bTaeGut_pangenome.full.og```: ```full``` graph in the ```odgi``` format, used for graph visualization with ```odgi```<br/>
+```bTaeGut_pangenome.sv.gfa.gz```: SV-only graph output by Minigraph<br/>
+```bTaeGut_pangenome.sv.gfa.fa.gz```: SVs included in the above Minigraph  graph in fasta format<br/>
+```bTaeGut_pangenome.full.hal```: Cactus's native alignment format, can be used to convert to MAF (multiple Alignment Files) and use it for liftovers, create tracks on the UCSC browser or perfom conservation analyses, among others<br/>
+```bTaeGut_pangenome.gfa.gz```: default ```clip``` graph in the default GFA format<br/>
+```bTaeGut_pangenome.xg```: .xg index for the default ```clip``` graph<br/>
+```bTaeGut_pangenome.og```: default ```clip``` graph in the ```odgi``` format<br/>
+```bTaeGut_pangenome.full.og```: ```full``` graph in the ```odgi``` format, used for graph visualization with ```odgi```<br/>
 
-```2_bTaeGut_pangenome.d1.gfa.gz```: ```filter``` graph in the default GFA format (1 = kept only nodes covered by at least 1 path)<br/>
-```2_bTaeGut_pangenome.d1.gbz```: ```filter``` graph in GBZ format for ```vg giraffe```<br/>
-```2_bTaeGut_pangenome.d1.xg```: .xg index for the ```filter``` graph<br/>
-```2_bTaeGut_pangenome.d1.dist```: snarl distance index needed by ```vg giraffe```<br/>
-```2_bTaeGut_pangenome.d1.min```: minimizer index needed by ```vg giraffe```<br/>
-```2_bTaeGut_pangenome.d1.snarls```: end and start nodes for each bubble and nesting informations. Used by ```vg decontruct``` to generate the VCF files<br/>
+```bTaeGut_pangenome.d1.gfa.gz```: ```filter``` graph in the default GFA format (1 = kept only nodes covered by at least 1 path)<br/>
+```bTaeGut_pangenome.d1.gbz```: ```filter``` graph in GBZ format for ```vg giraffe```<br/>
+```bTaeGut_pangenome.d1.xg```: .xg index for the ```filter``` graph<br/>
+```bTaeGut_pangenome.d1.dist```: snarl distance index needed by ```vg giraffe```<br/>
+```bTaeGut_pangenome.d1.min```: minimizer index needed by ```vg giraffe```<br/>
+```bTaeGut_pangenome.d1.snarls```: end and start nodes for each bubble and nesting informations. Used by ```vg decontruct``` to generate the VCF files<br/>
 
 #### VCFs
 
-```2_bTaeGut_pangenome.raw.vcf.gz``` : main VCF file referenced to bTaeGut7_mat before normalization<br/>
-```2_bTaeGut_pangenome.raw.vcf.gz.tbi```: index for the main VCF file referenced o bTaeGut7_mat before normalization<br/>
-```2_bTaeGut_pangenome.vcf.gz```: final main VCF file referenced to bTaeGut7_mat)<br/>
-```2_bTaeGut_pangenome.vcf.gz.tbi```: index for the final main VCF file referenced to bTaeGut7_mat<br/>
-```2_bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz```: VCF file referenced to bTaeGut7_pat before normalization<br/>
-```2_bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz.tbi```: index for VCF file referenced to bTaeGut7_pat before normalization<br/>
-```2_bTaeGut_pangenome.bTaeGut7_pat.vcf.gz```: VCF file referenced to bTaeGut7_pat<br/>
-```2_bTaeGut_pangenome.bTaeGut7_pat.vcf.gz.tbi```: index for VCF file referenced to bTaeGut7_pat<br/>
+```bTaeGut_pangenome.raw.vcf.gz``` : main VCF file referenced to bTaeGut7_mat before normalization<br/>
+```bTaeGut_pangenome.raw.vcf.gz.tbi```: index for the main VCF file referenced o bTaeGut7_mat before normalization<br/>
+```bTaeGut_pangenome.vcf.gz```: final main VCF file referenced to bTaeGut7_mat)<br/>
+```bTaeGut_pangenome.vcf.gz.tbi```: index for the final main VCF file referenced to bTaeGut7_mat<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz```: VCF file referenced to bTaeGut7_pat before normalization<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz.tbi```: index for VCF file referenced to bTaeGut7_pat before normalization<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz```: VCF file referenced to bTaeGut7_pat<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz.tbi```: index for VCF file referenced to bTaeGut7_pat<br/>
 
 #### Additional files and folders
 
 ```bTaeGut.log```: log file of the MC run<br/>
 ```bTaeGut.seqfile```: copy of the input file<br/>
-```2_bTaeGut_pangenome.stats.tgz```: clipping stats<br/>
-```./2_bTaeGut_pangenome.chroms```: contains any graph type we speficied in the input for each chromosome<br/>
-```./2_bTaeGut_pangenome.viz```: contains .png files generated with ```odgi viz```<br/>
+```bTaeGut_pangenome.stats.tgz```: clipping stats<br/>
+```./bTaeGut_pangenome.chroms```: contains any graph type we speficied in the input for each chromosome<br/>
+```./bTaeGut_pangenome.viz```: contains .png files generated with ```odgi viz```<br/>
 ```./chrom-alignments```: contains intermediate files<br/>
 ```./chrom-subproblems```: contains intermediate files<br/>
 
@@ -187,89 +193,131 @@ If you have multiple chromosome you can also add ```--chrom-og```  and ```--chro
 ### 2.1 Statistics 
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
-```bgzip -d -@ 32 5.1_MC18/5.1_MC18.gfa.gz``` <br />
-```odgi build -t 32 -g 5.1_MC18/5.1_MC18.gfa -o 5.1_MC18/5.1_MC18.gfa.og``` <br />
-```printf "Generating stats for 5.1_MC18/5.1_MC18.gfa.og"``` <br />
-```odgi stats -t 32 -S -i 5.1_MC18/5.1_MC18.gfa.og > 5.1_MC18/5.1_MC18.gfa.og.stats```
+Activate the conda environment with all our commands:
+
+```conda activate SIBE_course```
+
+We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
+
+* **If you don't have an .og file** you can generate it as follows:
+
+```bgzip -d -@ 8 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa.gz```  <br />
+```odgi build -t 8 -g 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa -o 2_bTaeGut_pangenome/bTaeGut_pangenome.og```
+
+* However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph:
+
+```odgi stats -t 8 -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.stats```
 
 **The output:**
 
 You can ```cat``` the output from ```odgi stats``` and look at the content:
 
-```cat 5.1_MC18/5.1_MC18.gfa.og.stats```
+```cat 3_stats_and_viz/bTaeGut_pangenome.og.stats```
 
 | length|nodes|edges|paths|steps|
 | ----- |:----:|:----:|:----:|:----:|
-| 1661172842|107376702|146402494|0|0
+| 5904335|491480|670290|9|1198027
 
 The graph has:
-- **Length of X bp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph.
-- X nodes
-- X edges 
+- **Length of 5.9 Mbp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph, i.e. if you concatenate all node sequences, you would get ~5.9 Mbp of sequence
+- **491k nodes** (i.e. the building blocks of the graph --> each node corresponds to a contiguous DNA sequence)
+- **670k edges** (i.e. the connections between the nodes --> edges describe how sequences can traverse from one node to another)
+- **9 paths** (i.e. the number of sequences)
+- **1.19 M steps** (i.e.)
+___
 
-*Is the pangenome graph bigger than the original reference sequence?* 
+####  QUESTION 1: *is the pangenome graph bigger than the original reference sequence?* 
 
-**YES!!**
+Generate the fasta index for the reference genome:
 
-Original size: X vs. Pangenome size: X
+```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta```
 
-*The size of a pangenome graph depends on the genome size of the respective species but is bound to be larger, as it incorporates accessory sequences from other individuals, and it is also influenced by the number and diversity of the individuals contributing to the pangenome as well as by the construction pipeline<sup>1</sup> *
+Look at the .fai index file:
 
-*Of how much the reference was augmented by the other sequences?* 
+```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
 
-The other sequences augmented the graph by X bp (X %). 
+| chr | size   | offset  | linebases | linewidth |
+| ----- |:----:|:----:|:----:|:----:|
+chr22	| 5052704 |	7 | 70 | 71
 
-### 2.2 Subsampling and visualization 
+In this index file, the chromosome size is the second column.
 
-Visualization is important to get an idea of the structure of the graph and the variability among the different genomes.
+* Original size of the backbone chromosome: **5.05 Mbp**
+* Pangenome size: **5.9 Mbp**
 
-#### odgi viz<sup>5</sup>
+#### ANSWER:  The pangenome size is bigger than the original reference. 
 
-In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder XX. Odgi viz was generated on the full graph as explained before and a .png file for each chromosome (one in our particular case) was generated. The input for odgi viz was the -og chromosome object.
+______
 
-Let's look at it. Each line represents a different chromosome' path with their genome.ID in the right side. Each path is coloured when passing through a node and edges representing variantion are represented by black lines in the bottom of the figure.
+####  QUESTION 2: *of how much the reference was augmented by the other sequences?* 
 
-#### SequenceTubeMap<sup>6</sup>
+*The size of a pangenome graph depends on the genome size of the respective species but is bound to be larger, as it incorporates accessory sequences from other individuals, and it is also influenced by the number and diversity of the individuals contributing to the pangenome as well as by the construction pipeline*<sup>1</sup> 
 
-Another useful tool for visualizing pangenome graphs is SequenceTubeMap. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is visualized differently and it can be inspected interactively.
+#### ANSWER: The other chromosomes augmented the reference by 0.9 Mbp
+___
 
-To visualize a specific vg file without uploading it on the webpage, it is possible to launch a server which provides the data to SequenceTubeMap<sup>6</sup>. In this course we will use the web interface for simplicity. 
+####  QUESTION 3: *Why we have 4 input sequences and 9 paths? Shouldn't there be 4 paths?* 
 
-First, we will chunk the graph in a smaller piece to be able to upload it online (the limit is X Mb).
+Let's look at the paths inside the graph. You can list the paths with ```odgi paths```:
 
-1. Run this command on the graph: 
+```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.paths```
 
-```vg chunk -t 64 -c 20 -x 5.1_MC18.d4.xg -p bPatFas1_hap1#0#chr1:10000000-100010000 -O vg > Chr1_10k.d4.vg```
+**Output:**
 
-The output would be: ...
+```cat 3_stats_and_viz/bTaeGut_pangenome.og.paths```
 
-2. Prepare the graph for SequenceTubeMap. These commands are included in the prepare_vg.sh script in [SequenceTubeMap repository](https://github.com/vgteam/sequenceTubeMap/tree/master/scripts)
+```
+bTaeGut2#1#chr22#0[5771-877768]
+bTaeGut2#1#chr22#0[889321-1697614]
+bTaeGut2#1#chr22#0[1871689-2456870]
+bTaeGut2#1#chr22#0[2530823-3686875]
+bTaeGut2#1#chr22#0[3705235-3705399]
+bTaeGut2#1#chr22#0[3743670-5050960]
+bTaeGut2#2#chr22#0[0-4660045]
+bTaeGut7_mat#0#chr22
+bTaeGut7_pat#0#chr22[6348-4838699]
+```
 
-```vg convert "${1}" -x >"${1}.xg```
-```vg gbwt -x "${1}" -v "${1%.vg}.vcf.gz" -o "${1}.gbwt``` #do i need this??
+The format is: ```sample#hap#chrom#coords[start-end]```
 
-You can find it in the folder on this github repository, download it directly from her the the computer.
+* *bTaeGut7_mat#0#chr22* = **Path 1** &rarr; The backbone reference is in one piece (used to map the other chromosomes) 
+* bTaeGut7_pat#0#chr22[6348-4838699] = **Path 2** &rarr; the alternate haplotype of the backbone reference is aligning in a big piece with start coordinate at 6348 bp and end coordinate at 4838699 bp
+* bTaeGut2#1#chr22#0[*] = **Paths 3-8** &rarr; haplotype 1 of the second individual is not aligning contigously and it's split on 6 different pieces
+* bTaeGut2#2#chr22#0[0-4660045] = **Path 9** &rarr; haplotype 2 of the second individual is also aligning in a big piece
 
-2. Go to the [sequenceTubeMap demo page](https://vgteam.github.io/sequenceTubeMap/). Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change the "mounted" with "upload" > select the file from the Download folder. 
+#### ANSWER: if the sequences doesn't align contiguously to the backbone reference (e.g. in the presence of structural variation) the other chromosomes might be split in multiple segments and counted as different paths, 9 in our case. Functionally, all bTaeGut2#1#chr22#0[*] lines together represent one biological chromosome, but they are split across multiple path segments.
+___
 
-Inspect the graph:
-- How many variants do you see?
-- ....
+#### QUESTION 4: *is this happening also in the full graph or is it the result of the clipping?*
 
-## 3. Pangenome-embedded variants
+Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```):
 
-*We looked at the variants inside the pangenome, but how can I look at them in a canonical way and use them for downstream analysis?*
+```odgi stats -t 8 -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
 
-The MC pipeline produces VCF files referenced to the backbone reference and other genomes you specified in the command. You can find information about the VCF format [here](https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
 
-The process through which the variants are defined is called **graph decomposition**, the process of breaking down a pangenome graph into smaller, more manageable subgraphs or components (snarls or bubbles).
+| length|nodes|edges|paths|steps|
+| ----- |:----:|:----:|:----:|:----:|
+| 6936749|492938|672043|4|1199841
 
-The file names are: X.vcf and X.vcf
+Let's look at the paths inside the graph. You can list the paths with ```odgi paths```:
 
-You might have noticed "raw" VCF files. These are those directly outputted by vg deconstruct inside that are then normalized and postprocessed automatically.
+```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.paths```
 
-Let's look at the VCF referenced to out backbone reference. Run the following command:
+**Output:**
 
-bcftools view -H 5.1_MC18.raw.vcf.gz | head
+```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.paths```
+
+```
+bTaeGut2#1#chr22#0
+bTaeGut2#2#chr22#0
+bTaeGut7_mat#0#chr22
+bTaeGut7_pat#0#chr22
+```
+
+#### ANSWER: in the full graph we have exactly 4 paths and the sequence length is way bigger than the clipped (6.9 Mbp). 
+
+* **Full graph**: keeps each input chromosome/haplptype as a single continuous path, 4 in total
+* **Clip graph**: removed sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 7 separate path segments. The overall graph length is also smaller than the full (~6.9 Mbp &rarr; ~5.9 Mbp)) 
 
 
