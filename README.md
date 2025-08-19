@@ -48,10 +48,10 @@ To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://g
 #### Main steps of the MC pipeline<sup>1</sup>:
 
 1. A user-selected reference genome is used as the initial backbone
-2. The reference is progressively augmented with structural variation from the other genomes by minigraph<sup>3</sup>, a sequence-to-graph aligner, as a graph constructor. The resulting graph is SV only (>50 bp)
-3. All assemblies are aligned back to the graph with a minimap2-like algorithm that generates base-level alignments for each reference chromosome separately.
-4. A modified version of the reference-free aligner Progressive Cactus<sup>4</sup> is used to combine the alignments into base-level pangenome graphs that contain variants of all sizes
-5. Chromosomal graphs are then combined and post-processed to reduce path complexity by collapsing redundant sequences. 
+2. The reference is progressively augmented with structural variation from the other genomes by minigraph<sup>3</sup>, a sequence-to-graph aligner, as a graph constructor. The resulting graph is SV only (>50 bp) (see **panel c** below)
+3. All assemblies are aligned back to the graph with a minimap2-like algorithm that generates base-level alignments for each reference chromosome separately  (see **panel d** below)
+4. The initian graph is split by chromosome and a modified version of the reference-free aligner Progressive Cactus<sup>4</sup> is used to combine the alignments into base-level pangenome graphs that contain variants of all sizes  (see **panel e** below)
+6. Chromosomal graphs are then combined and post-processed to reduce path complexity by removing ("clipping") unaligned sequences such as the centromeres, leaving onlt the backbone reference in those regions and the other alleles are split accordingly (see **panel f** below)
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/figures/Figure1_Hickey_G_et_al.jpg" alt="drawing" width="600"/> <br/>
 *Credits: [Hickey at al 2023](https://www.nature.com/articles/s41587-023-01793-w)*<br />
