@@ -5,6 +5,6 @@ If you are cloning this repository and using these pre-generated files, please d
 ```bgzip -d 2_bTaeGut_pangenome/bTaeGut_pangenome.og```
 ```bgzip -d bgzip bTaeGut_pangenome.full.og```
 
-```bgzip 2_bTaeGut_pangenome/bTaeGut_pangenome.chroms/chr22.d1.vg```
-```gzip 2_bTaeGut_pangenome/bTaeGut_pangenome.chroms/chr22.vg```
+```bgzip -d 2_bTaeGut_pangenome/bTaeGut_pangenome.chroms/chr22.d1.vg```
+```bgzip -d 2_bTaeGut_pangenome/bTaeGut_pangenome.chroms/chr22.vg```
 
