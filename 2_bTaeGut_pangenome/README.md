@@ -1,4 +1,4 @@
-These are the outputs of the Minirgraph-Catus pipeline. Some had to be compressed to be able to upload them on GitHub.
+This folder contains the outputs of the Minigraph-Catus pipeline. Some had to be compressed to be able to upload them on GitHub.
 
 If you are cloning this repository and using these pre-generated files, please decompress the following files:
 
