@@ -32,6 +32,8 @@ The main directory of this repository contains all the input files needed for th
 
 A separate folder, [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data), contains all the expected outputs organized using the same folder structure. You can use these reference files to compare results with the expected outcome, complete exercises after the session at home and troubleshoot and debug each step.
 
+#If you plan to use the reference data, read the [README.md](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/README.md) in the folder  [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/2_bTaeGut_pangenome) and follow the instructions.
+
 ### 0.2 Tools
 
 Almost all the tools needed for this course are inside a conda environment.
@@ -78,7 +80,7 @@ The file is organized like this:
 | ------------- |:-------------:|
 | bTaeGut7_mat | 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta |
 | bTaeGut7_pat | 1_fasta_files/bTaeGut7_pat_chr22_CM109772.1.fasta |
-| bTaeGut2.1 | 1_fasta_files/bTaeGut2_hap2_chr22_CM121079.1.fasta |
+| bTaeGut2.1 | 1_fasta_files/bTaeGut2_hap1_chr22_CM121079.1.fasta |
 | bTaeGut2.2 | 1_fasta_files/bTaeGut2_hap2_chr22_CM121121.1.fasta |
 
 **IMPORTANT:**
@@ -95,6 +97,8 @@ The file is organized like this:
 Activate the Cactus python environment:
 
 ```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
+
+in my case: source /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate
 
 Run the following command in the main directory:
 
@@ -116,7 +120,7 @@ cactus-pangenome \
 --xg clip filter \
 --chrom-vg clip filter \
 --odgi clip full \
---viz full
+--viz clip full
 ```
 
 * ```cactus-pangenome```: calls the MC pipeline 
@@ -145,12 +149,12 @@ In the following tags you can specify on which type of graph you want to operate
 * ```--gfa clip filter```: output the graphs in the text-based Graphical Fragment Assembly (GFA) format, in addition to Cactus's native alignment format (HAL). This format is typically the most compatible for exchanging graphs between ```vg``` and other pangenome tools
 * ```--gbz filter```: generate the .gbz graph file for these type of graphs. The filter grah in .gbz format is needed for ```vg giraffe```.
 * ```--giraffe filter```: generate ```vg giraffe``` indexes for the filter graph (default)
-* ```--chrom-vg clip filter```: generate the chromosome graphs in the Variation Graph (VG, .vg) format, usefull to use with the vg toolkit. This version of Catus does not support the generation of a whole-genome vg graph.
+* ```--chrom-vg clip filter```: generate the chromosome graphs in the Variation Graph (VG, .vg) format, usefull to use with the ```vg toolkit```. 
 * ```--xg clip filter```: generate the .xg index file for the whole graph. It's a compressed, indexed representation of a variation graph, specifically optimized for fast path and graph traversal operations
 *  ```--og full```: generate the graph in the ```odgi``` format  ```.og```. Usefull when running operations using ```odgi```
-* ```--viz full```: generate an ```odgi viz``` 1D .png for each chromosome. ```odgi``` works better with full graphs, the presence off all sequences doesn't hinder the visualization.
+* ```--viz clip full```: generate an ```odgi viz``` 1D .png for each chromosome. ```odgi``` works better with ```full``` graphs, the presence off all sequences doesn't hinder the visualization. We will generate a .png also for the ```clip``` graph as a comparison. 
 
-If you have multiple chromosome you can also add ```--chrom-og```  and ```--chrom-vg``` to generate ```.og``` and ```.vg``` files for each chromosome. If you forget to set some of these flags don't worry, you can always generate ```.vg```, ```.og```, and other files later on.
+If you forget to set some of these flags don't worry, you can always generate ```.vg```, ```.og```, and other files later on.
 
 ### 1.4 The outputs
 
@@ -210,7 +214,7 @@ We will generate general statistics for the pangenome using ```odgi```, starting
 
 * However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph:
 
-```odgi stats -t 8 -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.stats```
+```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.stats```
 
 **The output:**
 
@@ -296,7 +300,7 @@ ___
 
 Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```):
 
-```odgi stats -t 8 -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
+```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
 
 ```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
 
@@ -323,3 +327,146 @@ bTaeGut7_pat#0#chr22
 
 * **Full graph**: keeps each input chromosome/haplptype as a single continuous path, 4 in total
 * **Clip graph**: removed sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 7 separate path segments. The overall graph length is also smaller than the full (~6.9 Mbp &rarr; ~5.9 Mbp))
+
+___
+
+#### QUESTION 5: *why is clipping necessary?*
+
+Clipping is necessary to reduce the complexity of the graph and make downstream analyses more feasible. For example, the very repetitive centromeric regions are clipped away and this is necessary to avoid the generation of complex loops that will hinder downstream analyses.
+
+### 2.2 Subsampling and visualization 
+
+Visualization is important to get an idea of the structure of the graph and the inspection of homology relationships and variation between the genomes, providing insights on the latent biological data.
+
+#### odgi viz<sup>5</sup>
+
+In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder XX. A .png file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+
+Let's look at the ```full graph```'s png. Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
+
+There is the possibility of ordering the paths as we want, e.g. to have the backbone refreence on the top.
+
+To do this we can use the ```3_stats_and_viz/bTaeGut_pangenome.full.og.paths``` file, reordering the paths as we prefer. 
+
+
+```
+(grep "bTaeGut7_mat#0#chr22" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths; \
+grep "bTaeGut7_pat#0#chr22" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths; \
+grep "bTaeGut2#1#chr22#0" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths; \
+grep "bTaeGut2#2#chr22#0" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths) \
+> 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.paths
+```
+Let's look at the new path file to check if it's the correct order:
+
+```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.paths```
+
+```
+bTaeGut7_mat#0#chr22
+bTaeGut7_pat#0#chr22
+bTaeGut2#1#chr22#0
+bTaeGut2#2#chr22#0
+```
+
+Now we can generate a new ```odgi viz``` figure with the ordered paths:
+
+```odgi viz -x 1500 -y 500 -a 10 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -p 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.paths -o 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png```
+
+#### SequenceTubeMap<sup>6</sup>
+
+Another useful tool for visualizing pangenome graphs is SequenceTubeMap<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is displayed differently and it can be inspected interactively.
+
+Unfortunately, the online demo doesn't work right now. To visualize a specific vg file without uploading it on the webpage, it is possible to launch a server which provides the data to SequenceTubeMap<sup>6</sup>. See instructions on the [SequenceTubeMap GitHub page](https://github.com/vgteam/sequenceTubeMap). In this course we will just prepare the files and you can try at home. 
+
+First, we will chunk the graph in a smaller piece to be able to visualize it fast.
+
+1. Chunk the graph: 
+
+```vg chunk -t 8 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
+
+*Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
+
+* ```-c, --context-steps N```: expand the context of the chunk this many node steps [1]
+
+2. Index the new .vg chunk:
+
+```vg convert -t 8 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
+
+2. Upload the files in the [online demo](https://vgteam.github.io/sequenceTubeMap/). You can find the files in this github repository, download it directly from her the the computer. Follow the intructions:
+* Go to the [sequenceTubeMap demo page](https://vgteam.github.io/sequenceTubeMap/). 
+* Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change the "mounted" with "upload" > select the file from the Download folder > close 
+
+Inspect the graph:
+- How many variants do you see?
+- ....
+
+Unfortunately, the online demo does not work with custom data. Let's look at the examples already present in the online demo. While I'll show you our pangenome by sharing my screen.
+
+
+## 3. Pangenome-embedded variants
+
+We looked at the structure of the graph and the variants inside the pangenome, but *how can I look at them in a canonical way and use them for downstream analysis?*
+
+The MC pipeline produces **VCF files** referenced to the backbone reference and other genomes you specified in the command. You can find information about the VCF format [here](https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+
+The process through which the variants are defined is called **graph decomposition**, the process of breaking down a pangenome graph into smaller, more manageable subgraphs or components (snarls or bubbles). 
+
+You might have noticed "raw" VCF files. These are those directly outputted by vg deconstruct inside that are then normalized and postprocessed automatically.
+
+Let's look at the VCF referenced to our backbone reference.
+
+___
+
+#### QUESTION 6: *how many samples do you see in the VCF?*
+
+You can find information about the samples in the last row of the header file (i.e. the last line starting with "#") after the column "FORMAT".
+
+Run the following command in the main directory:
+
+```bcftools view 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | head -20```
+
+```
+##fileformat=VCFv4.2
+##FILTER=<ID=PASS,Description="All filters passed">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##INFO=<ID=CONFLICT,Number=.,Type=String,Description="Sample names for which there are multiple paths in the graph with conflicting alleles">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Total number of alternate alleles in called genotypes">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Estimated allele frequency in the range (0,1]">
+##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of samples with data">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=LV,Number=1,Type=Integer,Description="Level in the snarl tree (0=top level)">
+##INFO=<ID=PS,Number=1,Type=String,Description="ID of variant corresponding to parent snarl">
+##INFO=<ID=AT,Number=R,Type=String,Description="Allele Traversal as path in graph">
+##contig=<ID=chr22,length=5052704>
+##bcftools_viewVersion=1.21+htslib-1.21
+##bcftools_viewCommand=view 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz; Date=Wed Aug 20 15:34:06 2025
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	bTaeGut2	bTaeGut7_pat
+chr22	14063	>374>377	C	G	60	.	AC=1;AF=0.5;AN=2;AT=>374>375>377,>374>376>377;NS=2;LV=0	GT	1|.	0
+chr22	14268	>377>379	T	TT	60	.	AC=1;AF=0.5;AN=2;AT=>377>379,>377>378>379;NS=2;LV=0	GT	1|.	0
+chr22	14304	>379>382	G	A	60	.	AC=1;AF=0.5;AN=2;AT=>379>380>382,>379>381>382;NS=2;LV=0	GT	1|.	0
+chr22	14312	>382>385	C	A	60	.	AC=1;AF=0.5;AN=2;AT=>382>383>385,>382>384>385;NS=2;LV=0	GT	1|.	0
+chr22	14316	>385>388	TA	CT	60	.	AC=1;AF=0.5;AN=2;AT=>385>386>388,>385>387>388;NS=2;LV=0	GT	1|.	0
+```
+
+#### ANSWER: there are just two samples, one is the haploid individual bTaeGut2, with diploid genotype calls (i.e. 1|1), the other is the paternal haplotype of the backbone reference, which is indeed haploid (i.e. 0)
+
+___
+
+#### QUESTION 7: *why the diploid individual's genotypes are separed by a "|"?*
+
+Usually, when you call the variants from short-read mapping, for example, you have calls like this one "1\1".
+
+in a VCF:
+* ```/``` &rarr; **unphased** = we know the two alleles are present but don’t know which belongs to which haplotype
+* ```|``` &rarr; **phased** = we know which allele is on haplotype 1 vs haplotype 2
+
+#### ANSWER: the MC pipeline can output phased genotype because when you build a pangenome with chromosome-level haplotypes, each haplotype is represented explicitly as a path through the graph. The variant calling is performed by decomposing the graph into “bubbles” (alternative allelic paths) and since the graph keeps track of which haplotype path traverses which node in the bubble, the software can directly assign alleles to haplotypes.
+____
+
+# References
+
+1. Secomandi, Simona, et al. "Pangenome graphs and their applications in biodiversity genomics." Nature Genetics 57.1 (2025): 13-26.
+2. Hickey, Glenn, et al. "Pangenome graph construction from genome alignments with Minigraph-Cactus." Nature biotechnology 42.4 (2024): 663-673.
+3. Li, Heng, Xiaowen Feng, and Chong Chu. "The design and construction of reference pangenome graphs with minigraph." Genome biology 21.1 (2020): 265.
+4. Armstrong, Joel, et al. "Progressive Cactus is a multiple-genome aligner for the thousand-genome era." Nature 587.7833 (2020): 246-251.
+5. Guarracino, Andrea, et al. "ODGI: understanding pangenome graphs." Bioinformatics 38.13 (2022): 3319-3326.
+6. Beyer, Wolfgang, et al. "Sequence tube maps: making graph genomes intuitive to commuters." Bioinformatics 35.24 (2019): 5318-5320.
