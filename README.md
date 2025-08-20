@@ -401,8 +401,7 @@ Inspect the graph:
 
 Unfortunately, the online demo does not work with custom data. Let's look at the examples already present in the online demo. While I'll show you our pangenome by sharing my screen.
 
-
-## 3. Pangenome-embedded variants
+## 3. Pangenome-embedded small variants
 
 We looked at the structure of the graph and the variants inside the pangenome, but *how can I look at them in a canonical way and use them for downstream analysis?*
 
@@ -460,7 +459,44 @@ in a VCF:
 * ```|``` &rarr; **phased** = we know which allele is on haplotype 1 vs haplotype 2
 
 #### ANSWER: the MC pipeline can output phased genotype because when you build a pangenome with chromosome-level haplotypes, each haplotype is represented explicitly as a path through the graph. The variant calling is performed by decomposing the graph into “bubbles” (alternative allelic paths) and since the graph keeps track of which haplotype path traverses which node in the bubble, the software can directly assign alleles to haplotypes.
+
 ____
+
+#### QUESTION 8: *how many SNPs and how many INDELS our pangenome includes?*
+
+Let's look at biallelic SNPs and INDELS, which are those suitable to generate Principal Component Analysis (PCA) plots and other population genomics analysis.
+
+* To count biallelic SNPs:
+
+```bcftools view -v snps --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | grep -v "^#" | wc -l```
+
+* To count biallelic INDELs:
+
+```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | grep -v "^#" | wc -l```
+
+* To count the number of insertions and deletions:
+
+```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($4) > length($5)' | wc -l```
+
+* To count the number of deletions:
+
+```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($5) > length($4)' | wc -l```
+
+#### ANSWER: the pangenome contains 97890 biallelic SNPs and 15178 biallelic INDELs, of which 7587 are indertions and 7599 are deletions.
+
+Of course, these variants needs to be filtered and validated for downstream analysis, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with SequenceTubeMap by chunking the graph around the variant coordinates.
+
+## 4. Mapping of short-reads data with vg giraffe
+
+We will now use the pangenome as a reference for read mapping using the fast short-read mapper ```vg giraffe```<sup>7</sup>.
+
+In the folder ```4_short_read_data/``` you will find forward and reverse fastq files for a single Zebra finch individual ([SRR30414079](https://www.ncbi.nlm.nih.gov/sra/SRX25839725[accn])). 
+
+The reads have already been downsampled to 10X of coverage and trimmed for Illumina adaptors as follows:
+
+
+
+
 
 # References
 
@@ -470,3 +506,4 @@ ____
 4. Armstrong, Joel, et al. "Progressive Cactus is a multiple-genome aligner for the thousand-genome era." Nature 587.7833 (2020): 246-251.
 5. Guarracino, Andrea, et al. "ODGI: understanding pangenome graphs." Bioinformatics 38.13 (2022): 3319-3326.
 6. Beyer, Wolfgang, et al. "Sequence tube maps: making graph genomes intuitive to commuters." Bioinformatics 35.24 (2019): 5318-5320.
+7. Sirén, Jouni, et al. "Pangenomics enables genotyping of known structural variants in 5202 diverse genomes." Science 374.6574 (2021): abg8871.
