@@ -495,9 +495,6 @@ In the folder ```4_short_read_data/``` you will find forward and reverse fastq f
 The reads have already been downsampled to 10X of coverage and trimmed for Illumina adaptors as follows:
 
 
-
-
-
 # References
 
 1. Secomandi, Simona, et al. "Pangenome graphs and their applications in biodiversity genomics." Nature Genetics 57.1 (2025): 13-26.
