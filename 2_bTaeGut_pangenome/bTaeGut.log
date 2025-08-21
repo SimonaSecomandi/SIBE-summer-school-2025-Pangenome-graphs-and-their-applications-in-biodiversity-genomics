@@ -1,0 +1,476 @@
+Enabling realtime logging in Toil
+Deprecated toil method.  Please use "toil.lib.conversions.human2bytes()" instead."
+Deprecated toil method.  Please use "toil.lib.conversions.human2bytes()" instead."
+Cactus Command: /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/cactus-pangenome 2_bTaeGut_pangenome/jobStore 1_fasta_files/bTaeGut.seqfile --outDir 2_bTaeGut_pangenome --outName bTaeGut_pangenome --logFile 2_bTaeGut_pangenome/bTaeGut.log --reference bTaeGut7_mat bTaeGut7_pat --refContigs chr22 --vcf --vcfReference bTaeGut7_mat bTaeGut7_pat --filter 1 --gfa clip filter --gbz filter --giraffe filter --xg clip filter --chrom-vg clip filter --odgi clip full --viz clip full
+Cactus Commit: 20488aeb80c3ef985034e538b36ad97ed632cad2
+Importing file:///lustre/fs5/jarv_lab/scratch/ssecomandi/SIBE_course/1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta
+Importing file:///lustre/fs5/jarv_lab/scratch/ssecomandi/SIBE_course/1_fasta_files/bTaeGut7_pat_chr22_CM109772.1.fasta
+Importing file:///lustre/fs5/jarv_lab/scratch/ssecomandi/SIBE_course/1_fasta_files/bTaeGut2_hap1_chr22_CM121079.1.fasta
+Importing file:///lustre/fs5/jarv_lab/scratch/ssecomandi/SIBE_course/1_fasta_files/bTaeGut2_hap2_chr22_CM121121.1.fasta
+Running Toil version 7.0.0-d569ea5711eb310ffd5703803f7250ebf7c19576 on host node142.hpc.rockefeller.internal.
+Starting real-time logging.
+Issued job 'pangenome_end_to_end_workflow' kind-pangenome_end_to_end_workflow/instance-bp1nx9p9 v1 with job batch system ID: 1 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+0 jobs are running, 0 jobs are issued and waiting to run
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-gojpus0l v1 with job batch system ID: 2 and disk: 34.2 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-l9l5f4fm v1 with job batch system ID: 3 and disk: 34.4 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-vkt_zwqc v1 with job batch system ID: 4 and disk: 32.9 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-2elclyu7 v1 with job batch system ID: 5 and disk: 36.0 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:48:37.048749: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/fad5/job/tmp4zgtjbsg/bTaeGut2.2.fa bTaeGut2.2 -p"
+2025-08-20 10:48:37.051157: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bb41/job/tmp2wlf26cy/bTaeGut7_pat.fa bTaeGut7_pat -p"
+2025-08-20 10:48:37.062677: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/65e4/job/tmpfbzrhu_v/bTaeGut7_mat.fa bTaeGut7_mat -p"
+2025-08-20 10:48:37.065328: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/a7eb/job/tmp3ru2bd33/bTaeGut2.1.fa bTaeGut2.1 -p"
+2025-08-20 10:48:37.176906: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/fad5/job/tmp4zgtjbsg/bTaeGut2.2.fa bTaeGut2.2 -p" in 0.0555 seconds
+2025-08-20 10:48:37.178875: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/a7eb/job/tmp3ru2bd33/bTaeGut2.1.fa bTaeGut2.1 -p" in 0.0575 seconds
+2025-08-20 10:48:37.181122: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/65e4/job/tmpfbzrhu_v/bTaeGut7_mat.fa bTaeGut7_mat -p" in 0.0598 seconds
+2025-08-20 10:48:37.184703: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bb41/job/tmp2wlf26cy/bTaeGut7_pat.fa bTaeGut7_pat -p" in 0.0631 seconds
+2025-08-20 10:48:37.186973: Running the command: "cactus_analyseAssembly bTaeGut2.2.sanitized.fa"
+2025-08-20 10:48:37.188614: Running the command: "cactus_analyseAssembly bTaeGut2.1.sanitized.fa"
+2025-08-20 10:48:37.190758: Running the command: "cactus_analyseAssembly bTaeGut7_mat.sanitized.fa"
+2025-08-20 10:48:37.194547: Running the command: "cactus_analyseAssembly bTaeGut7_pat.sanitized.fa"
+2025-08-20 10:48:37.378887: Successfully ran: "cactus_analyseAssembly bTaeGut2.2.sanitized.fa" in 0.0478 seconds
+2025-08-20 10:48:37.381666: Successfully ran: "cactus_analyseAssembly bTaeGut7_mat.sanitized.fa" in 0.0505 seconds
+2025-08-20 10:48:37.382929: Successfully ran: "cactus_analyseAssembly bTaeGut7_pat.sanitized.fa" in 0.0519 seconds
+2025-08-20 10:48:37.389162: Successfully ran: "cactus_analyseAssembly bTaeGut2.1.sanitized.fa" in 0.058 seconds
+Got message from job at time 08-20-2025 10:48:37: Assembly stats for bTaeGut2.1: Input-sample: bTaeGut2.1.sanitized.fa Total-sequences: 1 Total-length: 5079584 Proportion-repeat-masked: 0.016811 ProportionNs: 0.016811 Total-Ns: 85393 N50: 5079584 Median-sequence-length: 5079584 Max-sequence-length: 5079584 Min-sequence-length: 5079584
+
+Got message from job at time 08-20-2025 10:48:37: Assembly stats for bTaeGut7_pat: Input-sample: bTaeGut7_pat.sanitized.fa Total-sequences: 1 Total-length: 5320397 Proportion-repeat-masked: 0.000000 ProportionNs: 0.000000 Total-Ns: 0 N50: 5320397 Median-sequence-length: 5320397 Max-sequence-length: 5320397 Min-sequence-length: 5320397
+
+Got message from job at time 08-20-2025 10:48:37: Assembly stats for bTaeGut2.2: Input-sample: bTaeGut2.2.sanitized.fa Total-sequences: 1 Total-length: 4860289 Proportion-repeat-masked: 0.001209 ProportionNs: 0.001209 Total-Ns: 5874 N50: 4860289 Median-sequence-length: 4860289 Max-sequence-length: 4860289 Min-sequence-length: 4860289
+
+Got message from job at time 08-20-2025 10:48:37: Assembly stats for bTaeGut7_mat: Input-sample: bTaeGut7_mat.sanitized.fa Total-sequences: 1 Total-length: 5052704 Proportion-repeat-masked: 0.000000 ProportionNs: 0.000000 Total-Ns: 0 N50: 5052704 Median-sequence-length: 5052704 Max-sequence-length: 5052704 Min-sequence-length: 5052704
+
+Issued job 'minigraph_construct_workflow' kind-minigraph_construct_workflow/instance-dwsde7dj v1 with job batch system ID: 6 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:48:38.766885: Running the command: "mash sketch bTaeGut7_mat.fa"
+2025-08-20 10:48:39.009977: Successfully ran: "mash sketch bTaeGut7_mat.fa" in 0.1847 seconds
+Issued job 'Job' kind-Job/instance-d_5a9qfe v1 with job batch system ID: 7 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:48:40.147514: Running the command: "mash dist bTaeGut2.1.fa.cat bTaeGut7_mat.fa.msh"
+2025-08-20 10:48:40.500712: Successfully ran: "mash dist bTaeGut2.1.fa.cat bTaeGut7_mat.fa.msh" in 0.3497 seconds
+2025-08-20 10:48:40.501364: Running the command: "mash dist bTaeGut2.1.fa bTaeGut7_mat.fa.msh"
+2025-08-20 10:48:40.687332: Successfully ran: "mash dist bTaeGut2.1.fa bTaeGut7_mat.fa.msh" in 0.1828 seconds
+mash distance of bTaeGut2.1 (size = 5079584) to reference bTaeGut7_mat = 0.0162193 sample distance = 0.0164989
+2025-08-20 10:48:41.661781: Running the command: "mash dist bTaeGut2.2.fa bTaeGut7_mat.fa.msh"
+2025-08-20 10:48:41.841818: Successfully ran: "mash dist bTaeGut2.2.fa bTaeGut7_mat.fa.msh" in 0.1765 seconds
+mash distance of bTaeGut2.2 (size = 4860289) to reference bTaeGut7_mat = 0.0183741 sample distance = 0.0164989
+Issued job 'mash_distance_order' kind-mash_distance_order/instance-0s__buzb v1 with job batch system ID: 8 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'minigraph_construct_in_batches' kind-minigraph_construct_in_batches/instance-q4xf8d77 v1 with job batch system ID: 9 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'minigraph_construct' kind-minigraph_construct/instance-cm7m04gq v1 with job batch system ID: 10 and disk: 39.1 Mi, memory: 2.0 Gi, cores: 8, accelerators: [], preemptible: False
+2025-08-20 10:48:47.225330: Running the command: "bash -c set -eo pipefail && minigraph -c -xggs -t 8 bTaeGut7_mat.fa bTaeGut7_pat.fa bTaeGut2.1.fa bTaeGut2.2.fa | bgzip --threads 8"
+[minigraph]: [M::main::0.012*1.20] loaded the graph from "bTaeGut7_mat.fa"
+[minigraph]: [M::mg_index::0.175*1.80] indexed the graph
+[minigraph]: [M::mg_opt_update::0.193*1.73] occ_max1=53; lc_max_occ=2
+[minigraph]: [M::ggen_map::0.206*1.68] loaded file "bTaeGut7_pat.fa"
+[minigraph]: [M::ggen_map::157.242*1.00] mapped 1 sequence(s) to the graph
+[minigraph]: [M::mg_ggsimple_cigar::157.307*1.00] inserted 998 events, including 0 inversions
+[minigraph]: [M::mg_index::157.484*1.00] indexed the graph
+[minigraph]: [M::mg_opt_update::157.500*1.00] occ_max1=57; lc_max_occ=2
+[minigraph]: [M::ggen_map::157.511*1.00] loaded file "bTaeGut2.1.fa"
+[minigraph]: [M::ggen_map::278.184*1.00] mapped 1 sequence(s) to the graph
+[minigraph]: [M::mg_ggsimple_cigar::278.250*1.00] inserted 1370 events, including 0 inversions
+[minigraph]: [M::mg_index::278.431*1.00] indexed the graph
+[minigraph]: [M::mg_opt_update::278.448*1.00] occ_max1=58; lc_max_occ=2
+[minigraph]: [M::ggen_map::278.458*1.00] loaded file "bTaeGut2.2.fa"
+[minigraph]: [M::ggen_map::297.989*1.00] mapped 1 sequence(s) to the graph
+[minigraph]: [M::mg_ggsimple_cigar::298.079*1.00] inserted 1103 events, including 0 inversions
+[minigraph]: [M::main] Version: 0.21-r606
+[minigraph]: [M::main] CMD: minigraph -c -xggs -t 8 bTaeGut7_mat.fa bTaeGut7_pat.fa bTaeGut2.1.fa bTaeGut2.2.fa
+[minigraph]: [M::main] Real time: 298.138 sec; CPU: 297.500 sec; Peak RSS: 0.951 GB
+2025-08-20 10:53:45.460686: Successfully ran [minigraph]: "bash -c set -eo pipefail && minigraph -c -xggs -t 8 bTaeGut7_mat.fa bTaeGut7_pat.fa bTaeGut2.1.fa bTaeGut2.2.fa | bgzip --threads 8" in 298.2284 seconds with job-memory 2.0 Gi
+Issued job 'export_minigraph_wrapper' kind-export_minigraph_wrapper/instance-mfg47_fp v1 with job batch system ID: 11 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'unzip_gz' kind-unzip_gz/instance-en2poxl0 v1 with job batch system ID: 12 and disk: 7.8 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'make_minigraph_fasta' kind-make_minigraph_fasta/instance-qxpdqxms v1 with job batch system ID: 13 and disk: 15.6 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:53:59.687974: Running the command: "gzip -dc bTaeGut_pangenome.sv.gfa.gz"
+2025-08-20 10:53:59.744625: Successfully ran: "gzip -dc bTaeGut_pangenome.sv.gfa.gz" in 0.0522 seconds
+Got message from job at time 08-20-2025 10:53:59: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job 'unzip_gz' kind-unzip_gz/instance-en2poxl0 v1 used 104.79% disk (8.1 MiB [8544256B] used, 7.8 MiB [8153470B] requested).
+2025-08-20 10:54:00.053154: Running the command: "bash -c set -eo pipefail && gfatools gfa2fa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/cb57/job/tmpb4c33x1v/mg.gfa | sed -e 's/^>\(.\)/>id=_MINIGRAPH_|\1/g' | bgzip --threads 1"
+2025-08-20 10:54:00.447383: Successfully ran: "bash -c set -eo pipefail && gfatools gfa2fa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/cb57/job/tmpb4c33x1v/mg.gfa | sed -e 's/^>\(.\)/>id=_MINIGRAPH_|\1/g' | bgzip --threads 1" in 0.3896 seconds
+Issued job 'minigraph_map_all' kind-minigraph_map_all/instance-s_gib0v5 v1 with job batch system ID: 14 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'minigraph_map_one' kind-minigraph_map_one/instance-mk_le8d4 v1 with job batch system ID: 15 and disk: 31.0 Mi, memory: 2.0 Gi, cores: 6, accelerators: [], preemptible: False
+Issued job 'minigraph_map_one' kind-minigraph_map_one/instance-zcdqh9o9 v1 with job batch system ID: 16 and disk: 32.2 Mi, memory: 2.0 Gi, cores: 6, accelerators: [], preemptible: False
+Issued job 'minigraph_map_one' kind-minigraph_map_one/instance-xypu52b7 v1 with job batch system ID: 17 and disk: 30.0 Mi, memory: 2.0 Gi, cores: 6, accelerators: [], preemptible: False
+Issued job 'minigraph_map_one' kind-minigraph_map_one/instance-q_8rd5wh v1 with job batch system ID: 18 and disk: 30.9 Mi, memory: 2.0 Gi, cores: 6, accelerators: [], preemptible: False
+2025-08-20 10:54:02.921671: Running the command: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.gaf -c -xasm -t 6"
+2025-08-20 10:55:56.119781: Successfully ran: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.gaf -c -xasm -t 6" in 113.1932 seconds with job-memory 2.0 Gi
+2025-08-20 10:55:56.120267: Running the command: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5"
+2025-08-20 10:55:56.341587: Successfully ran: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5" in 0.2175 seconds with job-memory 2.0 Gi
+2025-08-20 10:55:56.342091: Running the command: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'"
+2025-08-20 10:55:56.475395: Successfully ran: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/bTaeGut2.1.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/b602/job/tmpiuszlaet/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'" in 0.1292 seconds with job-memory 2.0 Gi
+2025-08-20 10:55:57.618986: Running the command: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.gaf -c -xasm -t 6"
+2025-08-20 10:56:13.816557: Successfully ran: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.gaf -c -xasm -t 6" in 16.1927 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:13.817093: Running the command: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5"
+2025-08-20 10:56:13.967673: Successfully ran: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5" in 0.1465 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:13.968186: Running the command: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'"
+2025-08-20 10:56:14.027581: Successfully ran: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/bTaeGut2.2.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1472/job/tmp9yp_ze_i/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'" in 0.0551 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:15.168105: Running the command: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.gaf -c -xasm -t 6"
+2025-08-20 10:56:27.500263: Successfully ran: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.gaf -c -xasm -t 6" in 12.327 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:27.500796: Running the command: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5"
+2025-08-20 10:56:27.636649: Successfully ran: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5" in 0.1318 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:27.637162: Running the command: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'"
+2025-08-20 10:56:27.687061: Successfully ran: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/bTaeGut7_pat.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/da94/job/tmpsf31vjm7/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'" in 0.0457 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:28.802761: Running the command: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.gaf -c -xasm -t 6"
+2025-08-20 10:56:40.854397: Successfully ran: "bash -c set -eo pipefail && minigraph /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.fa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.gaf -c -xasm -t 6" in 12.0468 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:40.854936: Running the command: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5"
+2025-08-20 10:56:40.970553: Successfully ran: "bash -c set -eo pipefail && gaf2unstable /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.gaf -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa.node_lengths.tsv | gaffilter - -r 5.0 -m 0.25 -q 5 -b 250000 -o 0 -i 0.5" in 0.1118 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:40.971013: Running the command: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'"
+2025-08-20 10:56:40.995570: Successfully ran: "bash -c set -eo pipefail && gaf2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/bTaeGut7_mat.gaf.unstable -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7749/job/tmpoim_s07o/mg.gfa.node_lengths.tsv | awk 'BEGIN{OFS="	"} {$6="id=_MINIGRAPH_|"$6; print}'" in 0.0208 seconds with job-memory 2.0 Gi
+Issued job 'merge_pafs' kind-merge_pafs/instance-rlsrdgvs v1 with job batch system ID: 19 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'merge_pafs' kind-merge_pafs/instance-omvfc30k v1 with job batch system ID: 20 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:56:42.099081: Running the command: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/3992/job/tmpeek2r7ic.tmp --threads 1"
+2025-08-20 10:56:42.217425: Successfully ran: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/3992/job/tmpeek2r7ic.tmp --threads 1" in 0.1151 seconds
+Issued job 'extract_paf_from_gfa' kind-extract_paf_from_gfa/instance-28ajltqg v1 with job batch system ID: 21 and disk: 15.6 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:56:43.287408: Running the command: "rgfa2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/e92e/job/tmp_eseclxk/bTaeGut_pangenome.sv.gfa -T id=_MINIGRAPH_| -P id=bTaeGut7_mat| -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/e92e/job/tmp_eseclxk/bTaeGut_pangenome.sv.gfa.tofilter.paf"
+2025-08-20 10:56:43.517284: Successfully ran: "rgfa2paf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/e92e/job/tmp_eseclxk/bTaeGut_pangenome.sv.gfa -T id=_MINIGRAPH_| -P id=bTaeGut7_mat| -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/e92e/job/tmp_eseclxk/bTaeGut_pangenome.sv.gfa.tofilter.paf" in 0.1321 seconds
+Issued job 'merge_pafs' kind-merge_pafs/instance-eoaxje3n v1 with job batch system ID: 22 and disk: 15.6 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'filter_paf_deletions' kind-filter_paf_deletions/instance-ei20g1t1 v1 with job batch system ID: 23 and disk: 124.4 Mi, memory: 2.0 Gi, cores: 6, accelerators: [], preemptible: False
+Issued job 'zip_gz' kind-zip_gz/instance-xl_141fz v1 with job batch system ID: 24 and disk: 15.6 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:56:45.348454: Running the command: "gzip -c mg.paf.unfiltered"
+2025-08-20 10:56:45.602868: Successfully ran: "gzip -c mg.paf.unfiltered" in 0.2505 seconds
+2025-08-20 10:56:45.680449: Running the command: "vg convert -r 0 -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa -p -T /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa.trans"
+2025-08-20 10:56:46.705332: Successfully ran: "vg convert -r 0 -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa -p -T /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa.trans" in 0.9393 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:46.705900: Running the command: "filter-paf-deletions /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa.vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa.trans /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.paf -d 10000000 -v -p -t 6 -m 0.01 -s 2.0"
+2025-08-20 10:56:46.987506: Successfully ran: "filter-paf-deletions /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa.vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.gfa.trans /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.paf -d 10000000 -v -p -t 6 -m 0.01 -s 2.0" in 0.219 seconds with job-memory 2.0 Gi
+2025-08-20 10:56:47.396828: Running the command: "wc -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.paf"
+2025-08-20 10:56:47.405339: Successfully ran: "wc -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.paf" in 0.0034 seconds
+2025-08-20 10:56:47.405988: Running the command: "wc -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.paf.filter"
+2025-08-20 10:56:47.412872: Successfully ran: "wc -l /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af70/job/tmph5x1qycm/mg.paf.filter" in 0.0033 seconds
+Issued job 'export_graphmap_wrapper' kind-export_graphmap_wrapper/instance-1hnwivzg v1 with job batch system ID: 25 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'Job' kind-Job/instance-mga5ozju v1 with job batch system ID: 26 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'unzip_gz' kind-unzip_gz/instance-3m7hg704 v1 with job batch system ID: 27 and disk: 15.6 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:57:05.555639: Running the command: "gzip -dc bTaeGut_pangenome.sv.gfa.gz"
+2025-08-20 10:57:05.611032: Successfully ran: "gzip -dc bTaeGut_pangenome.sv.gfa.gz" in 0.052 seconds
+Issued job 'filter_paf' kind-filter_paf/instance-wv6enhfg v1 with job batch system ID: 28 and disk: 41.9 Mi, memory: 4.0 Gi, cores: 1, accelerators: [], preemptible: False
+Running PAF filter with minBlock=250000 minMAPQ=5 minIdentity=0.5 minScore=1.0 maxCollapseDistanceRatio=5.0
+2025-08-20 10:57:06.790603: Running the command: "gaffilter /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1645/job/tmpqt5_q7m_/mg.paf.filter -p -r 5.0 -m 0.0 -b 250000 -q 5 -i 0.5"
+2025-08-20 10:57:07.010369: Successfully ran: "gaffilter /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1645/job/tmpqt5_q7m_/mg.paf.filter -p -r 5.0 -m 0.0 -b 250000 -q 5 -i 0.5" in 0.2156 seconds with job-memory 4.0 Gi
+Issued job 'split_gfa' kind-split_gfa/instance-4rkro905 v1 with job batch system ID: 29 and disk: 98.7 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:57:08.074571: Running the command: "rgfa-split -p /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/mg.paf -b /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/split_ -Q 2 -a _AMBIGUOUS_ -L /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/split.log -n 0.75 -n 0.5 -n 0.25 -T 100000 -T 1000000 -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/mg.gfa -G -r id=bTaeGut7_mat| -A 5 -c chr22 -c id=bTaeGut7_mat|chr22"
+2025-08-20 10:57:08.449419: Successfully ran: "rgfa-split -p /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/mg.paf -b /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/split_ -Q 2 -a _AMBIGUOUS_ -L /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/split.log -n 0.75 -n 0.5 -n 0.25 -T 100000 -T 1000000 -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/mg.gfa -G -r id=bTaeGut7_mat| -A 5 -c chr22 -c id=bTaeGut7_mat|chr22" in 0.32 seconds with job-memory 2.0 Gi
+2025-08-20 10:57:08.449805: Running the command: "sed -e s/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e -e s/ /	/g -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/split_chr22.paf"
+2025-08-20 10:57:08.477789: Successfully ran: "sed -e s/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e -e s/ /	/g -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcfd/job/tmpu5ppcd7x/split_chr22.paf" in 0.0239 seconds
+Issued job 'split_fas' kind-split_fas/instance-fgynkejp v1 with job batch system ID: 30 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'split_fa_into_contigs' kind-split_fa_into_contigs/instance-6fvr8pg5 v1 with job batch system ID: 31 and disk: 15.4 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'split_fa_into_contigs' kind-split_fa_into_contigs/instance-_4oy5g3p v1 with job batch system ID: 32 and disk: 14.6 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'split_fa_into_contigs' kind-split_fa_into_contigs/instance-kq7r7gdx v1 with job batch system ID: 33 and disk: 14.0 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'split_fa_into_contigs' kind-split_fa_into_contigs/instance-j6mdycz8 v1 with job batch system ID: 34 and disk: 4.4 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'split_fa_into_contigs' kind-split_fa_into_contigs/instance-88z3mf1u v1 with job batch system ID: 35 and disk: 14.7 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:57:10.783750: Running the command: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2b32/job/tmp9l8ajbn3/bTaeGut7_pat.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2b32/job/tmp9l8ajbn3/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'"
+2025-08-20 10:57:10.783974: Running the command: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/19e4/job/tmp7yvgr43w/bTaeGut2.2.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/19e4/job/tmp7yvgr43w/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'"
+2025-08-20 10:57:10.802256: Running the command: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6a5c/job/tmp7169yoby/_MINIGRAPH_.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6a5c/job/tmp7169yoby/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e' | bgzip --threads 1"
+2025-08-20 10:57:10.820049: Running the command: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/80e1/job/tmpb9xum3zm/bTaeGut7_mat.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/80e1/job/tmpb9xum3zm/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'"
+2025-08-20 10:57:10.825911: Running the command: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2da2/job/tmp_hjf_azx/bTaeGut2.1.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2da2/job/tmp_hjf_azx/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'"
+2025-08-20 10:57:10.948078: Successfully ran: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/19e4/job/tmp7yvgr43w/bTaeGut2.2.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/19e4/job/tmp7yvgr43w/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'" in 0.1601 seconds
+2025-08-20 10:57:10.948725: Running the command: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/19e4/job/tmp7yvgr43w/bTaeGut2.2_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'"
+2025-08-20 10:57:10.952481: Successfully ran: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/80e1/job/tmpb9xum3zm/bTaeGut7_mat.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/80e1/job/tmpb9xum3zm/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'" in 0.1275 seconds
+2025-08-20 10:57:10.953222: Running the command: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/80e1/job/tmpb9xum3zm/bTaeGut7_mat_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'"
+2025-08-20 10:57:10.953865: Successfully ran: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2da2/job/tmp_hjf_azx/bTaeGut2.1.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2da2/job/tmp_hjf_azx/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'" in 0.1234 seconds
+2025-08-20 10:57:10.954518: Running the command: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2da2/job/tmp_hjf_azx/bTaeGut2.1_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'"
+2025-08-20 10:57:10.958379: Successfully ran: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2b32/job/tmp9l8ajbn3/bTaeGut7_pat.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2b32/job/tmp9l8ajbn3/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e'" in 0.1701 seconds
+2025-08-20 10:57:10.959017: Running the command: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2b32/job/tmp9l8ajbn3/bTaeGut7_pat_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'"
+2025-08-20 10:57:10.995383: Successfully ran: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2b32/job/tmp9l8ajbn3/bTaeGut7_pat_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'" in 0.0324 seconds
+2025-08-20 10:57:10.996851: Successfully ran: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/80e1/job/tmpb9xum3zm/bTaeGut7_mat_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'" in 0.039 seconds
+2025-08-20 10:57:10.996902: Successfully ran: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/19e4/job/tmp7yvgr43w/bTaeGut2.2_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'" in 0.044 seconds
+2025-08-20 10:57:10.998469: Successfully ran: "bash -c set -eo pipefail && cat /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2da2/job/tmp_hjf_azx/bTaeGut2.1_chr22.fa | grep -v '>' | wc | awk '{printf "%f", $3-$1}'" in 0.0397 seconds
+2025-08-20 10:57:11.727725: Successfully ran: "bash -c set -eo pipefail && samtools faidx /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6a5c/job/tmp7169yoby/_MINIGRAPH_.fa --region-file /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6a5c/job/tmp7169yoby/chr22.fa_contigs.clean | sed -e 's/\([^:]*\):\([0-9]+\)-\([0-9]+\)/echo "\1_sub_$((\2-1))_\3"/e' | bgzip --threads 1" in 0.9217 seconds
+2025-08-20 10:57:11.728464: Running the command: "bash -c set -eo pipefail && bgzip -dc /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6a5c/job/tmp7169yoby/_MINIGRAPH__chr22.fa --threads 1 | grep -v '>' | wc | awk '{printf "%f", $3-$1}'"
+2025-08-20 10:57:11.767219: Successfully ran: "bash -c set -eo pipefail && bgzip -dc /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6a5c/job/tmp7169yoby/_MINIGRAPH__chr22.fa --threads 1 | grep -v '>' | wc | awk '{printf "%f", $3-$1}'" in 0.0349 seconds
+Issued job 'gather_fas' kind-gather_fas/instance-ipvhtfxi v1 with job batch system ID: 36 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'export_split_wrapper' kind-export_split_wrapper/instance-6m9885gv v1 with job batch system ID: 37 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'filter_paf' kind-filter_paf/instance-3_1suu3j v1 with job batch system ID: 38 and disk: 40.6 Mi, memory: 4.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_headers' kind-sanitize_fasta_headers/instance-hl55f23p v1 with job batch system ID: 39 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Running PAF filter with minBlock=250000 minMAPQ=5 minIdentity=0.5 minScore=1.0 maxCollapseDistanceRatio=5.0
+2025-08-20 10:57:36.678672: Running the command: "gaffilter /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/a2cb/job/tmp6xpv__j3/mg.paf.filter -p -r 5.0 -m 0.0 -b 250000 -q 5 -i 0.5"
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-lsqh2iqa v1 with job batch system ID: 40 and disk: 36.1 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-8fhvo_rj v1 with job batch system ID: 41 and disk: 34.5 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-jg_i366h v1 with job batch system ID: 42 and disk: 34.3 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-iv343w00 v1 with job batch system ID: 43 and disk: 33.0 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'sanitize_fasta_header' kind-sanitize_fasta_header/instance-x2lmxzcr v1 with job batch system ID: 44 and disk: 10.6 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:57:36.901942: Successfully ran: "gaffilter /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/a2cb/job/tmp6xpv__j3/mg.paf.filter -p -r 5.0 -m 0.0 -b 250000 -q 5 -i 0.5" in 0.219 seconds with job-memory 4.0 Gi
+2025-08-20 10:57:37.535574: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/a7c7/job/tmpzmd53frg/bTaeGut2.2.fa bTaeGut2.2 -p"
+2025-08-20 10:57:37.538563: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/ac3f/job/tmpm51hc5jp/bTaeGut7_pat.fa bTaeGut7_pat -p"
+2025-08-20 10:57:37.540121: Running the command: "bash -c set -eo pipefail && gzip -dc /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/701e/job/tmp5urhg8w3/_MINIGRAPH_.fa | cactus_sanitizeFastaHeaders - _MINIGRAPH_ -p"
+2025-08-20 10:57:37.552365: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1f64/job/tmpmu8zlemd/bTaeGut7_mat.fa bTaeGut7_mat -p"
+2025-08-20 10:57:37.555697: Running the command: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6d9d/job/tmp3ce846i3/bTaeGut2.1.fa bTaeGut2.1 -p"
+2025-08-20 10:57:37.595507: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/a7c7/job/tmpzmd53frg/bTaeGut2.2.fa bTaeGut2.2 -p" in 0.0564 seconds
+2025-08-20 10:57:37.604559: Running the command: "cactus_analyseAssembly bTaeGut2.2.sanitized.fa"
+2025-08-20 10:57:37.604923: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/ac3f/job/tmpm51hc5jp/bTaeGut7_pat.fa bTaeGut7_pat -p" in 0.0629 seconds
+2025-08-20 10:57:37.613798: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/1f64/job/tmpmu8zlemd/bTaeGut7_mat.fa bTaeGut7_mat -p" in 0.0582 seconds
+2025-08-20 10:57:37.617907: Successfully ran: "bash -c set -eo pipefail && gzip -dc /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/701e/job/tmp5urhg8w3/_MINIGRAPH_.fa | cactus_sanitizeFastaHeaders - _MINIGRAPH_ -p" in 0.0741 seconds
+2025-08-20 10:57:37.621161: Successfully ran: "cactus_sanitizeFastaHeaders /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6d9d/job/tmp3ce846i3/bTaeGut2.1.fa bTaeGut2.1 -p" in 0.0619 seconds
+2025-08-20 10:57:37.623326: Running the command: "cactus_analyseAssembly bTaeGut7_mat.sanitized.fa"
+2025-08-20 10:57:37.626150: Running the command: "cactus_analyseAssembly bTaeGut7_pat.sanitized.fa"
+2025-08-20 10:57:37.629804: Running the command: "cactus_analyseAssembly _MINIGRAPH_.sanitized.fa"
+2025-08-20 10:57:37.657382: Successfully ran: "cactus_analyseAssembly bTaeGut2.2.sanitized.fa" in 0.0484 seconds
+2025-08-20 10:57:37.658351: Running the command: "cactus_analyseAssembly bTaeGut2.1.sanitized.fa"
+2025-08-20 10:57:37.677026: Successfully ran: "cactus_analyseAssembly bTaeGut7_mat.sanitized.fa" in 0.0485 seconds
+2025-08-20 10:57:37.683301: Successfully ran: "cactus_analyseAssembly bTaeGut7_pat.sanitized.fa" in 0.0517 seconds
+2025-08-20 10:57:37.688534: Successfully ran: "cactus_analyseAssembly _MINIGRAPH_.sanitized.fa" in 0.0556 seconds
+2025-08-20 10:57:37.715059: Successfully ran: "cactus_analyseAssembly bTaeGut2.1.sanitized.fa" in 0.0514 seconds
+Got message from job at time 08-20-2025 10:57:37: Assembly stats for _MINIGRAPH_: Input-sample: _MINIGRAPH_.sanitized.fa Total-sequences: 8865 Total-length: 5720086 Proportion-repeat-masked: 0.000000 ProportionNs: 0.000000 Total-Ns: 0 N50: 4794 Median-sequence-length: 104 Max-sequence-length: 224871 Min-sequence-length: 1
+
+Got message from job at time 08-20-2025 10:57:37: Assembly stats for bTaeGut7_pat: Input-sample: bTaeGut7_pat.sanitized.fa Total-sequences: 1 Total-length: 5320397 Proportion-repeat-masked: 0.000000 ProportionNs: 0.000000 Total-Ns: 0 N50: 5320397 Median-sequence-length: 5320397 Max-sequence-length: 5320397 Min-sequence-length: 5320397
+
+Got message from job at time 08-20-2025 10:57:37: Assembly stats for bTaeGut2.2: Input-sample: bTaeGut2.2.sanitized.fa Total-sequences: 1 Total-length: 4860289 Proportion-repeat-masked: 0.001209 ProportionNs: 0.001209 Total-Ns: 5874 N50: 4860289 Median-sequence-length: 4860289 Max-sequence-length: 4860289 Min-sequence-length: 4860289
+
+Got message from job at time 08-20-2025 10:57:38: Assembly stats for bTaeGut7_mat: Input-sample: bTaeGut7_mat.sanitized.fa Total-sequences: 1 Total-length: 5052704 Proportion-repeat-masked: 0.000000 ProportionNs: 0.000000 Total-Ns: 0 N50: 5052704 Median-sequence-length: 5052704 Max-sequence-length: 5052704 Min-sequence-length: 5052704
+
+Got message from job at time 08-20-2025 10:57:38: Assembly stats for bTaeGut2.1: Input-sample: bTaeGut2.1.sanitized.fa Total-sequences: 1 Total-length: 5079584 Proportion-repeat-masked: 0.016811 ProportionNs: 0.016811 Total-Ns: 85393 N50: 5079584 Median-sequence-length: 5079584 Max-sequence-length: 5079584 Min-sequence-length: 5079584
+
+Issued job 'cactus_cons_with_resources' kind-cactus_cons_with_resources/instance-8bulqa4g v1 with job batch system ID: 45 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Estimating cactus_consolidated(chr22) memory as 33.3 Gi from 5 sequences with total-sequence-size 25.3 Mi and paf-size 4252786 using <conslidatedMemory> configuration settings
+Issued job 'cactus_cons' kind-cactus_cons/instance-1vrsmjqb v1 with job batch system ID: 46 and disk: 134.4 Mi, memory: 33.3 Gi, cores: 8, accelerators: [], preemptible: False
+2025-08-20 10:57:41.699066: Running the command: "cactus_consolidated --seqFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.seqfile --logLevel INFO --alignments /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0_primary.paf --params /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.config.xml --outputFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.c2h --outputHalFastaFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.c2h.fa --outputReferenceFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.ref --outgroupEvents  --referenceEvent Anc0 --threads 8"
+cactus_consolidated(chr22): Params file: /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.config.xml
+cactus_consolidated(chr22): Output file string : /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.c2h
+cactus_consolidated(chr22): Output hal fasta file string : /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.c2h.fa
+cactus_consolidated(chr22): Output reference fasta file string : /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.ref
+cactus_consolidated(chr22): Sequence files and events: (null)
+cactus_consolidated(chr22): Alignments file: /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0_primary.paf
+cactus_consolidated(chr22): Secondary alignments file: (null)
+cactus_consolidated(chr22): Constraint alignments file: (null)
+cactus_consolidated(chr22): Species tree: (null)
+cactus_consolidated(chr22): Outgroup events:
+cactus_consolidated(chr22): Reference event: Anc0
+cactus_consolidated(chr22): Loaded the parameters files, 0 seconds have elapsed
+cactus_consolidated(chr22): Set up the cactus disk, 0 seconds have elapsed
+cactus_consolidated(chr22): Constructed the first flower
+cactus_consolidated(chr22): Going to build the event tree with newick string: (bTaeGut7_mat:0.025,bTaeGut7_pat:0.025,bTaeGut2.1:0.025,bTaeGut2.2:0.025,_MINIGRAPH_:0.025)Anc0;
+cactus_consolidated(chr22): Parsed the tree
+cactus_consolidated(chr22): Constructed the basic event tree
+cactus_consolidated(chr22): Assigning sequence bTaeGut7_mat.fa to bTaeGut7_mat
+cactus_consolidated(chr22): Processing file: bTaeGut7_mat.fa
+cactus_consolidated(chr22): Assigning sequence bTaeGut7_pat.fa to bTaeGut7_pat
+cactus_consolidated(chr22): Processing file: bTaeGut7_pat.fa
+cactus_consolidated(chr22): Assigning sequence bTaeGut2.1.fa to bTaeGut2.1
+cactus_consolidated(chr22): Processing file: bTaeGut2.1.fa
+cactus_consolidated(chr22): Assigning sequence bTaeGut2.2.fa to bTaeGut2.2
+cactus_consolidated(chr22): Processing file: bTaeGut2.2.fa
+cactus_consolidated(chr22): Assigning sequence _MINIGRAPH_.fa to _MINIGRAPH_
+cactus_consolidated(chr22): Processing file: _MINIGRAPH_.fa
+cactus_consolidated(chr22): Constructed the initial flower with 8869 sequences and 7 events with string: ((bTaeGut7_mat:0.025,bTaeGut7_pat:0.025,bTaeGut2.1:0.025,bTaeGut2.2:0.025,_MINIGRAPH_:0.025)Anc0:9.22337e+18)ROOT:9.22337e+18;
+cactus_consolidated(chr22): Established the first Flower in the hierarchy, 1 seconds have elapsed
+cactus_consolidated(chr22): Converted alignment coordinates, 1 seconds have elapsed
+cactus_consolidated(chr22): Stripped any unique IDs, 1 seconds have elapsed
+cactus_consolidated(chr22): We found a max path distance between ingroups in the tree (((bTaeGut7_mat:0.025,bTaeGut7_pat:0.025,bTaeGut2.1:0.025,bTaeGut2.2:0.025,_MINIGRAPH_:0.025)Anc0:9.22337e+18)ROOT:9.22337e+18;) of 0.050000, giving us and min final chain length of: 2048
+cactus_consolidated(chr22): Starting annealing round with a minimum chain length of 2048 and an alignment trim of 3
+cactus_consolidated(chr22): Sequence graph statistics after annealing:
+cactus_consolidated(chr22): There were 80354 blocks in the sequence graph, representing 24443127 total aligned bases
+cactus_consolidated(chr22): Block degree stats: min 1, avg 3.187296, median 3, max 5
+cactus_consolidated(chr22): Block support stats: min 0.000000, avg 0.224642, median 0.250000, max 0.500000
+cactus_consolidated(chr22): Starting melting round with a minimum chain length of 2
+cactus_consolidated(chr22): A melting round is destroying 1999 blocks with an average degree of 3.417209 from chains with length less than 2. Total aligned bases lost: 6831
+cactus_consolidated(chr22): Starting melting round with a minimum chain length of 32
+cactus_consolidated(chr22): A melting round is destroying 30155 blocks with an average degree of 3.265661 from chains with length less than 32. Total aligned bases lost: 742958
+cactus_consolidated(chr22): Starting melting round with a minimum chain length of 256
+cactus_consolidated(chr22): A melting round is destroying 6071 blocks with an average degree of 3.118267 from chains with length less than 256. Total aligned bases lost: 963942
+cactus_consolidated(chr22): A melting round is destroying 2033 blocks with an average degree of 3.160354 from chains with length less than 2048. Total aligned bases lost: 854678
+cactus_consolidated(chr22): Destroying 28 recoverable blocks
+cactus_consolidated(chr22): The blocks covered 8066 columns for a total of 28889 aligned bases
+cactus_consolidated(chr22): Destroying 0 recoverable blocks
+cactus_consolidated(chr22): The blocks covered 0 columns for a total of 0 aligned bases
+cactus_consolidated(chr22): Sequence graph statistics after melting:
+cactus_consolidated(chr22): There were 36695 blocks in the sequence graph, representing 20849240 total aligned bases
+cactus_consolidated(chr22): Block degree stats: min 1, avg 2.968552, median 3, max 5
+cactus_consolidated(chr22): Block support stats: min 0.000000, avg 0.109244, median 0.200000, max 0.500000
+cactus_consolidated(chr22): Attaching the sequence to the cactus root 15, header chr22 with length 5320397 and 4064581 total bases aligned and 0 bases aligned to other chromosome threads
+cactus_consolidated(chr22): Ran cactus caf, 8 seconds have elapsed
+cactus_consolidated(chr22): Ran extended flowers ready for bar, 8 seconds have elapsed
+cactus_consolidated(chr22): Ran cactus bar (use poa:1), 11 seconds have elapsed
+cactus_consolidated(chr22): There are 6 layers in the flowers hierarchy
+cactus_consolidated(chr22): In the 0 layer there are 1 flowers in the flowers hierarchy
+cactus_consolidated(chr22): Chose reference event 2: Anc0
+cactus_consolidated(chr22): For flower: 0 we have 0 nodes for: 50612 ends, 6154 chains, 0 stubs and 16437 blocks
+cactus_consolidated(chr22): Building a matching for 0 stub nodes in the top level problem from 17738 total stubs of which 12308 attached , 50612 total ends, 6154 chains, 16437 blocks 22591 groups and 8869 sequences
+cactus_consolidated(chr22): Starting to build the reference for flower 0, with 0 stubs and 0 chains and 0 nodes in the flowers tangle
+cactus_consolidated(chr22): The score of the initial solution is 0.000000/0 out of a max possible 0.000000
+cactus_consolidated(chr22): The score of the solution after permutation sampling is 0.000000/0 after 10 rounds of greedy permutation out of a max possible 0.000000
+cactus_consolidated(chr22): The score of the final reference solution is 0.000000/0 after 100 rounds of greedy nudging out of a max possible 0.000000
+cactus_consolidated(chr22): In the 1 layer there are 22591 flowers in the flowers hierarchy
+cactus_consolidated(chr22): In the 2 layer there are 24853 flowers in the flowers hierarchy
+cactus_consolidated(chr22): In the 3 layer there are 6737 flowers in the flowers hierarchy
+cactus_consolidated(chr22): In the 4 layer there are 494 flowers in the flowers hierarchy
+cactus_consolidated(chr22): In the 5 layer there are 1 flowers in the flowers hierarchy
+cactus_consolidated(chr22): Ran cactus make reference, 12 seconds have elapsed
+cactus_consolidated(chr22): Ran cactus make reference bottom up coordinates, 14 seconds have elapsed
+cactus_consolidated(chr22): Ran cactus make reference top down coordinates, 15 seconds have elapsed
+cactus_consolidated(chr22): Ran cactus to hal stage, 15 seconds have elapsed
+cactus_consolidated(chr22): Dumped sequences for hal file, 15 seconds have elapsed
+cactus_consolidated(chr22): Dumped reference sequences, 15 seconds have elapsed
+cactus_consolidated(chr22): Cactus consolidated is done!, 15 seconds have elapsed
+2025-08-20 10:57:56.821200: Successfully ran cactus_consolidated(chr22): "cactus_consolidated --seqFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.seqfile --logLevel INFO --alignments /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0_primary.paf --params /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.config.xml --outputFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.c2h --outputHalFastaFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.c2h.fa --outputReferenceFile /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/5a84/job/tmpj7wkappy/Anc0.ref --outgroupEvents  --referenceEvent Anc0 --threads 8" in 15.0217 seconds with job-memory 33.3 Gi
+Issued job 'export_hal' kind-export_hal/instance-05m2egke v1 with job batch system ID: 47 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Got message from job at time 08-20-2025 10:57:57: Ran cactus consolidated okay
+2025-08-20 10:57:58.069986: Running the command: "halAppendCactusSubtree /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal.c2h /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal.fa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.newick /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal --inMemory"
+2025-08-20 10:58:00.327255: Successfully ran: "halAppendCactusSubtree /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal.c2h /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal.fa /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.newick /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal --inMemory" in 2.1669 seconds with job-memory 2.0 Gi
+2025-08-20 10:58:00.327743: Running the command: "halSetMetadata /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal CACTUS_COMMIT 20488aeb80c3ef985034e538b36ad97ed632cad2"
+2025-08-20 10:58:00.430685: Successfully ran: "halSetMetadata /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal CACTUS_COMMIT 20488aeb80c3ef985034e538b36ad97ed632cad2" in 0.0099 seconds
+2025-08-20 10:58:00.435441: Running the command: "halSetMetadata /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal CACTUS_CONFIG PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8Y2FjdHVzV29ya2Zsb3dDb25maWcgZGlzdGFuY2VUb0FkZFRvUm9vdEFsaWdubWVudD0iMC4xIj4KCTxjb25zdGFudHMgZGVmYXVsdE1lbW9yeT0iMzUwMDAwMDAwMCIgZGVmYXVsdE92ZXJsYXJnZU1lbW9yeT0iMzUwMDAwMDAwMCIgZGVmYXVsdENwdT0iMSIgZGVmYXVsdE92ZXJsYXJnZUNwdT0iMSIgc3lzdGVtX21lbW9yeT0iNDA0Nzk2MzA5NTA0Ij4KCQkgIAoJCTxkaXZlcmdlbmNlcyB1c2VEZWZhdWx0PSIwIiBvbmU9IjAuMSIgdHdvPSIwLjE1IiB0aHJlZT0iMC4yIiBmb3VyPSIwLjI1IiBmaXZlPSIwLjM1Ii8+Cgk8L2NvbnN0YW50cz4KCTxwcmVwcm9jZXNzb3IgbWVtb3J5PSIyMDAwMDAwMDAwIiBwcmVwcm9jZXNzSm9iPSJjdXRIZWFkZXJzIiBjdXRCZWZvcmU9IiIgY3V0QWZ0ZXI9IiAgIiBhY3RpdmU9IjEiLz4KCTxwcmVwcm9jZXNzb3IgbWVtb3J5PSIyMDAwMDAwMDAwIiBwcmVwcm9jZXNzSm9iPSJjaGVja1VuaXF1ZUhlYWRlcnMiIGNoZWNrQXNzZW1ibHlIdWI9IjEiIGFjdGl2ZT0iMSIvPgoJPHByZXByb2Nlc3NvciB1bm1hc2s9IjAiIG1lbW9yeT0iMzUwMDAwMDAwMCIgcHJlcHJvY2Vzc0pvYj0icmVkIiByZWRPcHRzPSIiIHJlZFByZWZpbHRlck9wdHM9Ii1tIDIwMDAwIC1iIDAuOTgiIGFjdGl2ZT0iMSIvPgoJPHByZXByb2Nlc3NvciB1bm1hc2s9IjAiIGNodW5rU2l6ZT0iMTAwMDAwMDAiIHByb3BvcnRpb25Ub1NhbXBsZT0iMC4yIiBtZW1vcnk9IjIwMDAwMDAwMDAiIHByZXByb2Nlc3NKb2I9Imxhc3R6UmVwZWF0TWFzayIgbWluUGVyaW9kPSI1MCIgbGFzdHpPcHRzPSItLXN0ZXA9MyAtLWFtYmlndW91cz1pdXBhYywxMDAsMTAwIC0tdW5nYXBwZWQgLS1xdWVyeWhzcGxpbW <...> DA9IjEyODAwMDAwMDAwMCIgc2VxX3NpemVfNDAwMDAwMDAwMD0iMjU2MDAwMDAwMDAwIiBzZXFfc2l6ZV8xMDAwMDAwMDAwMD0iNTEyMDAwMDAwMDAwIi8+Cgk8L2NvbnNvbGlkYXRlZD4KCTxjb25zb2xpZGF0ZWQyLz4KPC9jYWN0dXNXb3JrZmxvd0NvbmZpZz4K"
+2025-08-20 10:58:00.443637: Successfully ran: "halSetMetadata /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal CACTUS_CONFIG PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8Y2FjdHVzV29ya2Zsb3dDb25maWcgZGlzdGFuY2VUb0FkZFRvUm9vdEFsaWdubWVudD0iMC4xIj4KCTxjb25zdGFudHMgZGVmYXVsdE1lbW9yeT0iMzUwMDAwMDAwMCIgZGVmYXVsdE92ZXJsYXJnZU1lbW9yeT0iMzUwMDAwMDAwMCIgZGVmYXVsdENwdT0iMSIgZGVmYXVsdE92ZXJsYXJnZUNwdT0iMSIgc3lzdGVtX21lbW9yeT0iNDA0Nzk2MzA5NTA0Ij4KCQkgIAoJCTxkaXZlcmdlbmNlcyB1c2VEZWZhdWx0PSIwIiBvbmU9IjAuMSIgdHdvPSIwLjE1IiB0aHJlZT0iMC4yIiBmb3VyPSIwLjI1IiBmaXZlPSIwLjM1Ii8+Cgk8L2NvbnN0YW50cz4KCTxwcmVwcm9jZXNzb3IgbWVtb3J5PSIyMDAwMDAwMDAwIiBwcmVwcm9jZXNzSm9iPSJjdXRIZWFkZXJzIiBjdXRCZWZvcmU9IiIgY3V0QWZ0ZXI9IiAgIiBhY3RpdmU9IjEiLz4KCTxwcmVwcm9jZXNzb3IgbWVtb3J5PSIyMDAwMDAwMDAwIiBwcmVwcm9jZXNzSm9iPSJjaGVja1VuaXF1ZUhlYWRlcnMiIGNoZWNrQXNzZW1ibHlIdWI9IjEiIGFjdGl2ZT0iMSIvPgoJPHByZXByb2Nlc3NvciB1bm1hc2s9IjAiIG1lbW9yeT0iMzUwMDAwMDAwMCIgcHJlcHJvY2Vzc0pvYj0icmVkIiByZWRPcHRzPSIiIHJlZFByZWZpbHRlck9wdHM9Ii1tIDIwMDAwIC1iIDAuOTgiIGFjdGl2ZT0iMSIvPgoJPHByZXByb2Nlc3NvciB1bm1hc2s9IjAiIGNodW5rU2l6ZT0iMTAwMDAwMDAiIHByb3BvcnRpb25Ub1NhbXBsZT0iMC4yIiBtZW1vcnk9IjIwMDAwMDAwMDAiIHByZXByb2Nlc3NKb2I9Imxhc3R6UmVwZWF0TWFzayIgbWluUGVyaW9kPSI1MCIgbGFzdHpPcHRzPSItLXN0ZXA9MyAtLWFtYmlndW91cz1pdXBhYywxMDAsMTAwIC0tdW5nYXBwZWQgLS1xdWVyeWhzcGxpbWl0P <...> wMCIgc2VxX3NpemVfNDAwMDAwMDAwMD0iMjU2MDAwMDAwMDAwIiBzZXFfc2l6ZV8xMDAwMDAwMDAwMD0iNTEyMDAwMDAwMDAwIi8+Cgk8L2NvbnNvbGlkYXRlZD4KCTxjb25zb2xpZGF0ZWQyLz4KPC9jYWN0dXNXb3JrZmxvd0NvbmZpZz4K" in 0.0049 seconds
+2025-08-20 10:58:00.444132: Running the command: "halRemoveDupes /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal bTaeGut7_mat"
+2025-08-20 10:58:00.533782: Successfully ran: "halRemoveDupes /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/22cb/6bf5/tmpkfyj51c2/Anc0.hal bTaeGut7_mat" in 0.0226 seconds with job-memory 2.0 Gi
+Issued job 'clean_jobstore_files' kind-clean_jobstore_files/instance-snpoenuu v1 with job batch system ID: 48 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'export_vg' kind-export_vg/instance-hs_gw3fq v1 with job batch system ID: 49 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:58:01.732394: Running the command: "hal2vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/e20b/749f/tmp90bd5om9/out.hal --progress --inMemory --ignoreGenomes Anc0 --refGenomes _MINIGRAPH_,bTaeGut7_mat,bTaeGut7_pat"
+2025-08-20 10:58:13.646745: Successfully ran: "hal2vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/e20b/749f/tmp90bd5om9/out.hal --progress --inMemory --ignoreGenomes Anc0 --refGenomes _MINIGRAPH_,bTaeGut7_mat,bTaeGut7_pat" in 11.8455 seconds with job-memory 2.0 Gi
+Got message from job at time 08-20-2025 10:58:13: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job 'export_vg' kind-export_vg/instance-hs_gw3fq v4 used 114.64% disk (38.0 MiB [39886848B] used, 33.2 MiB [34791948B] requested).
+Issued job 'export_align_wrapper' kind-export_align_wrapper/instance-q44zgea1 v1 with job batch system ID: 50 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'merge_hal' kind-merge_hal/instance-5fo9hrqf v1 with job batch system ID: 51 and disk: 22.1 Mi, memory: 22.1 Mi, cores: 1, accelerators: [], preemptible: False
+Issued job 'Job' kind-Job/instance-xfwndwdt v1 with job batch system ID: 52 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:58:33.677182: Running the command: "halMergeChroms chr22.hal __merged__.hal --progress"
+2025-08-20 10:58:33.738422: Running the command: "vg convert -W -f /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg"
+2025-08-20 10:58:35.102333: Successfully ran: "vg convert -W -f /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg" in 1.358 seconds with job-memory 2.0 Gi
+2025-08-20 10:58:35.102720: Running the command: "gfaffix /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfa --output_refined /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed.gfa --check_transformation --dont_collapse bTaeGut7_mat#[.]*"
+2025-08-20 10:58:37.642382: Successfully ran: "halMergeChroms chr22.hal __merged__.hal --progress" in 3.808 seconds with job-memory 22.1 Mi
+Issued job 'clean_jobstore_files' kind-clean_jobstore_files/instance-qmin6sqr v1 with job batch system ID: 53 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:58:41.430611: Successfully ran: "gfaffix /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfa --output_refined /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed.gfa --check_transformation --dont_collapse bTaeGut7_mat#[.]*" in 6.2228 seconds with job-memory 2.0 Gi
+2025-08-20 10:58:41.430933: Running the command: "head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfa"
+2025-08-20 10:58:41.437390: Successfully ran: "head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfa" in 0.001 seconds
+2025-08-20 10:58:41.437912: Running the command: "sed -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed.gfa -e 1s/.*/H	VN:Z:1.1	RS:Z:bTaeGut7_mat bTaeGut7_pat _MINIGRAPH_/"
+2025-08-20 10:58:41.594708: Successfully ran: "sed -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed.gfa -e 1s/.*/H	VN:Z:1.1	RS:Z:bTaeGut7_mat bTaeGut7_pat _MINIGRAPH_/" in 0.1529 seconds
+2025-08-20 10:58:41.595490: Running the command: "bash -c set -eo pipefail && vg convert -g -p /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed.gfa | vg mod -u -"
+2025-08-20 10:58:50.822374: Successfully ran: "bash -c set -eo pipefail && vg convert -g -p /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed.gfa | vg mod -u -" in 9.222 seconds
+2025-08-20 10:58:50.823334: Running the command: "bash -c set -eo pipefail && clip-vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed -f -e bTaeGut7_mat -d _MINIGRAPH_ -L | vg mod -X 1024 - | vg paths -x - -n -Q bTaeGut7_mat -t 1 | vg clip -d 1 - -P bTaeGut7_mat | vg ids -s -"
+2025-08-20 10:59:06.536737: Successfully ran: "bash -c set -eo pipefail && clip-vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.gfaffixed -f -e bTaeGut7_mat -d _MINIGRAPH_ -L | vg mod -X 1024 - | vg paths -x - -n -Q bTaeGut7_mat -t 1 | vg clip -d 1 - -P bTaeGut7_mat | vg ids -s -" in 15.7082 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:06.537087: Running the command: "vg validate /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.clip"
+2025-08-20 10:59:07.433910: Successfully ran: "vg validate /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/4559/tmppijqk_5t/chr22.vg.clip" in 0.8925 seconds
+2025-08-20 10:59:07.530332: Running the command: "bash -c set -eo pipefail && vg convert -f -W chr22.vg | grep -v '^P	_MINIGRAPH_'"
+2025-08-20 10:59:08.697966: Successfully ran: "bash -c set -eo pipefail && vg convert -f -W chr22.vg | grep -v '^P	_MINIGRAPH_'" in 1.1627 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:08.698397: Running the command: "odgi build -g chr22.vg.gfa -o chr22.vg.og -t 1"
+2025-08-20 10:59:19.010987: Successfully ran: "odgi build -g chr22.vg.gfa -o chr22.vg.og -t 1" in 10.1952 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:19.151408: Running the command: "vg ids -j /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/df63/tmp1tlatgxi/chr22.vg"
+2025-08-20 10:59:19.321276: Successfully ran: "vg ids -j /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/af89/df63/tmp1tlatgxi/chr22.vg" in 0.1641 seconds with job-memory 107.9 Mi
+Issued job 'Job' kind-Job/instance-llomwvs9 v1 with job batch system ID: 54 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'Job' kind-Job/instance-v9fgwmda v1 with job batch system ID: 55 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Got message from job at time 08-20-2025 10:59:19: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job 'join_vg' kind-Job/instance-xfwndwdt v9 used 116.52% disk (31.4 MiB [32956416B] used, 27.0 MiB [28284223B] requested).
+Issued job 'odgi_squeeze' kind-odgi_squeeze/instance-duopx2va v1 with job batch system ID: 56 and disk: 107.9 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+Issued job 'make_odgi_viz' kind-make_odgi_viz/instance-g6zrvi5x v1 with job batch system ID: 57 and disk: 269.7 Mi, memory: 2.0 Gi, cores: 7, accelerators: [], preemptible: False
+Issued job 'vg_to_gfa' kind-vg_to_gfa/instance-aqf_5gwa v1 with job batch system ID: 58 and disk: 269.7 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:59:20.557534: Running the command: "bash -c set -eo pipefail && clip-vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg -f -e bTaeGut7_mat -d _MINIGRAPH_ -u 10000 -a _MINIGRAPH_ -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip.bed | vg clip -d 1 - -P bTaeGut7_mat | vg clip -sS - -P bTaeGut7_mat"
+2025-08-20 10:59:21.127320: Running the command: "odgi squeeze -f /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/cc27/job/tmp_qwp0ypn/full.squeeze.input -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/cc27/job/tmp_qwp0ypn/full.og -t 7"
+2025-08-20 10:59:26.836657: Successfully ran: "odgi squeeze -f /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/cc27/job/tmp_qwp0ypn/full.squeeze.input -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/cc27/job/tmp_qwp0ypn/full.og -t 7" in 5.7048 seconds with job-memory 863.2 Mi
+Got message from job at time 08-20-2025 10:59:27: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job 'odgi_squeeze' kind-odgi_squeeze/instance-duopx2va v1 used 157.01% disk (169.4 MiB [177639424B] used, 107.9 MiB [113136892B] requested).
+2025-08-20 10:59:28.023677: Running the command: "vg convert -f chr22.vg -Q bTaeGut7_mat -B"
+2025-08-20 10:59:29.633354: Successfully ran: "vg convert -f chr22.vg -Q bTaeGut7_mat -B" in 1.6056 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:30.252391: Successfully ran: "bash -c set -eo pipefail && clip-vg /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg -f -e bTaeGut7_mat -d _MINIGRAPH_ -u 10000 -a _MINIGRAPH_ -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip.bed | vg clip -d 1 - -P bTaeGut7_mat | vg clip -sS - -P bTaeGut7_mat" in 9.6893 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:30.252715: Running the command: "vg validate /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip"
+2025-08-20 10:59:30.825231: Running the command: "odgi sort -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.sort -t 7"
+2025-08-20 10:59:31.041107: Successfully ran: "vg validate /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip" in 0.7841 seconds
+2025-08-20 10:59:31.041960: Running the command: "bash -c set -eo pipefail && vg paths -E -v /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip | awk '{print "chr22	" $0}'"
+2025-08-20 10:59:31.239904: Successfully ran: "bash -c set -eo pipefail && vg paths -E -v /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip | awk '{print "chr22	" $0}'" in 0.1931 seconds
+2025-08-20 10:59:31.240627: Running the command: "bash -c set -eo pipefail && vg stats -l -z /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip | awk '{print "chr22	" $0}'"
+2025-08-20 10:59:31.299061: Successfully ran: "bash -c set -eo pipefail && vg stats -l -z /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip | awk '{print "chr22	" $0}'" in 0.0543 seconds
+2025-08-20 10:59:31.299695: Running the command: "awk {print $0 "	chr22"} /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip.bed"
+2025-08-20 10:59:31.307210: Successfully ran: "awk {print $0 "	chr22"} /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/7a2b/27dd/tmpoewc6_t0/chr22.vg.clip.bed" in 0.0036 seconds
+2025-08-20 10:59:31.419750: Running the command: "bash -c set -eo pipefail && vg convert -f -W chr22.vg | grep -v '^P	_MINIGRAPH_'"
+2025-08-20 10:59:32.416571: Successfully ran: "bash -c set -eo pipefail && vg convert -f -W chr22.vg | grep -v '^P	_MINIGRAPH_'" in 0.992 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:32.417027: Running the command: "odgi build -g chr22.vg.gfa -o chr22.vg.og -t 1"
+2025-08-20 10:59:43.340680: Successfully ran: "odgi build -g chr22.vg.gfa -o chr22.vg.og -t 1" in 10.9189 seconds with job-memory 2.0 Gi
+Issued job 'Job' kind-Job/instance-bh7z0qol v1 with job batch system ID: 59 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'Job' kind-Job/instance-tknwguoe v1 with job batch system ID: 60 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'cat_stats' kind-cat_stats/instance-rc9u53x2 v1 with job batch system ID: 61 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Issued job 'make_odgi_viz' kind-make_odgi_viz/instance-zo7zigl9 v1 with job batch system ID: 62 and disk: 269.7 Mi, memory: 2.0 Gi, cores: 7, accelerators: [], preemptible: False
+Issued job 'odgi_squeeze' kind-odgi_squeeze/instance-tfna29no v1 with job batch system ID: 63 and disk: 107.9 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+Issued job 'vg_to_gfa' kind-vg_to_gfa/instance-jay4t63j v1 with job batch system ID: 64 and disk: 269.7 Mi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:59:45.164986: Running the command: "bash -c set -eo pipefail && vg clip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2f09/0245/tmplhg83696/chr22.vg -d 1 -P bTaeGut7_mat -P bTaeGut7_pat -m 1000 | vg clip -d 1 - -P bTaeGut7_mat -P bTaeGut7_pat | vg clip -sS - -P bTaeGut7_mat"
+2025-08-20 10:59:49.682401: Successfully ran: "bash -c set -eo pipefail && vg clip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2f09/0245/tmplhg83696/chr22.vg -d 1 -P bTaeGut7_mat -P bTaeGut7_pat -m 1000 | vg clip -d 1 - -P bTaeGut7_mat -P bTaeGut7_pat | vg clip -sS - -P bTaeGut7_mat" in 4.5128 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:49.682730: Running the command: "vg validate /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2f09/0245/tmplhg83696/chr22.vg.clip"
+2025-08-20 10:59:50.459936: Successfully ran: "vg validate /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2f09/0245/tmplhg83696/chr22.vg.clip" in 0.7737 seconds
+Issued job 'Job' kind-Job/instance-s8nc7j6n v1 with job batch system ID: 65 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+2025-08-20 10:59:51.628854: Running the command: "vg convert -f chr22.vg -Q bTaeGut7_mat -B"
+2025-08-20 10:59:53.055651: Successfully ran: "vg convert -f chr22.vg -Q bTaeGut7_mat -B" in 1.422 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:53.754501: Successfully ran: "odgi sort -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.sort -t 7" in 22.9246 seconds with job-memory 2.0 Gi
+2025-08-20 10:59:53.754827: Running the command: "odgi paths -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.sort -L"
+2025-08-20 10:59:54.306200: Running the command: "tar czf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/stats.tgz /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/clip-stats.bed /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/path-stats.tsv /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/graph-stats.tsv /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/sample-stats.tsv"
+2025-08-20 10:59:54.321189: Successfully ran: "tar czf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/stats.tgz /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/clip-stats.bed /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/path-stats.tsv /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/graph-stats.tsv /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/78d5/job/tmpmep6r2u1/sample-stats.tsv" in 0.0105 seconds
+2025-08-20 10:59:54.796139: Successfully ran: "odgi paths -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.sort -L" in 1.0375 seconds
+2025-08-20 10:59:54.797248: Running the command: "odgi viz -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.sort -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.viz.png -M /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/path_sample_names -t 7 -x 1500 -y 500 -a 10"
+2025-08-20 10:59:55.425139: Running the command: "vg convert -f chr22.vg -Q bTaeGut7_mat -B"
+2025-08-20 10:59:56.834964: Successfully ran: "vg convert -f chr22.vg -Q bTaeGut7_mat -B" in 1.4052 seconds with job-memory 2.0 Gi
+Issued job 'make_vg_indexes' kind-make_vg_indexes/instance-tvgprqq5 v1 with job batch system ID: 66 and disk: 161.8 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+2025-08-20 10:59:57.641039: Successfully ran: "odgi viz -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.sort -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/chr22.full.og.viz.png -M /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/6de3/job/tmpjr5tx158/path_sample_names -t 7 -x 1500 -y 500 -a 10" in 2.8388 seconds with job-memory 2.0 Gi
+Issued job 'make_vg_indexes' kind-make_vg_indexes/instance-5cqe0l1k v1 with job batch system ID: 67 and disk: 161.8 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+2025-08-20 10:59:58.742672: Running the command: "bash -c set -eo pipefail && head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/chr22.vg.gfa | sed -e 1s/_MINIGRAPH_//"
+2025-08-20 10:59:58.754311: Successfully ran: "bash -c set -eo pipefail && head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/chr22.vg.gfa | sed -e 1s/_MINIGRAPH_//" in 0.0065 seconds
+2025-08-20 10:59:58.755158: Running the command: "grep -v ^H\|^W	_MINIGRAPH_ /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/chr22.vg.gfa"
+2025-08-20 10:59:58.873529: Successfully ran: "grep -v ^H\|^W	_MINIGRAPH_ /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/chr22.vg.gfa" in 0.1126 seconds with job-memory 863.2 Mi
+2025-08-20 10:59:58.879941: Running the command: "vg gbwt -G /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gfa --gbz-format -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gbz --translation /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gbz.trans"
+2025-08-20 11:00:00.760322: Successfully ran: "vg gbwt -G /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gfa --gbz-format -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gbz --translation /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gbz.trans" in 1.8747 seconds with job-memory 863.2 Mi
+2025-08-20 11:00:00.760962: Running the command: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gfa --threads 7"
+2025-08-20 11:00:00.903534: Successfully ran: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gfa --threads 7" in 0.1378 seconds
+2025-08-20 11:00:00.904384: Running the command: "vg snarls /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gbz -T -t 7"
+2025-08-20 11:00:10.246720: Successfully ran: "vg snarls /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/f252/job/tmpxl754al7/filter.merged.gbz -T -t 7" in 9.3374 seconds with job-memory 863.2 Mi
+Issued job 'make_xg' kind-make_xg/instance-0cv0u45y v1 with job batch system ID: 68 and disk: 269.7 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+Issued job 'make_giraffe_indexes' kind-make_giraffe_indexes/instance-hu366py0 v1 with job batch system ID: 69 and disk: 431.6 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+2025-08-20 11:00:11.395833: Running the command: "bash -c set -eo pipefail && head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/chr22.vg.gfa | sed -e 1s/_MINIGRAPH_//"
+2025-08-20 11:00:11.406975: Successfully ran: "bash -c set -eo pipefail && head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/chr22.vg.gfa | sed -e 1s/_MINIGRAPH_//" in 0.006 seconds
+2025-08-20 11:00:11.407834: Running the command: "grep -v ^H\|^W	_MINIGRAPH_ /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/chr22.vg.gfa"
+2025-08-20 11:00:11.526620: Successfully ran: "grep -v ^H\|^W	_MINIGRAPH_ /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/chr22.vg.gfa" in 0.113 seconds with job-memory 863.2 Mi
+2025-08-20 11:00:11.533324: Running the command: "vg gbwt -G /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gfa --gbz-format -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gbz --translation /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gbz.trans"
+2025-08-20 11:00:13.356872: Successfully ran: "vg gbwt -G /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gfa --gbz-format -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gbz --translation /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gbz.trans" in 1.8187 seconds with job-memory 863.2 Mi
+2025-08-20 11:00:13.357554: Running the command: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gfa --threads 7"
+2025-08-20 11:00:13.526991: Successfully ran: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gfa --threads 7" in 0.1644 seconds
+2025-08-20 11:00:13.527839: Running the command: "vg snarls /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gbz -T -t 7"
+2025-08-20 11:00:22.875574: Successfully ran: "vg snarls /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/job/tmpqc08v4pa/full.merged.gbz -T -t 7" in 9.3426 seconds with job-memory 863.2 Mi
+2025-08-20 11:00:23.028592: Running the command: "bash -c set -eo pipefail && vg paths -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/5331/tmpy8xte1c4/full.bTaeGut_pangenome.gbz -S bTaeGut7_mat -F | sed -e 's/bTaeGut7_mat#.\+#//g' | bgzip --threads 1"
+2025-08-20 11:00:23.668191: Successfully ran: "bash -c set -eo pipefail && vg paths -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/5331/tmpy8xte1c4/full.bTaeGut_pangenome.gbz -S bTaeGut7_mat -F | sed -e 's/bTaeGut7_mat#.\+#//g' | bgzip --threads 1" in 0.6353 seconds
+2025-08-20 11:00:23.673165: Running the command: "bash -c set -eo pipefail && vg paths -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/5331/tmpy8xte1c4/full.bTaeGut_pangenome.gbz -S bTaeGut7_pat -F | sed -e 's/bTaeGut7_pat#.\+#//g' | bgzip --threads 1"
+2025-08-20 11:00:24.297862: Successfully ran: "bash -c set -eo pipefail && vg paths -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/dcc9/5331/tmpy8xte1c4/full.bTaeGut_pangenome.gbz -S bTaeGut7_pat -F | sed -e 's/bTaeGut7_pat#.\+#//g' | bgzip --threads 1" in 0.6205 seconds
+2025-08-20 11:00:25.422762: Running the command: "vg convert -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c397/job/tmpjp9vae6m/filter.bTaeGut_pangenome.gbz -t 7"
+2025-08-20 11:00:29.207280: Successfully ran: "vg convert -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c397/job/tmpjp9vae6m/filter.bTaeGut_pangenome.gbz -t 7" in 3.7804 seconds
+2025-08-20 11:00:30.326845: Running the command: "vg index -t 7 -j /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.dist /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.gbz"
+2025-08-20 11:00:37.309931: Successfully ran: "vg index -t 7 -j /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.dist /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.gbz" in 6.9778 seconds with job-memory 863.2 Mi
+2025-08-20 11:00:37.310331: Running the command: "vg minimizer -k 29 -w 11 -t 7 -d /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.dist -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.min /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.gbz"
+2025-08-20 11:00:39.109283: Successfully ran: "vg minimizer -k 29 -w 11 -t 7 -d /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.dist -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.min /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/2bad/job/tmpltrbiafg/filter.bTaeGut_pangenome.gbz" in 1.7943 seconds with job-memory 863.2 Mi
+2025-08-20 11:00:40.347497: Running the command: "odgi squeeze -f /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c7ef/job/tmpbsiii2jl/clip.squeeze.input -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c7ef/job/tmpbsiii2jl/clip.og -t 7"
+2025-08-20 11:00:46.870986: Successfully ran: "odgi squeeze -f /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c7ef/job/tmpbsiii2jl/clip.squeeze.input -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c7ef/job/tmpbsiii2jl/clip.og -t 7" in 6.5186 seconds with job-memory 863.2 Mi
+Got message from job at time 08-20-2025 11:00:47: Job used more disk than requested. For CWL, consider increasing the outdirMin requirement, otherwise, consider increasing the disk requirement. Job 'odgi_squeeze' kind-odgi_squeeze/instance-tfna29no v1 used 155.01% disk (167.2 MiB [175370240B] used, 107.9 MiB [113136892B] requested).
+2025-08-20 11:00:48.192316: Running the command: "odgi sort -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.sort -t 7"
+2025-08-20 11:01:10.930227: Successfully ran: "odgi sort -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.sort -t 7" in 22.7337 seconds with job-memory 2.0 Gi
+2025-08-20 11:01:10.930550: Running the command: "odgi paths -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.sort -L"
+2025-08-20 11:01:11.964786: Successfully ran: "odgi paths -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.sort -L" in 1.0304 seconds
+2025-08-20 11:01:11.966146: Running the command: "odgi viz -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.sort -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.viz.png -M /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/path_sample_names -t 7 -x 1500 -y 500 -a 10"
+2025-08-20 11:01:14.954482: Successfully ran: "odgi viz -i /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.sort -o /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/chr22.clip.og.viz.png -M /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/bcd7/job/tmp806xmgip/path_sample_names -t 7 -x 1500 -y 500 -a 10" in 2.984 seconds with job-memory 2.0 Gi
+Issued job 'make_vg_indexes' kind-make_vg_indexes/instance-blfg1d5n v1 with job batch system ID: 70 and disk: 161.8 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+2025-08-20 11:01:16.084448: Running the command: "bash -c set -eo pipefail && head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/chr22.vg.gfa | sed -e 1s/_MINIGRAPH_//"
+2025-08-20 11:01:16.095380: Successfully ran: "bash -c set -eo pipefail && head -1 /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/chr22.vg.gfa | sed -e 1s/_MINIGRAPH_//" in 0.0061 seconds
+2025-08-20 11:01:16.096269: Running the command: "grep -v ^H\|^W	_MINIGRAPH_ /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/chr22.vg.gfa"
+2025-08-20 11:01:16.213293: Successfully ran: "grep -v ^H\|^W	_MINIGRAPH_ /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/chr22.vg.gfa" in 0.1116 seconds with job-memory 863.2 Mi
+2025-08-20 11:01:16.219589: Running the command: "vg gbwt -G /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gfa --gbz-format -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gbz --translation /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gbz.trans"
+2025-08-20 11:01:18.086757: Successfully ran: "vg gbwt -G /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gfa --gbz-format -g /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gbz --translation /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gbz.trans" in 1.8624 seconds with job-memory 863.2 Mi
+2025-08-20 11:01:18.087442: Running the command: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gfa --threads 7"
+2025-08-20 11:01:18.230015: Successfully ran: "bgzip /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gfa --threads 7" in 0.1383 seconds
+2025-08-20 11:01:18.230755: Running the command: "vg snarls /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gbz -T -t 7"
+2025-08-20 11:01:27.498549: Successfully ran: "vg snarls /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/9462/job/tmpt3dxz3fw/clip.merged.gbz -T -t 7" in 9.263 seconds with job-memory 863.2 Mi
+Issued job 'make_vcf' kind-make_vcf/instance-lxb6ndi7 v1 with job batch system ID: 71 and disk: 161.8 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+Issued job 'make_xg' kind-make_xg/instance-81g38shb v1 with job batch system ID: 72 and disk: 269.7 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+Issued job 'make_vcf' kind-make_vcf/instance-hqe3a6nu v1 with job batch system ID: 73 and disk: 161.8 Mi, memory: 863.2 Mi, cores: 7, accelerators: [], preemptible: False
+2025-08-20 11:01:28.622017: Running the command: "bash -c set -eo pipefail && vg deconstruct /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.bTaeGut_pangenome.gbz -P bTaeGut7_mat -C -a -r /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.bTaeGut_pangenome.snarls -t 7 | bgzip --threads 7"
+2025-08-20 11:01:39.638282: Successfully ran: "bash -c set -eo pipefail && vg deconstruct /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.bTaeGut_pangenome.gbz -P bTaeGut7_mat -C -a -r /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.bTaeGut_pangenome.snarls -t 7 | bgzip --threads 7" in 11.0109 seconds with job-memory 863.2 Mi
+2025-08-20 11:01:39.638611: Running the command: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.merged.vcf.gz"
+2025-08-20 11:01:39.903248: Successfully ran: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.merged.vcf.gz" in 0.191 seconds
+2025-08-20 11:01:39.914383: Running the command: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.merged.vcf.gz | tail"
+2025-08-20 11:01:40.514024: Successfully ran: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.merged.vcf.gz | tail" in 0.596 seconds
+2025-08-20 11:01:40.514734: Running the command: "bash -c set -eo pipefail && vcfbub --input /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.merged.vcf.gz --max-ref-length 100000 --max-level 0 | bgzip --threads 7"
+2025-08-20 11:01:41.346056: Successfully ran: "bash -c set -eo pipefail && vcfbub --input /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/clip.merged.vcf.gz --max-ref-length 100000 --max-level 0 | bgzip --threads 7" in 0.8278 seconds
+2025-08-20 11:01:41.346550: Running the command: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/merged.filtered.vcf.gz"
+2025-08-20 11:01:41.512176: Successfully ran: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/merged.filtered.vcf.gz" in 0.162 seconds
+2025-08-20 11:01:41.539386: Running the command: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/merged.filtered.vcf.gz | tail"
+2025-08-20 11:01:42.015347: Successfully ran: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/c8d9/job/tmpr8ujslz5/merged.filtered.vcf.gz | tail" in 0.4727 seconds
+2025-08-20 11:01:43.100762: Running the command: "bash -c set -eo pipefail && vg deconstruct /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/clip.bTaeGut_pangenome.gbz -P bTaeGut7_pat -C -a -r /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/clip.bTaeGut_pangenome.snarls -t 7 | bgzip --threads 7"
+2025-08-20 11:01:54.106693: Successfully ran: "bash -c set -eo pipefail && vg deconstruct /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/clip.bTaeGut_pangenome.gbz -P bTaeGut7_pat -C -a -r /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/clip.bTaeGut_pangenome.snarls -t 7 | bgzip --threads 7" in 11.001 seconds with job-memory 863.2 Mi
+2025-08-20 11:01:54.107022: Running the command: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/bTaeGut7_pat.clip.merged.vcf.gz"
+2025-08-20 11:01:54.298415: Successfully ran: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/bTaeGut7_pat.clip.merged.vcf.gz" in 0.1879 seconds
+2025-08-20 11:01:54.320088: Running the command: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/bTaeGut7_pat.clip.merged.vcf.gz | tail"
+2025-08-20 11:01:54.851735: Successfully ran: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/bTaeGut7_pat.clip.merged.vcf.gz | tail" in 0.528 seconds
+2025-08-20 11:01:54.852467: Running the command: "bash -c set -eo pipefail && vcfbub --input /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/bTaeGut7_pat.clip.merged.vcf.gz --max-ref-length 100000 --max-level 0 | bgzip --threads 7"
+2025-08-20 11:01:55.526677: Successfully ran: "bash -c set -eo pipefail && vcfbub --input /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/bTaeGut7_pat.clip.merged.vcf.gz --max-ref-length 100000 --max-level 0 | bgzip --threads 7" in 0.6707 seconds
+2025-08-20 11:01:55.527176: Running the command: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/merged.filtered.vcf.gz"
+2025-08-20 11:01:55.690017: Successfully ran: "tabix -p vcf /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/merged.filtered.vcf.gz" in 0.1597 seconds
+2025-08-20 11:01:55.699459: Running the command: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/merged.filtered.vcf.gz | tail"
+2025-08-20 11:01:56.170240: Successfully ran: "bash -c set -eo pipefail && bcftools view /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/4469/job/tmpax8oj4ff/merged.filtered.vcf.gz | tail" in 0.4674 seconds
+2025-08-20 11:01:57.254086: Running the command: "vg convert -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/8730/job/tmp0l7k8643/clip.bTaeGut_pangenome.gbz -t 7"
+2025-08-20 11:02:01.040868: Successfully ran: "vg convert -x /tmp/toilwf-0ccb634cd4f95624891a252332c2dcf1/8730/job/tmp0l7k8643/clip.bTaeGut_pangenome.gbz -t 7" in 3.7823 seconds
+Issued job 'export_join_wrapper' kind-export_join_wrapper/instance-5xxbs_lv v1 with job batch system ID: 74 and disk: 2.0 Gi, memory: 2.0 Gi, cores: 1, accelerators: [], preemptible: False
+Finished toil run successfully.
+Stopping real-time logging server.
+Joining real-time logging server thread.
+Successfully deleted the job store: FileJobStore(/lustre/fs5/jarv_lab/scratch/ssecomandi/SIBE_course/2_bTaeGut_pangenome/jobStore)
+cactus-pangenome has finished after 850.4993468050379 seconds

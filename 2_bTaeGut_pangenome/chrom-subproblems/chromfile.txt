@@ -1,0 +1,1 @@
+chr22	/lustre/fs5/jarv_lab/scratch/ssecomandi/SIBE_course/2_bTaeGut_pangenome/chrom-subproblems/seqfiles/chr22.seqfile	/lustre/fs5/jarv_lab/scratch/ssecomandi/SIBE_course/2_bTaeGut_pangenome/chrom-subproblems/chr22/chr22.paf
