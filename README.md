@@ -491,7 +491,7 @@ Of course, these variants needs to be filtered and validated for downstream anal
 We will now use the pangenome as a reference for read mapping using the fast short-read mapper ```vg giraffe```<sup>7</sup>.
 
 In the folder ```4_short_read_data/``` you will find forward and reverse fastq files for a single Zebra finch individual [SRR16569049](https://www.ncbi.nlm.nih.gov/sra/SRX12771087[accn]). 
-They have been pre-processedas follows:
+They have been pre-processed as follows:
 1. The data have been downloaded from NCBI with ```fasterq-dump``` as follows:
 2. Reads were checked with ```fastqc```. No adptors found, probably the reads were trimmed before uploaded on NCBI.
 3. Read have been aligned to the pangenome with ```vg giraffe``` and surjected with ```vg surject``` (see below for the explanation). Only those mapping to chr22 were extracted. These are the reads you you will use in this course.
