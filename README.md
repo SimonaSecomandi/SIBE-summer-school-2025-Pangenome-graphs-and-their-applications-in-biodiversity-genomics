@@ -205,6 +205,11 @@ If you forget to set some of these flags don't worry, you can always generate ``
 
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
+Deactivate the Cactus environment:
+
+**RUN:**
+```deactivate```
+
 Activate the conda environment with all our commands:
 
 **RUN:**
