@@ -345,7 +345,7 @@ In the MC command we specified to generate ```odgi viz``` graphs and these can b
 
 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
 
-<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="600"/> <br/>
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
 
 Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
 
@@ -382,7 +382,7 @@ Now we can generate a new ```odgi viz``` figure with the ordered paths:
 
 Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png```):
 
-<img src=https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png" alt="drawing" width="600"/> <br/>
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png" alt="drawing" width="1000"/> <br/>
 
 
 #### SequenceTubeMap<sup>6</sup>
