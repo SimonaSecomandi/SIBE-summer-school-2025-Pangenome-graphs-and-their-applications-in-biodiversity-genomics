@@ -343,13 +343,19 @@ Visualization is important to get an idea of the structure of the graph and the 
 
 In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder XX. A .png file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
 
-Let's look at the ```full graph```'s png. Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
+Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
 
-There is the possibility of ordering the paths as we want, e.g. to have the backbone refreence on the top.
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="600"/> <br/>
+
+Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
+
+###### Change the paths order in the .png
+
+There is the possibility of ordering the paths as we want, e.g. to have the backbone reference at the top.
 
 To do this we can use the ```3_stats_and_viz/bTaeGut_pangenome.full.og.paths``` file, reordering the paths as we prefer. 
 
-
+**RUN:**
 ```
 (grep "bTaeGut7_mat#0#chr22" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths; \
 grep "bTaeGut7_pat#0#chr22" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths; \
@@ -359,6 +365,7 @@ grep "bTaeGut2#2#chr22#0" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths) \
 ```
 Let's look at the new path file to check if it's the correct order:
 
+**RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.paths```
 
 ```
@@ -370,7 +377,13 @@ bTaeGut2#2#chr22#0
 
 Now we can generate a new ```odgi viz``` figure with the ordered paths:
 
+**RUN:**
 ```odgi viz -x 1500 -y 500 -a 10 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -p 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.paths -o 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png```
+
+Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png```):
+
+<img src=https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png" alt="drawing" width="600"/> <br/>
+
 
 #### SequenceTubeMap<sup>6</sup>
 
