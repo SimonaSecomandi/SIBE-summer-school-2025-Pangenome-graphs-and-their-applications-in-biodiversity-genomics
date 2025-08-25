@@ -63,7 +63,7 @@ To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://g
 
 ### 1.1 Fasta input files
 
-We will create a pangenome for **chromosome 12** of two different **Zebra finch (*Taeniopygia guttata*)** individuals publicly available on NCBI.
+We will create a pangenome for a chunk of **chromosome 22** (the first Mbp) of two different **Zebra finch (*Taeniopygia guttata*)** individuals publicly available on NCBI.
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/figures/Zebra%20Finches_Michael_Lawton_Flickr.jpg" alt="drawing" width="300"/> <br/>
 *Credits: [Flickr/Michael Lawton](https://www.flickr.com/photos/michaellawton/5712718319)*<br />
@@ -80,10 +80,10 @@ The file is organized like this:
 
 | GenomeID.hap  | path/to/fasta |
 | ------------- |:-------------:|
-| bTaeGut7_mat | 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta |
-| bTaeGut7_pat | 1_fasta_files/bTaeGut7_pat_chr22_CM109772.1.fasta |
-| bTaeGut2.1 | 1_fasta_files/bTaeGut2_hap1_chr22_CM121079.1.fasta |
-| bTaeGut2.2 | 1_fasta_files/bTaeGut2_hap2_chr22_CM121121.1.fasta |
+| bTaeGut7_mat | 1_fasta_files/bTaeGut7_mat_chr22_1Mbp_NC_133047.1.fasta |
+| bTaeGut7_pat | 1_fasta_files/bTaeGut7_pat_chr22_1Mbp_CM109772.1.fasta |
+| bTaeGut2.1 | 1_fasta_files/bTaeGut2_hap1_chr22_1Mbp_CM121079.1.fasta |
+| bTaeGut2.2 | 1_fasta_files/bTaeGut2_hap2_chr22_1Mbp_CM121121.1.fasta |
 
 **IMPORTANT:**
 * Divergent haplotypes from the same individuals must be defined with ".1" and ".2" after the genome ID.
