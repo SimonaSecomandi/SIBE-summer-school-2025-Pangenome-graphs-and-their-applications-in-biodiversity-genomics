@@ -536,6 +536,12 @@ To answer this question we need to generate statistics for the GAM file. We can 
 
 ```cat 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam.stats```
 
+```
+...
+Total aligned: 1722518
+...
+```
+
 #### ANSWER: we have aligned 1.72 M paired reads
 
 ___
@@ -563,8 +569,7 @@ warning[vg::giraffe]: Falling back on single-end mapping
 Using fragment length estimate: 0 +/- 1
 ```
 
-Giraffe performes single-end mapping by defaults. When aligning paired-end reads it assumes that the first batch of reads are representative of the whole run, but if the input file is sorted, for example, this is not the case (see: https://github.com/vgteam/vg/wiki/Giraffe-best-practices)
-Therefore, ```vg giraffe``` can’t estimate the **** fragment length and standard deviation and falls back to single-end mapping. If this happens, align the reads to a linear reference and calculate those statistics using ```Picard```. 
+Giraffe performes single-end mapping by defaults. When aligning paired-end reads it assumes that the first batch of reads are representative of the whole run, but if the input file is sorted, for example, this is not the case (see: https://github.com/vgteam/vg/wiki/Giraffe-best-practices). Therefore, ```vg giraffe``` can’t estimate the mean fragment length and standard deviation for read pairing and falls back to single-end mapping. If this happens, align the reads to a linear reference and calculate those statistics using ```Picard```. 
 
 1. Index the linear reference
 
@@ -609,15 +614,17 @@ vg giraffe -t 4 -p \
 ```
 ___
 
-### 4.3 project graph alignments onto a linear reference with ```vg surject```
+### 5. Project graph alignments onto a linear reference with ```vg surject```
 
-Surjection is needed....
+```vg giraffe``` produces graph-coordinate alignments (GAM). Most downstream tools such as ```samtools```, ```Picard```, ```bcftools``` and ```GATK```, require linear reference coordinates and therefore linear alignment files (BAM). With surjection you can projects each graph alignment onto a chosen reference path (e.g., the backbone reference) and generate a BAM file for downstreama anlysis. 
 
-We need the reference paths.. extract the reference paths (or "path" in our case) from the paths file we generated before. It's fine to use those from the ```clip graph``` since the backbone reference paths are always unclipped.
+#### 4.3.1 Retrieve the reference paths we will suject the alignments to
+
+Extract the reference paths (a single "path" in our case) from the paths file we generated before. It's fine to use those from the ```clip graph``` since the backbone reference paths are always unclipped.
 
 ```grep "bTaeGut7_mat#0#chr22" 3_stats_and_viz/bTaeGut_pangenome.og.paths > 5.1_vg_giraffe/bTaeGut_pangenome.og.REF.paths```
 
-Then, run ```vg surject```:
+#### 5.1 run ```vg surject```
 
 ```
 vg surject \
@@ -625,34 +632,86 @@ vg surject \
 	--xg-name 2_bTaeGut_pangenome/bTaeGut_pangenome.d1.xg  \
 	-F 5.1_vg_giraffe/bTaeGut_pangenome.og.REF.paths \
     -R "@RG\tID:SRR16569049\tPL:ILLUMINA\tSM:wildtype10\tPU:SRR16569049\tLB:SRR16569049" \
-	5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam \
     --interleaved \
     --bam-output \
+	5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam \
 	> 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam
 ```
 
-Finally, sort the bam:
-```
-samtools sort -@ 6 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe.sort.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe.bam
-```
-
-For downstream analyses, remember to rename the ```.bam``` with "classic" chromosome names. The PanSN-spec sequence naming is not compatible with all the other softwares (e.g. mapDamage2)
-
-```samtools reheader -c "sed s/bTaeGut7_mat#0#//g" 5.1_vg_giraffe/SRR16569049_vg_giraffe.bam > 5.1_vg_giraffe/SRR16569049_vg_giraffe.reheadered.bam```
-
-
 #### The inputs
-* Filtered graph in .xg format: we already ave it since we asked MC to generate an .xg index for the ```clip``` and ```filter``` graph
-* Reference path
-* 
+* ```--xg-name```: ```filtered graph``` in ```.xg``` format. We already ave it since we asked MC to generate an ```.xg``` index for the ```clip``` and ```filter``` graph
+* ```-F``` : reference paths file
+* ```-R``` : read groups information fow downstream analysis
+* ```--interleaved```: to indicate the GAM file contains interleaved paired-end reads
+* ```--bam-output```: to indicate we want a bam file as output
+* the ```GAM``` file
+    
 ### The output
 
-### 4.4 generate statistics for the BAM
-samtools flagstats -@ 32 5.1_vg_giraffe/SRR16569049_vg_giraffe.bam 1> 5.1_vg_giraffe/SRR16569049_vg_giraffe.bam.flagstats.out 
+The output is a ```BAM``` file referenced to the reference paths we provided (the backbone reference).
 
-#samtools view -@ 16 -bF 4 5.1_vg_giraffe/SRR16569049_vg_giraffe.bam | samtools sort -@ 16 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe_mapped.bam
-samtools flagstats -@ 32 5.1_vg_giraffe/SRR16569049_vg_giraffe_mapped.bam 1> 5.1_vg_giraffe/SRR16569049_vg_giraffe_mapped.bam.flagstats.out 
+#### 5.2 Sort the bam:
 
+```samtools sort -@ 6 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam```
+
+#### 5.2 Reheader the bam:
+
+Remember to rename the ```.bam``` with "standard" chromosome names. The ```PanSN-spec``` sequence naming is not compatible with all the other softwares (e.g. ```mapDamage2```)
+
+```samtools reheader -c "sed s/bTaeGut7_mat#0#//g" 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam```
+
+Check before and after.
+
+**Before**:
+```samtools view -H SRR16569049_vg_giraffe_chr22.sort.bam```
+```
+@HD	VN:1.5	SO:coordinate
+@SQ	SN:bTaeGut7_mat#0#chr22	LN:5052704
+@RG	ID:@RG\tID:SRR16569049\tPL:ILLUMINA\tSM:wildtype10\tPU:SRR16569049\tLB:SRR16569049	SM:wildtype10
+@PG	ID:0	PN:vg
+@PG	ID:samtools	PN:samtools	PP:0	VN:1.22.1	CL:samtools sort -@ 6 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam
+@PG	ID:samtools.1	PN:samtools	PP:samtools	VN:1.22.1	CL:samtools view -H SRR16569049_vg_giraffe_chr22.sort.bam
+```
+
+**After**:
+```samtools view -H 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam```
+
+```
+@HD	VN:1.5	SO:coordinate
+@SQ	SN:chr22	LN:5052704
+@RG	ID:@RG\tID:SRR16569049\tPL:ILLUMINA\tSM:wildtype10\tPU:SRR16569049\tLB:SRR16569049	SM:wildtype10
+@PG	ID:0	PN:vg
+@PG	ID:samtools	PN:samtools	PP:0	VN:1.22.1	CL:samtools sort -@ 6 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam
+@PG	ID:samtools.1	PN:samtools	PP:samtools	VN:1.22.1	CL:samtools reheader -c sed s/bTaeGut7_mat#0#//g 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam
+@PG	ID:samtools.2	PN:samtools	PP:samtools.1	VN:1.22.1	CL:samtools view -H 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam
+```
+
+This command left only "chr22" as chromosome name!
+
+___
+
+#### QUESTION 10: *how many reads remains after surjection ?*
+
+To answer this question we need to generate statistics for the BAM file. We can use ```samtools flagstat``` as follows:
+
+```samtools flagstats -@ 6 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam 1> 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam.flagstats.out``` 
+
+```cat 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam.flagstats.out```
+
+```
+...
+1701550 + 0 mapped (98.78% : N/A)
+...
+```
+
+#### ANSWER: we have aligned 1.70 M paired reads
+
+___
+
+#### QUESTION 11: *did we lost some read during surjection?*
+
+Aligned reads in the GAM file:
+Aligned reads in the BAM file: 1701550
 
 ### 4.5 align reads against the linear reference
 
