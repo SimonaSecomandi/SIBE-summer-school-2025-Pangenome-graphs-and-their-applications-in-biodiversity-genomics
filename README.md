@@ -44,6 +44,8 @@ conda activate pangenomics
 ```
 Other tools can be found here: 
 
+All the commands can be run from the main directory!
+
 ## 1. Pangenome construction
 
 To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>2</sup>. The pipeline can be run as a whole or run step by step. 
@@ -96,11 +98,12 @@ The file is organized like this:
 
 Activate the Cactus python environment:
 
+**RUN:**
 ```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
 
 in my case: source /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate
 
-Run the following command in the main directory:
+**RUN**:
 
 ```
 cactus-pangenome \
@@ -199,27 +202,32 @@ If you forget to set some of these flags don't worry, you can always generate ``
 ## 2. Pangenome evaluation
 
 ### 2.1 Statistics 
+
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
 Activate the conda environment with all our commands:
 
+**RUN:**
 ```conda activate SIBE_course```
 
 We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
 
-* **If you don't have an .og file** you can generate it as follows:
+* **If you don't have an .og file** you can generate it as follows
 
+**RUN:**
 ```bgzip -d -@ 8 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa.gz```  <br />
 ```odgi build -t 8 -g 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa -o 2_bTaeGut_pangenome/bTaeGut_pangenome.og```
 
-* However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph:
+* However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph
 
+**RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.stats```
 
 **The output:**
 
-You can ```cat``` the output from ```odgi stats``` and look at the content:
+You can ```cat``` the output from ```odgi stats``` and look at the content.
 
+**RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.og.stats```
 
 | length|nodes|edges|paths|steps|
@@ -239,10 +247,12 @@ ___
 
 Generate the fasta index for the reference genome:
 
+**RUN:**
 ```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta```
 
 Look at the .fai index file:
 
+**RUN:**
 ```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
 
 | chr | size   | offset  | linebases | linewidth |
@@ -267,12 +277,12 @@ ___
 
 ####  QUESTION 3: *Why do we have 4 input sequences but 9 paths? Shouldn’t there be only 4 paths?* 
 
-Let's look at the paths inside the graph. You can list the paths with ```odgi paths```:
+Let's look at the paths inside the graph. You can list the paths with ```odgi paths```.
 
+**RUN:**
 ```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.paths```
 
-**Output:**
-
+**RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.og.paths```
 
 ```
@@ -299,22 +309,23 @@ ___
 
 #### QUESTION 4: *Does this occur in the full graph too, or only after clipping?*
 
-Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```):
+Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```).
 
+**RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
-
+**RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
 
 | length|nodes|edges|paths|steps|
 | ----- |:----:|:----:|:----:|:----:|
 | 6936749|492938|672043|4|1199841
 
-Let's look at the paths inside the graph. You can list the paths with ```odgi paths```:
+Let's look at the paths inside the graph. You can list the paths with ```odgi paths```.
 
+**RUN:**
 ```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.paths```
 
-**Output:**
-
+**RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.paths```
 
 ```
@@ -384,36 +395,33 @@ Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png`
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png" alt="drawing" width="1000"/> <br/>
 
+#### ```SequenceTubeMap```<sup>6</sup>
 
-#### SequenceTubeMap<sup>6</sup>
+Another useful tool for visualizing pangenome graphs is ```SequenceTubeMap```<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is displayed differently and it can be inspected interactively.
 
-Another useful tool for visualizing pangenome graphs is SequenceTubeMap<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is displayed differently and it can be inspected interactively.
+There is an [online demo](https://vgteam.github.io/SequenceTubeMap/) that can be used to upload small files. However, sometime doesn't work in general ormost probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder 3_stats_and_viz/sequenceTubeMap:
 
-Unfortunately, the online demo doesn't work right now. To visualize a specific vg file without uploading it on the webpage, it is possible to launch a server which provides the data to SequenceTubeMap<sup>6</sup>. See instructions on the [SequenceTubeMap GitHub page](https://github.com/vgteam/sequenceTubeMap). In this course we will just prepare the files and you can try at home. 
+To visualize a specific vg file without uploading it on the webpage, it is possible to launch a server which provides the data to ```SequenceTubeMap```<sup>6</sup>. See instructions on the [```SequenceTubeMap``` GitHub page](https://github.com/vgteam/```SequenceTubeMap```). In this course we will just prepare the files and you can try later at home.
 
 First, we will chunk the graph in a smaller piece to be able to visualize it fast.
 
-1. Chunk the graph: 
+1. Chunk the graph 
 
+**RUN:**
 ```vg chunk -t 8 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
 
 *Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
 
 * ```-c, --context-steps N```: expand the context of the chunk this many node steps [1]
 
-2. Index the new .vg chunk:
+2. Index the new ```.vg``` chunk
 
+**RUN:**
 ```vg convert -t 8 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
 
-2. Upload the files in the [online demo](https://vgteam.github.io/sequenceTubeMap/). You can find the files in this github repository, download it directly from her the the computer. Follow the intructions:
-* Go to the [sequenceTubeMap demo page](https://vgteam.github.io/sequenceTubeMap/). 
-* Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change the "mounted" with "upload" > select the file from the Download folder > close 
-
-Inspect the graph:
-- How many variants do you see?
-- ....
-
-Unfortunately, the online demo most probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots I placed in the folder :
+2. Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). You can find the files in this github repository, download it directly from her the the computer. Follow the intructions:
+* Go to the [```SequenceTubeMap``` demo page](https://vgteam.github.io/SequenceTubeMap/). 
+* Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change "mounted" with "upload" > select the .xg file from the Download folder > close using the "x" in the upper right corner
 
 ## 3. Pangenome-embedded small variants
 
@@ -433,8 +441,7 @@ ___
 
 You can find information about the samples in the last row of the header file (i.e. the last line starting with "#") after the column "FORMAT".
 
-Run the following command in the main directory:
-
+**RUN:**
 ```bcftools view 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | head -20```
 
 ```
@@ -480,25 +487,26 @@ ____
 
 Let's look at biallelic SNPs and INDELS, which are those suitable to generate Principal Component Analysis (PCA) plots and other population genomics analysis.
 
-* To count biallelic SNPs:
+* To count biallelic SNPs **RUN:**
 
+**RUN:**
 ```bcftools view -v snps --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | grep -v "^#" | wc -l```
 
-* To count biallelic INDELs:
+* To count biallelic INDELs **RUN:**
 
 ```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | grep -v "^#" | wc -l```
 
-* To count the number of insertions and deletions:
+* To count the number of insertions and deletions **RUN:**
 
 ```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($4) > length($5)' | wc -l```
 
-* To count the number of deletions:
+* To count the number of deletions **RUN:**
 
 ```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($5) > length($4)' | wc -l```
 
 #### ANSWER: the pangenome contains 97890 biallelic SNPs and 15178 biallelic INDELs, of which 7587 are indertions and 7599 are deletions.
 
-Of course, these variants needs to be filtered and validated for downstream analysis, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with SequenceTubeMap by chunking the graph around the variant coordinates.
+Of course, these variants needs to be filtered and validated for downstream analysis, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with ```SequenceTubeMap``` by chunking the graph around the variant coordinates.
 
 _____
 
@@ -515,6 +523,7 @@ They have been pre-processed as follows:
    
 ### 4.1 align the reads with vg giraffe
 
+**RUN:**
 ```
 vg giraffe -t 4 -p \
 	--gbz-name 2_bTaeGut_pangenome/bTaeGut_pangenome.d1.gbz \
@@ -543,10 +552,11 @@ ____
 
 #### QUESTION 9: *how many read have aligned?*
 
-To answer this question we need to generate statistics for the GAM file. We can use the ```vg toolkit``` as follows:
+To answer this question we need to generate statistics for the GAM file. We can use the ```vg toolkit``` as follows.
 
+**RUN:**
 ```vg stats --threads 8 -a 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam.stats```
-
+**RUN:**
 ```cat 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam.stats```
 
 ```
@@ -635,10 +645,12 @@ ___
 
 Extract the reference paths (a single "path" in our case) from the paths file we generated before. It's fine to use those from the ```clip graph``` since the backbone reference paths are always unclipped.
 
+**RUN:**
 ```grep "bTaeGut7_mat#0#chr22" 3_stats_and_viz/bTaeGut_pangenome.og.paths > 5.1_vg_giraffe/bTaeGut_pangenome.og.REF.paths```
 
 #### 5.1 run ```vg surject```
 
+**RUN:**
 ```
 vg surject \
 	--threads 8 \
@@ -665,17 +677,21 @@ The output is a ```BAM``` file referenced to the reference paths we provided (th
 
 #### 5.2 Sort the bam:
 
+**RUN:**
 ```samtools sort -@ 6 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam```
 
 #### 5.2 Reheader the bam:
 
 Remember to rename the ```.bam``` with "standard" chromosome names. The ```PanSN-spec``` sequence naming is not compatible with all the other softwares (e.g. ```mapDamage2```)
 
+**RUN:**
 ```samtools reheader -c "sed s/bTaeGut7_mat#0#//g" 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam```
 
 Check before and after.
 
-**Before**:
+**Before**
+
+**RUN:**
 ```samtools view -H SRR16569049_vg_giraffe_chr22.sort.bam```
 ```
 @HD	VN:1.5	SO:coordinate
@@ -686,7 +702,9 @@ Check before and after.
 @PG	ID:samtools.1	PN:samtools	PP:samtools	VN:1.22.1	CL:samtools view -H SRR16569049_vg_giraffe_chr22.sort.bam
 ```
 
-**After**:
+**After**
+
+**RUN:**
 ```samtools view -H 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam```
 
 ```
@@ -705,10 +723,11 @@ ___
 
 #### QUESTION 10: *how many reads remains after surjection ?*
 
-To answer this question we need to generate statistics for the BAM file. We can use ```samtools flagstat``` as follows:
+To answer this question we need to generate statistics for the BAM file. We can use ```samtools flagstat``` as follows.
 
+**RUN:**
 ```samtools flagstats -@ 6 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam 1> 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam.flagstats.out``` 
-
+**RUN:**
 ```cat 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.reheadered.bam.flagstats.out```
 
 ```
@@ -723,8 +742,76 @@ ___
 
 #### QUESTION 11: *did we lost some read during surjection?*
 
-Aligned reads in the GAM file:
-Aligned reads in the BAM file: 1701550
+Aligned reads in the ```GAM``` file: **1722518**
+Aligned reads in the ```BAM``` file: **1701550**
+
+#### ANSWER: 20968 reads that were mapped in the graph, are now stored in the BAM file as unmapped. These reads couldn't be projected one the linear path we chose because they probably aligned exclusively to an alternative path with no embedding on your chosen paths, i.e. true novel insertions) or the alingment was too complex.
+
+New computational methods and file formats other than the linear binary alignment map (BAM) and variant call format (VCF) need to be developed to overcome this limitation and represent all the information embedded in the graph<sup>1</sup>.
+
+___
+
+#### 5.3 Visualize aligned reads with ```SequenceTubeMap```<sup>6</sup>
+
+```SequenceTubeMap```<sup>6</sup> can be used to visualize a ```GAM``` file. 
+
+As before, let's try to use the [online demo](https://vgteam.github.io/SequenceTubeMap/). If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder 6_vg_giraffe_viz/sequenceTubeMap:
+
+First, we will chunk the ```GAM``` and the ```filter``` graph used for the alignment at the same coordinates we used to chunk the ```clip``` graph before. 
+
+1. Sort and index ```GAM```
+
+**RUN:**
+```vg gamsort -t 8 -i 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam  > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam ```
+
+This will take around 5 minutes to run.
+Copy and paste the outputs from the [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/5.1_vg_giraffe) folder if there is no time to run the command:
+```
+cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam
+cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai
+```
+
+2. Chunk the sorted ```GAM``` and the ```filter``` graph
+
+**RUN:**
+```vg chunk -t 8 -c 1 -p bTaeGut7_mat#0#chr22:0-100000 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.d1.xg -a 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam -g -O vg --prefix 6_vg_giraffe_viz/bTaeGut_pangenome > 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg```
+
+*Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
+
+**Inputs:**
+* ```-p```: the coordinates to chunk
+* ```-x```: the ```.xg``` graph
+* ```-a```: the sorted and indexed ```.gam``` file
+* ```-g```: tells the program to chunk both the graph and the ```.gam```
+* ```-O``` specifies the file name for the chunked graph (```.vg``` format)
+* ```--prefix```: specifies the chunked ```.gam``` path and prefix
+  
+**Outputs:**
+* ```6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.gam```: the chunked ```.gam```
+* ```6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg```: the chunked ```filtered``` graph
+
+3. Index the chunked ```.gam``` and ```filter``` graph
+
+**RUN:**
+```vg convert -t 8 -x 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg > 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.xg```
+**RUN:**
+```vg gamsort -t 8 -i 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam.gai 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.gam  >  6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam ```
+
+This will take a couple of minutes to run.
+Copy and paste the outputs from the [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/6_vg_giraffe_viz) folder if there is no time to run the command:
+```
+cp reference_data/6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam
+cp reference_data/6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam.gai 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sort.sorted.gai
+```
+
+4. Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). You can find the files in this github repository in reference_data/6_vg_giraffe_viz, download it directly from there on the computer. Follow the intructions:
+* Go to the [```SequenceTubeMap``` demo page](https://vgteam.github.io/SequenceTubeMap/). 
+* Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change "mounted" with "upload" > select the .xg file from the Download folder
+* Click "+" > change "graph" with "read" > change "mounted" with "upload" > select the .gam file from the Download folder
+
+
+
+
 
 ### 4.5 align reads against the linear reference
 
