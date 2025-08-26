@@ -96,13 +96,15 @@ The file is organized like this:
 
 *The pipeline will take ~13 minutes to finish using 8 threads and 8 GB RAM.*
 
-Activate the Cactus python environment:
+1. Activate the Cactus python environment:
 
 **RUN:**
 ```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
 
 in my case: source /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate
 
+2. Run the pipeline:
+   
 **RUN**:
 
 ```
@@ -125,6 +127,10 @@ cactus-pangenome \
 --odgi clip full \
 --viz clip full
 ```
+
+The pipeline will take around 3 minutes to run. You can find the log (the same you saw in stdout) here:  
+
+**The inputs:**
 
 * ```cactus-pangenome```: calls the MC pipeline 
 * ```jobStore```: a directory used by the workflow management system to store intermediate files and job metadata
@@ -159,9 +165,9 @@ In the following tags you can specify on which type of graph you want to operate
 
 If you forget to set some of these flags don't worry, you can always generate ```.vg```, ```.og```, and other files later on.
 
-### 1.4 The outputs
+**The outputs:**
 
-#### Graphs
+Graphs:
 
 ```bTaeGut_pangenome.sv.gfa.gz```: SV-only graph output by Minigraph<br/>
 ```bTaeGut_pangenome.sv.gfa.fa.gz```: SVs included in the above Minigraph  graph in fasta format<br/>
@@ -178,7 +184,7 @@ If you forget to set some of these flags don't worry, you can always generate ``
 ```bTaeGut_pangenome.d1.min```: minimizer index needed by ```vg giraffe```<br/>
 ```bTaeGut_pangenome.d1.snarls```: end and start nodes for each bubble and nesting informations. Used by ```vg decontruct``` to generate the VCF files<br/>
 
-#### VCFs
+VCFs:
 
 ```bTaeGut_pangenome.raw.vcf.gz``` : main VCF file referenced to bTaeGut7_mat before normalization<br/>
 ```bTaeGut_pangenome.raw.vcf.gz.tbi```: index for the main VCF file referenced o bTaeGut7_mat before normalization<br/>
@@ -189,7 +195,7 @@ If you forget to set some of these flags don't worry, you can always generate ``
 ```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz```: VCF file referenced to bTaeGut7_pat<br/>
 ```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz.tbi```: index for VCF file referenced to bTaeGut7_pat<br/>
 
-#### Additional files and folders
+Additional files and folders:
 
 ```bTaeGut.log```: log file of the MC run<br/>
 ```bTaeGut.seqfile```: copy of the input file<br/>
@@ -205,28 +211,32 @@ If you forget to set some of these flags don't worry, you can always generate ``
 
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
-Deactivate the Cactus environment:
+1. Deactivate the Cactus environment:
 
 **RUN:**
 ```deactivate```
 
-Activate the conda environment with all our commands:
+2. Activate the conda environment with all our commands:
 
 **RUN:**
 ```conda activate SIBE_course```
 
-We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
+3. We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
 
-* **If you don't have an .og file** you can generate it as follows
+**If you don't have an .og file** you can generate it as follows
 
-**RUN:**
 ```bgzip -d -@ 8 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa.gz```  <br />
 ```odgi build -t 8 -g 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa -o 2_bTaeGut_pangenome/bTaeGut_pangenome.og```
 
-* However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph
+However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph
 
 **RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.stats```
+
+##The inputs:**
+
+* ```-S```: print a summary of the graph properties and dimensions
+* ```-i```: the input ```.og``` variantion graph
 
 **The output:**
 
@@ -237,95 +247,98 @@ You can ```cat``` the output from ```odgi stats``` and look at the content.
 
 | length|nodes|edges|paths|steps|
 | ----- |:----:|:----:|:----:|:----:|
-| 5904335|491480|670290|9|1198027
+| 1123880|54958|74832|5|136900
 
 The graph has:
-- **Length of 5.9 Mbp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph &rarr; if you concatenate all node sequences, you would get ~5.9 Mbp of sequence
-- **491k nodes**: the building blocks of the graph &rarr; each node corresponds to a contiguous DNA sequence
-- **670k edges**:the connections between the nodes &rarr; edges describe how sequences can traverse from one node to another
-- **9 paths**: a “path” usually corresponds to a genome/assembly/chromosome provided as input. See below for the explanation on why there are 9 paths instead of 4. 
-- **1.19 M steps**: the total number of node visits across all paths
+- **Length ~1.12 Mbp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph &rarr; if you concatenate all node sequences, you would get ~1.12 Mbp of sequence
+- **~54.9k nodes**: the building blocks of the graph &rarr; each node corresponds to a contiguous DNA sequence
+- **~670k edges**:the connections between the nodes &rarr; edges describe how sequences can traverse from one node to another
+- **~5 paths**: a “path” usually corresponds to a genome/assembly/chromosome provided as input. See below for the explanation on why there are 5 paths instead of 4. 
+- **~136k steps**: the total number of node visits across all paths
 
 ___
 
 ####  QUESTION 1: *is the pangenome graph bigger than the original reference sequence?* 
 
-Generate the fasta index for the reference genome:
+1. Generate the fasta index for the reference genome:
 
 **RUN:**
-```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta```
+```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_1Mb_NC_133047.1.fasta```
 
-Look at the .fai index file:
+2. Look at the .fai index file:
 
 **RUN:**
 ```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
 
 | chr | size   | offset  | linebases | linewidth |
 | ----- |:----:|:----:|:----:|:----:|
-chr22	| 5052704 |	7 | 70 | 71
+chr22	| 1000000 |	7 | 1000000 | 1000001
 
 In this index file, the chromosome size is in the second column.
 
-* Original size of the backbone chromosome: **5.05 Mbp**
-* Pangenome size: **5.9 Mbp**
+* Original size of the backbone chromosome: **1.12 Mbp**
+* Pangenome size: **1 Mbp**
 
 #### ANSWER:  The pangenome size is bigger than the original reference. 
 
 ______
 
-####  QUESTION 2: *of how much the reference was augmented by the other sequences?* 
+####  QUESTION 2: *by how much was the reference augmented by the other sequences??* 
 
 *The size of a pangenome graph depends on the genome size of the respective species but is bound to be larger, as it incorporates accessory sequences from other individuals, and it is also influenced by the number and diversity of the individuals contributing to the pangenome as well as by the construction pipeline*<sup>1</sup> 
 
-#### ANSWER: The other chromosomes augmented the reference by 0.9 Mbp
+**pangenome length - reference length**
+1123880 bp - 1000000 bp = 123880 bp
+
+#### ANSWER: The other chromosomes augmented the reference by ~123 Kbp
+
 ___
 
-####  QUESTION 3: *Why do we have 4 input sequences but 9 paths? Shouldn’t there be only 4 paths?* 
+####  QUESTION 3: *Why do we have 4 input sequences but 5 paths?* 
 
 Let's look at the paths inside the graph. You can list the paths with ```odgi paths```.
 
 **RUN:**
 ```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.paths```
 
+Look at the path list:
+
 **RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.og.paths```
 
 ```
 bTaeGut2#1#chr22#0[5771-877768]
-bTaeGut2#1#chr22#0[889321-1697614]
-bTaeGut2#1#chr22#0[1871689-2456870]
-bTaeGut2#1#chr22#0[2530823-3686875]
-bTaeGut2#1#chr22#0[3705235-3705399]
-bTaeGut2#1#chr22#0[3743670-5050960]
-bTaeGut2#2#chr22#0[0-4660045]
+bTaeGut2#1#chr22#0[889321-995863]
+bTaeGut2#2#chr22#0
 bTaeGut7_mat#0#chr22
-bTaeGut7_pat#0#chr22[6348-4838699]
+bTaeGut7_pat#0#chr22[6348-993008]
 ```
 
 The naming format is: ```sample#hap#chrom#coords[start-end]```, also called [PanSN](https://github.com/pangenome/PanSN-spec) format. 
 
 * *bTaeGut7_mat#0#chr22* = **Path 1** &rarr; the backbone reference is in one piece (used to map the other chromosomes) 
-* bTaeGut7_pat#0#chr22[6348-4838699] = **Path 2** &rarr; the alternate haplotype of the backbone reference is aligning in a big piece with start coordinate at 6348 bp and end coordinate at 4838699 bp
-* bTaeGut2#1#chr22#0[*] = **Paths 3-8** &rarr; haplotype 1 of the second individual is not aligning contigously and it's split on 6 different pieces
-* bTaeGut2#2#chr22#0[0-4660045] = **Path 9** &rarr; haplotype 2 of the second individual is also aligning in a big piece
+* bTaeGut7_pat#0#chr22[6348-993008] = **Path 2** &rarr; the alternate haplotype of the backbone reference is aligning in a big piece with start coordinate at 6348 bp and end coordinate at 993008 bp
+* bTaeGut2#1#chr22#0[*] = **Paths 2-3** &rarr; haplotype 1 of the second individual is not aligning contigously and it's split into 2 different pieces
+* bTaeGut2#2#chr22#0 = **Path 4** &rarr; haplotype 2 of the second individual is also aligning in a big piece
 
-#### ANSWER: if the sequences doesn't align contiguously to the backbone reference (e.g. in the presence of repetitive regions) the other chromosomes might be split in multiple segments and counted as different paths, 9 in our case. Functionally, all bTaeGut2#1#chr22#0[*] lines together represent one biological chromosome, but they are split across multiple path segments.
+#### ANSWER: if the sequences doesn't align contiguously to the backbone reference (e.g. in the presence of repetitive regions) the other chromosomes might be split in multiple segments and counted as different paths, 5 in our case. Functionally, all bTaeGut2#1#chr22#0[*] lines together represent one biological chromosome, but they are split across multiple path segments.
 ___
 
-#### QUESTION 4: *Does this occur in the full graph too, or only after clipping?*
+#### QUESTION 4: *Does this occur in the full graph too, or is this a result of clipping?*
 
-Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```).
+1. Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```).
 
 **RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
+
 **RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
 
 | length|nodes|edges|paths|steps|
 | ----- |:----:|:----:|:----:|:----:|
-| 6936749|492938|672043|4|1199841
+| 1150037|55483|75569|4|137676
 
-Let's look at the paths inside the graph. You can list the paths with ```odgi paths```.
+2. Let's now look at the paths inside the graph. You can list the paths with ```odgi paths```.
 
 **RUN:**
 ```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.paths```
@@ -343,7 +356,7 @@ bTaeGut7_pat#0#chr22
 #### ANSWER: in the full graph we have exactly 4 paths and the sequence length is way bigger than the clipped (6.9 Mbp). 
 
 * **Full graph**: keeps each input chromosome/haplptype as a single continuous path, 4 in total
-* **Clip graph**: removed sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 7 separate path segments. The overall graph length is also smaller than the full (~6.9 Mbp &rarr; ~5.9 Mbp))
+* **Clip graph**: removed sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 2 separate path segments. The overall graph length is also smaller than the full (~1.12 Mbp &rarr; ~1.15 Mbp))
 
 ___
 
@@ -351,19 +364,23 @@ ___
 
 Clipping is necessary to reduce the complexity of the graph and make downstream analyses more feasible. For example, the very repetitive centromeric regions are clipped away and this is necessary to avoid the generation of complex loops that will hinder downstream analyses.
 
+___
+
 ### 2.2 Subsampling and visualization 
 
 Visualization is important to get an idea of the structure of the graph and the inspection of homology relationships and variation between the genomes, providing insights on the latent biological data.
 
 #### odgi viz<sup>5</sup>
 
-In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder XX. A .png file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A .png file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
 
 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
 
 Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
+
+#HERE
 
 ###### Change the paths order in the .png
 
@@ -551,7 +568,20 @@ vg giraffe -t 4 -p \
 
 The output of vg giraffe is a ```GAM``` file, which stores alignments in ```vg```’s native binary format.
 
-It will take around 730.2 sec with 4 threads and X with 8 threads (to try).
+It will take around 3.5 minutes to run using 4 threads and 8 GB RAM (see below).
+
+```vg giraffe``` log (stdout):
+
+```
+Using fragment length estimate: 488.569 +/- 128.728
+Mapped 1722530 reads across 4 threads in 203.879 seconds with 7.92238 additional single-threaded seconds.
+Mapping speed: 2091.87 reads per second per thread
+Used 791.928 CPU-seconds (including output).
+Achieved 2175.11 reads per CPU-second (including output)
+Used 3586241473540 CPU instructions (not including output).
+Mapping slowness: 2.08196 M instructions per read at 4528.5 M mapping instructions per inclusive CPU-second
+Memory footprint: 0.339954 GB
+```
 
 ____
 
@@ -577,7 +607,7 @@ ___
 **OPTIONAL - not needed for this excercise**
 
 During the run, ```vg giraffe``` sometimes prints to stdout progress messages like the following:
-```Using fragment length estimate: 483.223 +/- 127.451```
+```Using fragment length estimate: 488.569 +/- 128.728```
 These are fragment length estimates that ```vg giraffe``` calculates on the fly (**OUR CASE**).
 
 “In the folder ```5.2_bwa_mem/``` you can find the outputs from the steps below. Even though we won’t need them, it’s important to know how to proceed when ``` vg giraffe``` complains about the insert size.
