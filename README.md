@@ -287,7 +287,7 @@ ______
 
 *The size of a pangenome graph depends on the genome size of the respective species but is bound to be larger, as it incorporates accessory sequences from other individuals, and it is also influenced by the number and diversity of the individuals contributing to the pangenome as well as by the construction pipeline*<sup>1</sup> 
 
-### 1. calculate the difference between the pangenome length and the reference length 
+#### 1. calculate the difference between the pangenome length and the reference length 
 
 **pangenome length - reference length** <br/>
 1123880 bp - 1000000 bp = 123880 bp
