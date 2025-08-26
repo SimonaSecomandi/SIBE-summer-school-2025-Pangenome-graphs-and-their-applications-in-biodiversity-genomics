@@ -211,17 +211,17 @@ Additional files and folders:
 
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
-## 2.1.1 Deactivate the Cactus environment:
+#### 2.1.1 Deactivate the Cactus environment:
 
 **RUN:**
 ```deactivate```
 
-## 2.1.2 Activate the conda environment with all our commands:
+#### 2.1.2 Activate the conda environment with all our commands:
 
 **RUN:**
 ```conda activate SIBE_course```
 
-## 2.1.3 Generate graph statistics
+#### 2.1.3 Generate graph statistics
 
 We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
 
@@ -262,12 +262,12 @@ ___
 
 ####  QUESTION 1: *is the pangenome graph bigger than the original reference sequence?* 
 
-## 2.1.4 Generate the fasta index for the reference genome:
+#### 2.1.4 Generate the fasta index for the reference genome:
 
 **RUN:**
 ```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_1Mb_NC_133047.1.fasta```
 
-## 2.1.5 Look at the .fai index file:
+#### 2.1.5 Look at the .fai index file:
 
 **RUN:**
 ```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
