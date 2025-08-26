@@ -96,14 +96,14 @@ The file is organized like this:
 
 *The pipeline will take ~13 minutes to finish using 8 threads and 8 GB RAM.*
 
-## 1.3.1 Activate the Cactus python environment:
+#### 1.3.1 Activate the Cactus python environment:
 
 **RUN:**
 ```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
 
 in my case: source /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate
 
-## 1.3.2 Run the pipeline:
+#### 1.3.2 Run the pipeline:
    
 **RUN**:
 
@@ -262,12 +262,12 @@ ___
 
 ####  QUESTION 1: *is the pangenome graph bigger than the original reference sequence?* 
 
-#### 2.1.4 Generate the fasta index for the reference genome:
+#### Generate the fasta index for the reference genome:
 
 **RUN:**
 ```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_1Mb_NC_133047.1.fasta```
 
-#### 2.1.5 Look at the .fai index file:
+#### Look at the .fai index file:
 
 **RUN:**
 ```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
@@ -289,7 +289,7 @@ ______
 
 *The size of a pangenome graph depends on the genome size of the respective species but is bound to be larger, as it incorporates accessory sequences from other individuals, and it is also influenced by the number and diversity of the individuals contributing to the pangenome as well as by the construction pipeline*<sup>1</sup> 
 
-**pangenome length - reference length**
+**pangenome length - reference length** <br/>
 1123880 bp - 1000000 bp = 123880 bp
 
 #### ANSWER: The other chromosomes augmented the reference by ~123 Kbp
