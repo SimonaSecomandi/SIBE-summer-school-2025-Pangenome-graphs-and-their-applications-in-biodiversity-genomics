@@ -74,7 +74,7 @@ Differently from ProgressiveCactus, **MC ignores soft-masked bases**, so there i
 
 ### 1.2 bTaeGut.seqfile input file 
 
-The main input file for the MC pipeline is the [bTaeGut.seqfile ]() file. Similarly to Progressive Cactus, this text file contains user defined genome IDs and paths to the corresponding fasta file, one assembly per line. The main difference with the Progressive Cactus imput file is the absence of a guide three (Newick format), which is usually the first row in the Cactus file. 
+The main input file for the MC pipeline is the [bTaeGut.seqfile](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/1_fasta_files/bTaeGut.seqfile) file in the folder ```1_fasta_files/```. Similarly to ```Progressive Cactus```, this text file contains user defined genome IDs and paths to the corresponding fasta file, one assembly per line. The main difference with the Progressive Cactus imput file is the absence of a guide three (```Newick``` format), which is usually the first row in the ```Cactus``` input file. 
 
 The file is organized like this:
 
@@ -96,14 +96,14 @@ The file is organized like this:
 
 *The pipeline will take ~13 minutes to finish using 8 threads and 8 GB RAM.*
 
-1. Activate the Cactus python environment:
+## 1.3.1 Activate the Cactus python environment:
 
 **RUN:**
 ```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
 
 in my case: source /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate
 
-2. Run the pipeline:
+## 1.3.2 Run the pipeline:
    
 **RUN**:
 
@@ -211,17 +211,19 @@ Additional files and folders:
 
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
-1. Deactivate the Cactus environment:
+## 2.1.1 Deactivate the Cactus environment:
 
 **RUN:**
 ```deactivate```
 
-2. Activate the conda environment with all our commands:
+## 2.1.2 Activate the conda environment with all our commands:
 
 **RUN:**
 ```conda activate SIBE_course```
 
-3. We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
+## 2.1.3 Generate graph statistics
+
+We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
 
 **If you don't have an .og file** you can generate it as follows
 
@@ -233,7 +235,7 @@ However, we asked MC to generate an odgi file with ```--og full clip```, so **we
 **RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.stats```
 
-##The inputs:**
+**The inputs:**
 
 * ```-S```: print a summary of the graph properties and dimensions
 * ```-i```: the input ```.og``` variantion graph
@@ -260,12 +262,12 @@ ___
 
 ####  QUESTION 1: *is the pangenome graph bigger than the original reference sequence?* 
 
-1. Generate the fasta index for the reference genome:
+## 2.1.4 Generate the fasta index for the reference genome:
 
 **RUN:**
 ```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_1Mb_NC_133047.1.fasta```
 
-2. Look at the .fai index file:
+## 2.1.5 Look at the .fai index file:
 
 **RUN:**
 ```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
