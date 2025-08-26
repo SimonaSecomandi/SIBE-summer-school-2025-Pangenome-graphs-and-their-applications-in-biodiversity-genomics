@@ -1,4 +1,4 @@
-Assigned contig to chr22: id=bTaeGut2.2|chr22  len=4860289 cov=0.929864 (vs 0.25) uf= infinity (vs 2)
-Assigned contig to chr22: id=bTaeGut2.1|chr22  len=5079584 cov=0.903387 (vs 0.25) uf= infinity (vs 2)
-Assigned contig to chr22: id=bTaeGut7_pat|chr22  len=5320397 cov=0.889656 (vs 0.25) uf= infinity (vs 2)
-Assigned ref-contig to chr22: id=bTaeGut7_mat|chr22  len=5052704 cov=0.999523 (vs 0.25) uf= infinity (vs 2)
+Assigned contig to chr22: id=bTaeGut2.2|chr22  len=1000000 cov=0.980997 (vs 0.25) uf= infinity (vs 2)
+Assigned contig to chr22: id=bTaeGut2.1|chr22  len=1000000 cov=0.958833 (vs 0.25) uf= infinity (vs 2)
+Assigned contig to chr22: id=bTaeGut7_pat|chr22  len=1000000 cov=0.972269 (vs 0.25) uf= infinity (vs 2)
+Assigned ref-contig to chr22: id=bTaeGut7_mat|chr22  len=1000000 cov=0.999926 (vs 0.25) uf= infinity (vs 2)
