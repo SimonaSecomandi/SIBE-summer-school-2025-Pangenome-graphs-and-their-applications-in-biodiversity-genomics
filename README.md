@@ -205,23 +205,21 @@ Additional files and folders:
 ```./chrom-alignments```: contains intermediate files<br/>
 ```./chrom-subproblems```: contains intermediate files<br/>
 
-## 2. Pangenome evaluation
-
-### 2.1 Statistics 
+## 2. Pangenome evaluation and statistics
 
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
-#### 2.1.1 Deactivate the Cactus environment:
+#### 2.1 Deactivate the Cactus environment:
 
 **RUN:**
 ```deactivate```
 
-#### 2.1.2 Activate the conda environment with all our commands:
+#### 2.2 Activate the conda environment with all our commands:
 
 **RUN:**
 ```conda activate SIBE_course```
 
-#### 2.1.3 Generate graph statistics
+#### 2.3 Generate graph statistics
 
 We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
 
@@ -262,12 +260,12 @@ ___
 
 ####  QUESTION 1: *is the pangenome graph bigger than the original reference sequence?* 
 
-#### Generate the fasta index for the reference genome:
+#### 1. Generate the fasta index for the reference genome:
 
 **RUN:**
 ```samtools faidx 1_fasta_files/bTaeGut7_mat_chr22_1Mb_NC_133047.1.fasta```
 
-#### Look at the .fai index file:
+#### 2. Look at the .fai index file:
 
 **RUN:**
 ```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
@@ -289,6 +287,8 @@ ______
 
 *The size of a pangenome graph depends on the genome size of the respective species but is bound to be larger, as it incorporates accessory sequences from other individuals, and it is also influenced by the number and diversity of the individuals contributing to the pangenome as well as by the construction pipeline*<sup>1</sup> 
 
+### 1. calculate the difference between the pangenome length and the reference length 
+
 **pangenome length - reference length** <br/>
 1123880 bp - 1000000 bp = 123880 bp
 
@@ -298,12 +298,12 @@ ___
 
 ####  QUESTION 3: *Why do we have 4 input sequences but 5 paths?* 
 
-Let's look at the paths inside the graph. You can list the paths with ```odgi paths```.
+#### 1. Let's look at the paths inside the graph. You can list the paths with ```odgi paths```.
 
 **RUN:**
 ```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.paths```
 
-Look at the path list:
+#### 2. Look at the path list:
 
 **RUN:**
 ```cat 3_stats_and_viz/bTaeGut_pangenome.og.paths```
@@ -328,7 +328,7 @@ ___
 
 #### QUESTION 4: *Does this occur in the full graph too, or is this a result of clipping?*
 
-1. Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```).
+#### 1. Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```).
 
 **RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
@@ -340,7 +340,7 @@ ___
 | ----- |:----:|:----:|:----:|:----:|
 | 1150037|55483|75569|4|137676
 
-2. Let's now look at the paths inside the graph. You can list the paths with ```odgi paths```.
+#### 2. Let's now look at the paths inside the graph. You can list the paths with ```odgi paths```.
 
 **RUN:**
 ```odgi paths -L -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.paths```
@@ -368,21 +368,21 @@ Clipping is necessary to reduce the complexity of the graph and make downstream 
 
 ___
 
-### 2.2 Subsampling and visualization 
+## 3. Visualization and subsampling
 
 Visualization is important to get an idea of the structure of the graph and the inspection of homology relationships and variation between the genomes, providing insights on the latent biological data.
 
-#### ```odgi viz```<sup>5</sup>
+### 3.1 ```odgi viz```<sup>5</sup>
 
 In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A .png file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
 
-## 1. Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
+## 3.1.1 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
 
 Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
 
-## 2. Change the path order in the .png
+## 3.1.2 Change the path order in the .png
 
 There is the possibility of ordering the paths as we want, e.g. to have the backbone reference at the top.
 
@@ -396,6 +396,7 @@ grep "bTaeGut2#1#chr22#0" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths; \
 grep "bTaeGut2#2#chr22#0" 3_stats_and_viz/bTaeGut_pangenome.full.og.paths) \
 > 3_stats_and_viz/bTaeGut_pangenome.full.og.sort.paths
 ```
+
 Let's look at the new path file to check if it's the correct order:
 
 **RUN:**
@@ -421,35 +422,46 @@ Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png`
 
 Now the paths are in the correct order.
 
-#### ```SequenceTubeMap```<sup>6</sup>
+### 3.2 ```SequenceTubeMap```<sup>6</sup>
 
 Another useful tool for visualizing pangenome graphs is ```SequenceTubeMap```<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is displayed differently and it can be inspected interactively.
 
-There is an [online demo](https://vgteam.github.io/SequenceTubeMap/) that can be used to upload small files. However, sometime doesn't work in general ormost probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder 3_stats_and_viz/sequenceTubeMap:
+There is an [online demo](https://vgteam.github.io/SequenceTubeMap/) that can be used to upload small files. However, sometime it doesn't work (since it's just a demo) and most probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```3_stats_and_viz/sequenceTubeMap/```:
 
-To visualize a specific vg file without uploading it on the webpage, it is possible to launch a server which provides the data to ```SequenceTubeMap```<sup>6</sup>. See instructions on the [```SequenceTubeMap``` GitHub page](https://github.com/vgteam/```SequenceTubeMap```). In this course we will just prepare the files and you can try later at home.
+To visualize a specific graph file without uploading it on the webpage, it is possible to launch a server which provides the data to ```SequenceTubeMap```<sup>6</sup>. See instructions on the [```SequenceTubeMap``` GitHub page](https://github.com/vgteam/```SequenceTubeMap```). In this course we will just prepare the files and you can try later at home.
 
 First, we will chunk the graph in a smaller piece to be able to visualize it fast.
 
-1. Chunk the graph 
+#### 3.2.1 Chunk the graph 
+
+You can visualize a ```.vg``` graph and it's index ```.xg``` with ```SequenceTubeMap```. To aid visualization and avoid using too much memory, we will subsample the graph at specific coordinates.
 
 **RUN:**
-```vg chunk -t 8 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
+```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
+
+The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context of the chunk this many node steps.
 
 *Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
 
-* ```-c, --context-steps N```: expand the context of the chunk this many node steps [1]
-
-2. Index the new ```.vg``` chunk
+#### 3.2.2 Index the new ```.vg``` chunk
 
 **RUN:**
 ```vg convert -t 8 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
 
-2. Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). You can find the files in this github repository, download it directly from her the the computer. Follow the intructions:
+#### 3.2.3 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). 
+
+You can find the files in this github repository, download it directly from her the the computer:
+* ```3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
+* ```3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
+
+Follow the instructions:
 * Go to the [```SequenceTubeMap``` demo page](https://vgteam.github.io/SequenceTubeMap/). 
 * Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change "mounted" with "upload" > select the .xg file from the Download folder > close using the "x" in the upper right corner
 
-## 3. Pangenome-embedded small variants
+
+##RE DO FILES FROM HERE
+
+## 4. Pangenome-embedded small variants
 
 We looked at the structure of the graph and the variants inside the pangenome, but *how can I look at them in a canonical way and use them for downstream analysis?*
 
