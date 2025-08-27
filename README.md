@@ -57,7 +57,7 @@ Remember to **activate the Cactus environment** before running ```Minigraph-Cact
 
 ```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
 
-Remember to **activate the conda environment** before running any command after the pangenome contrustion:
+Remember to **activate the conda environment** before running any command after the pangenome construction:
 
 ```conda activate SIBE_course```
 
