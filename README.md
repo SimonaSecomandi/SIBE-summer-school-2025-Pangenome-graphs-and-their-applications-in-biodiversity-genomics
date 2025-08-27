@@ -588,7 +588,7 @@ Of course, these variants needs to be filtered and validated for downstream anal
 
 _____
 
-## 4. Mapping of short-reads data with vg giraffe
+## 5. Mapping of short-reads data with vg giraffe
 
 We will now use the pangenome as a reference for read mapping using the fast short-read mapper ```vg giraffe```<sup>7</sup>.
 
@@ -599,7 +599,7 @@ They have been pre-processed as follows:
 3. Read have been aligned to the pangenome with ```vg giraffe``` and surjected with ```vg surject``` (see below for the explanation). Only those mapping to chr22 were extracted.
 4. Read have been aligned to the linear reference with ```bwa mem``` (see below for the explanation). Only those mapping to chr22 were extracted.
    
-### 4.1 align the reads with vg giraffe
+### 5.1 align the reads with vg giraffe
 
 **RUN:**
 ```
@@ -737,7 +737,7 @@ vg giraffe -t 4 -p \
 ```
 ___
 
-### 5. Project graph alignments onto a linear reference with ```vg surject```
+### 5.2 Project graph alignments onto a linear reference with ```vg surject```
 
 ```vg giraffe``` produces graph-coordinate alignments (GAM). Most downstream tools such as ```samtools```, ```Picard```, ```bcftools``` and ```GATK```, require linear reference coordinates and therefore linear alignment files (BAM). With surjection you can projects each graph alignment onto a chosen reference path (e.g., the backbone reference) and generate a BAM file for downstreama anlysis. 
 
@@ -789,12 +789,12 @@ However, NCBI ofter removes the read group information from the fastq files, so 
 
 The output is a ```BAM``` file referenced to the reference paths we provided (the backbone reference).
 
-#### 5.3 Sort the bam:
+#### Sort the bam:
 
 **RUN:**
 ```samtools sort -@ 4 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam```
 
-#### 5.4 Reheader the bam:
+#### Reheader the bam:
 
 Remember to rename the ```.bam``` with "standard" chromosome names. The ```PanSN-spec``` sequence naming is not compatible with all the other softwares (e.g. ```mapDamage2```)
 
@@ -866,7 +866,7 @@ Aligned reads in the ```BAM``` file: **872688**
 
 ___
 
-#### 5.5 Visualize aligned reads with ```SequenceTubeMap```<sup>6</sup>
+#### 5.3 Visualize aligned reads with ```SequenceTubeMap```<sup>6</sup>
 
 ```SequenceTubeMap```<sup>6</sup> can be used to visualize a ```GAM``` file. 
 
@@ -874,7 +874,7 @@ As before, let's try to use the [online demo](https://vgteam.github.io/SequenceT
 
 First, we will chunk the ```GAM``` and the ```filter``` graph used for the alignment at the same coordinates we used to chunk the ```clip``` graph before. 
 
-##### 5.5.1 Sort and index ```GAM```
+##### 5.3.1 Sort and index ```GAM```
 
 **RUN:**
 ```vg gamsort -t 4 -i 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam  > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam```
@@ -886,7 +886,7 @@ cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam 5.1_vg_
 cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai
 ```
 
-##### 5.5.2 Chunk the sorted ```GAM``` and the ```filter``` graph
+##### 5.3.2 Chunk the sorted ```GAM``` and the ```filter``` graph
 
 **RUN:**
 ```vg chunk -t 4 -c 1 -p bTaeGut7_mat#0#chr22:0-100000 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.d1.xg -a 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam -g -O vg --prefix 6_vg_giraffe_viz/bTaeGut_pangenome > 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg```
@@ -905,7 +905,7 @@ cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1
 * ```6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.gam```: the chunked ```.gam```
 * ```6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg```: the chunked ```filtered``` graph
 
-##### 5.5.3 Index the chunked ```.gam``` and ```filter``` graph
+##### 5.3.3 Index the chunked ```.gam``` and ```filter``` graph
 
 **RUN:**
 ```vg convert -t 4 -x 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg > 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.xg```
@@ -919,7 +919,7 @@ cp reference_data/6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_10
 cp reference_data/6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam.gai 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sort.sorted.gai
 ```
 
-##### 5.5.4 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). 
+##### 5.3.4 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). 
 
 You can find the files in this github repository, download it directly from her the the computer:
 * ```6_vg_giraffe_viz/6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg```
