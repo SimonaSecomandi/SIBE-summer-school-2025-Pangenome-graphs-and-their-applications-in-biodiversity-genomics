@@ -449,7 +449,7 @@ Now the paths are in the correct order.
 
 Another useful tool for visualizing pangenome graphs is ```SequenceTubeMap```<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is displayed differently and it can be inspected interactively.
 
-There is an [online demo](https://vgteam.github.io/sequenceTubeMap/) that can be used to upload small files. However, sometime it doesn't work (since it's just a demo) and most probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```3_stats_and_viz/sequenceTubeMap/```:
+There is an [online demo](https://vgteam.github.io/sequenceTubeMap/) that can be used to upload small files. However, sometime it doesn't work (since it's just a demo) and most probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```reference_data/3_stats_and_viz/sequenceTubeMap```:
 
 To visualize a specific graph file without uploading it on the webpage, it is possible to launch a server which provides the data to ```SequenceTubeMap```<sup>6</sup>. See instructions on the [```SequenceTubeMap``` GitHub page](https://github.com/vgteam/```SequenceTubeMap```). In this course we will just prepare the files and you can try later at home.
 
@@ -870,7 +870,7 @@ ___
 
 ```SequenceTubeMap```<sup>6</sup> can be used to visualize a ```GAM``` file. 
 
-As before, let's try to use the [online demo](https://vgteam.github.io/SequenceTubeMap/). If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder 6_vg_giraffe_viz/sequenceTubeMap:
+As before, let's try to use the [online demo](https://vgteam.github.io/SequenceTubeMap/). If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```reference_data/6_vg_giraffe_viz/sequenceTubeMap```:
 
 First, we will chunk the ```GAM``` and the ```filter``` graph used for the alignment at the same coordinates we used to chunk the ```clip``` graph before. 
 
