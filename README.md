@@ -460,7 +460,27 @@ The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context 
 **RUN:**
 ```vg convert -t 8 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
 
-#### 3.2.3 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). 
+#### 3.2.3 Look at the paths inside the chunk
+
+We can use ```vg path``` since we are looking at the ```.xg``` file.
+
+**RUN:**
+```vg paths -L -x bTaeGut_pangenome.chunk.100Kb.xg```
+```
+bTaeGut7_pat#0#chr22[6348-38182]
+bTaeGut7_pat#0#chr22[38183-91119]
+bTaeGut7_mat#0#chr22[0-100017]
+bTaeGut2#1#chr22#5771[13553-35791]
+bTaeGut2#1#chr22#5771[42325-93155]
+bTaeGut2#2#chr22#0[0-48874]
+bTaeGut2#1#chr22#5771[0-2494]
+bTaeGut2#1#chr22#5771[35792-39253]
+bTaeGut2#1#chr22#5771[4542-13552]
+```
+
+As you can see we have more paths, this happens because the chunk may include disconnected pieces of a path (because nodes outside the requested range were dropped), so each connected run becomes its own [start-end] fragment. ```vg chunk``` splits each original path into the pieces that lie inside the subgraph we extracted. 
+
+#### 3.2.4 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). 
 
 You can find the files in this github repository, download it directly from her the the computer:
 * ```3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
