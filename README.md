@@ -22,17 +22,20 @@ This course will...
 
 ### 0.1 Files and folders
 
-Copy this repository in your folder:
+The main directory of this repository contains all the input files needed for the exercises, as well as empty folders where your outputs will be written. All commands can be run from the main directory and they will output the data in the correct folders automatically.
+
+A separate folder, [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data), contains all the expected outputs organized using the same folder structure. You can use these reference files to compare results with the expected outcome, complete exercises after the session at home and troubleshoot and debug each step.
+
+#### 0.1.1 Copy this repository in your folder:
 
 ```
 git clone https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics.git
 ```
 
-The main directory of this repository contains all the input files needed for the exercises, as well as empty folders where your outputs will be written. All commands can be run from the main directory and they will output the data in the correct folders automatically.
+#### 0.1.2 Download "big" files
 
-A separate folder, [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data), contains all the expected outputs organized using the same folder structure. You can use these reference files to compare results with the expected outcome, complete exercises after the session at home and troubleshoot and debug each step.
-
-#If you plan to use the reference data, read the [README.md](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/README.md) in the folder  [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/2_bTaeGut_pangenome) and follow the instructions.
+Unfortunately GitHub doesn't allow the upload of files > 100 Gbp. You can download these files from GoogleDrive at this link: https://drive.google.com/drive/folders/1UQXGIKwR2ErMcv6pT097QnPD9XzjChrL?usp=sharing 
+Download them and place them in the correct folder ```reference_data/5.1_vg_giraffe```.
 
 ### 0.2 Tools
 
