@@ -12,19 +12,20 @@ This course will...
 ## Table of content
 
 0. First steps
+   
     0.1 Files and folders
     0.2 Tools
-1. Pangenome construction
+2. Pangenome construction
     1.1 Fasta input files
     1.2 bTaeGut.seqfile input file
     1.3 Running the MC pipeline
-2. Pangenome evaluation and statistics
+3. Pangenome evaluation and statistics
 	2.1 Generate graph statistics
-3. Visualization and subsampling
+4. Visualization and subsampling
 	3.1 odgi viz
    	3.2 SequenceTubeMap
-4. Pangenome-embedded small variants
-5. Mapping of short-reads data with vg giraffe
+5. Pangenome-embedded small variants
+6. Mapping of short-reads data with vg giraffe
 	5.1 align the reads with vg giraffe
 	5.2 Project graph alignments onto a linear reference with vg surject
 	5.3 Visualize aligned reads with SequenceTubeMap6
