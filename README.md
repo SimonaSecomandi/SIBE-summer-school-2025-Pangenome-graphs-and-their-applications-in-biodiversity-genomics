@@ -457,7 +457,7 @@ First, we will chunk the graph in a smaller piece to be able to visualize it fas
 
 #### 3.2.1 Chunk the graph 
 
-You can visualize a ```.vg``` graph and it's index ```.xg``` with ```SequenceTubeMap```. To aid visualization and avoid using too much memory, we will subsample the graph at specific coordinates.
+You can visualize a ```.vg``` graph and it's index ```.xg``` with ```SequenceTubeMap```. To aid visualization and avoid using too much memory, we will subsample the graph at specific coordinates using ```vg chunk```<sup>7</sup>.
 
 **RUN:**
 ```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
@@ -590,7 +590,7 @@ _____
 
 ## 5. Mapping of short-reads data with vg giraffe
 
-We will now use the pangenome as a reference for read mapping using the fast short-read mapper ```vg giraffe```<sup>7</sup>.
+We will now use the pangenome as a reference for read mapping using the fast short-read mapper ```vg giraffe```<sup>8</sup>.
 
 In the folder ```4_short_read_data/``` you will find forward and reverse fastq files for a single Zebra finch individual [SRR16569049](https://www.ncbi.nlm.nih.gov/sra/SRX12771087[accn]). 
 They have been pre-processed as follows:
