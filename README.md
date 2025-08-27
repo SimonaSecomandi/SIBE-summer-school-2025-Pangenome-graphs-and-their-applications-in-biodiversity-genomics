@@ -16,18 +16,18 @@ This course will...
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.2 Tools<br />
 **1. Pangenome construction**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.1 Fasta input files<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2 bTaeGut.seqfile input file<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3 Running the MC pipeline<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2 ```bTaeGut.seqfile``` input file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3 Running the ```MC pipeline```<br />
 **2. Pangenome evaluation and statistics**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1 Generate graph statistics<br />
 **3. Visualization and subsampling**<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 odgi viz<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 SequenceTubeMap<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 ```odgi viz```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 ```SequenceTubeMap```<br />
 **4. Pangenome-embedded small variants**<br />
-**5. Mapping of short-reads data with vg giraffe**<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 Align the reads with vg giraffe<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2 Project graph alignments onto a linear reference with vg surject<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3 Visualize aligned reads with SequenceTubeMap6<br />
+**5. Mapping of short-reads data with ```vg giraffe```**<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 Align the reads with ```vg giraffe```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2 Project graph alignments onto a linear reference with ```vg surject```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3 Visualize aligned reads with ```SequenceTubeMap```6<br />
 
 ## 0. First steps
 
