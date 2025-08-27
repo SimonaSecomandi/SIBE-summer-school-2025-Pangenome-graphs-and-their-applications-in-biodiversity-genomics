@@ -12,8 +12,8 @@ This course will...
 ## Table of content
 
 **0. First steps**<br />
-		0.1 Files and folders<br />
-    0.2 Tools<br />
+&nbsp;&nbsp;&nbsp;0.1 Files and folders<br />
+&nbsp;&nbsp;&nbsp;0.2 Tools<br />
 **1. Pangenome construction**<br />
     1.1 Fasta input files<br />
     1.2 bTaeGut.seqfile input file<br />
