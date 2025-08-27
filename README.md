@@ -11,11 +11,9 @@ This course will...
 
 ## Table of content
 
-0. First steps
-   
-    0.1 Files and folders
-   
-    0.2 Tools
+0. First steps<br />
+    0.1 Files and folders<br />
+    0.2 Tools<br />
 2. Pangenome construction
    
     1.1 Fasta input files
