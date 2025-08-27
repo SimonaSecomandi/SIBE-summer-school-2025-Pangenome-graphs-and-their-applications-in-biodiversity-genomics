@@ -36,7 +36,7 @@ git clone https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-g
 
 Unfortunately GitHub doesn't allow the upload of files > 100 Gbp. You can download these files from GoogleDrive at this [link](https://drive.google.com/drive/folders/1UQXGIKwR2ErMcv6pT097QnPD9XzjChrL?usp=sharing).
 
-Download them and place them in the correct folder ```reference_data/5.1_vg_giraffe```.
+Download them and place them in the correct folder ```reference_data/5.1_vg_giraffe``` and ```reference_data/5.2_bwa_mem```.
 
 ### 0.2 Tools
 
