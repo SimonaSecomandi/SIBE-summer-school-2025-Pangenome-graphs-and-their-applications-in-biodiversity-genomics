@@ -27,7 +27,7 @@ This course will...
 **5. Mapping of short-reads data with ```vg giraffe```**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 Align the reads with ```vg giraffe```<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2 Project graph alignments onto a linear reference with ```vg surject```<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3 Visualize aligned reads with ```SequenceTubeMap```6<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3 Visualize aligned reads with ```SequenceTubeMap```<br />
 
 ## 0. First steps
 
