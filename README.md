@@ -7,7 +7,7 @@ The title of this course recalls our recent pangenomics review:
 
 ## Introduction
 
-This course will...
+This practical course will walk you through building, inspecting, and using a small pangenome graph for biodiversity genomics analyses. Working on the first 1 Mbp of Zebra finch (*Taeniopygia guttata*) chr22, you’ll generate a pangenome graph from 4 haplotypes using the Minigraph-Cactus (MC) pipeline<sup>2,3,4</sup> to generate different type of graphs, indexes needed for read mapping, and VCFs. You’ll then compute graph statistics, visualize the graph structure and the embedded variability<sup>5,6,7</sup>, and use the graph as a reference for short-read mapping with ```vg giraffe```<sup>8</sup>, including surjection to BAM for compatibility with standard donwstream tools.
 
 ## Table of content
 
@@ -69,7 +69,7 @@ You will find these commands throught the excercises when needed.
 
 To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>2</sup>. The pipeline can be run as a whole or run step by step. 
 
-#### Main steps of the MC pipeline<sup>1</sup>:
+#### Main steps of the MC pipeline<sup>2</sup>:
 
 1. A user-selected reference genome is used as the initial backbone
 2. The reference is progressively augmented with structural variation from the other genomes by minigraph<sup>3</sup>, a sequence-to-graph aligner, as a graph constructor. The resulting graph is SV only (>50 bp) (see **panel c** below)
@@ -985,4 +985,5 @@ samtools flagstats -@ 32 5.2_bwa_mem/SRR16569049_bwa_mem_mapped.sort.bam 1> 5.2_
 4. Armstrong, Joel, et al. "Progressive Cactus is a multiple-genome aligner for the thousand-genome era." Nature 587.7833 (2020): 246-251.
 5. Guarracino, Andrea, et al. "ODGI: understanding pangenome graphs." Bioinformatics 38.13 (2022): 3319-3326.
 6. Beyer, Wolfgang, et al. "Sequence tube maps: making graph genomes intuitive to commuters." Bioinformatics 35.24 (2019): 5318-5320.
-7. Sirén, Jouni, et al. "Pangenomics enables genotyping of known structural variants in 5202 diverse genomes." Science 374.6574 (2021): abg8871.
+7. Garrison, Erik, et al. "Variation graph toolkit improves read mapping by representing genetic variation in the reference." Nature biotechnology 36.9 (2018): 875-879.
+8. Sirén, Jouni, et al. "Pangenomics enables genotyping of known structural variants in 5202 diverse genomes." Science 374.6574 (2021): abg8871.
