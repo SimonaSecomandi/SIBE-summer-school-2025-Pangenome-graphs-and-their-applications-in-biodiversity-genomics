@@ -40,15 +40,19 @@ Download them and place them in the correct folder ```reference_data/5.1_vg_gira
 
 ### 0.2 Tools
 
-Almost all the tools needed for this course are inside a conda environment.
-Remember to **activate the conda environment** before running any command:
+Almost all the tools needed for this course are inside a conda environment, except ```Minigraph-Cactus```.
 
-```
-conda activate pangenomics
-```
-Other tools can be found here: 
+Remember to **activate the Cactus environment** before running ```Minigraph-Cactus```:
 
-All the commands can be run from the main directory!
+```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
+
+Remember to **activate the conda environment** before running any command after the pangenome contrustion:
+
+```conda activate SIBE_course```
+
+You will find these commands throught the excercises when needed. 
+
+**Rerember, all the commands MUST be run from the main directory!**
 
 ## 1. Pangenome construction
 
@@ -825,7 +829,7 @@ ___
 Aligned reads in the ```GAM``` file: **950821**
 Aligned reads in the ```BAM``` file: **872688**
 
-#### ANSWER: 78133 reads that were mapped in the graphical alignment ``GAM``, are now stored in the ``BAM`` file as unmapped. These reads couldn't be projected one the linear path we chose because they probably aligned exclusively to an alternative path with no embedding on your chosen paths, i.e. true novel insertions), the reads were flanking the path, or the alingment was too complex.
+#### ANSWER: 78133 reads that were mapped in the graphical alignment ``GAM``, are now stored in the ``BAM`` file as unmapped. These reads couldn't be projected one the linear path we chose because they probably aligned exclusively to an alternative path with no embedding on your chosen paths, i.e. true novel insertions), it only flanks/partially overlaps the path so no continuous projection exists, or the alignment is too complex/ambiguous for a consistent projection.
 
 *New computational methods and file formats other than the linear binary alignment map (``BAM``) and variant call format (``VCF``) need to be developed to overcome this limitation and represent all the information embedded in the graph<sup>1</sup>.*
 
