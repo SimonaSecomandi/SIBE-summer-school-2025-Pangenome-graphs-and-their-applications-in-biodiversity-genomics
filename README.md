@@ -870,7 +870,7 @@ ___
 
 ```SequenceTubeMap```<sup>6</sup> can be used to visualize a ```GAM``` file. 
 
-As before, let's try to use the [online demo](https://vgteam.github.io/SequenceTubeMap/). If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```reference_data/6_vg_giraffe_viz/sequenceTubeMap```:
+As before, let's try to use the [online demo](https://vgteam.github.io/SequenceTubeMap/). If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```reference_data/6_vg_giraffe_viz/sequenceTubeMap```.
 
 First, we will chunk the ```GAM``` and the ```filter``` graph used for the alignment at the same coordinates we used to chunk the ```clip``` graph before. 
 
