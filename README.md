@@ -25,7 +25,7 @@ This course will...
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 SequenceTubeMap<br />
 **4. Pangenome-embedded small variants**<br />
 **5. Mapping of short-reads data with vg giraffe**<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 align the reads with vg giraffe<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 Align the reads with vg giraffe<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2 Project graph alignments onto a linear reference with vg surject<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3 Visualize aligned reads with SequenceTubeMap6<br />
 
@@ -599,7 +599,7 @@ They have been pre-processed as follows:
 3. Read have been aligned to the pangenome with ```vg giraffe``` and surjected with ```vg surject``` (see below for the explanation). Only those mapping to chr22 were extracted.
 4. Read have been aligned to the linear reference with ```bwa mem``` (see below for the explanation). Only those mapping to chr22 were extracted.
    
-### 5.1 align the reads with vg giraffe
+### 5.1 Align the reads with vg giraffe
 
 **RUN:**
 ```
