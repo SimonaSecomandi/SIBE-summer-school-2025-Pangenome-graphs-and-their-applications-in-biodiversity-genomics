@@ -12,11 +12,22 @@ This course will...
 ## Table of content
 
 0. First steps
-    1. Files and folders
-    2. Tools
+    0.1 Files and folders
+    0.2 Tools
 1. Pangenome construction
-    1. Fasta input files
-    2. bTaeGut.seqfile input file
+    1.1 Fasta input files
+    1.2 bTaeGut.seqfile input file
+    1.3 Running the MC pipeline
+2. Pangenome evaluation and statistics
+	2.1 Generate graph statistics
+3. Visualization and subsampling
+	3.1 odgi viz
+   	3.2 SequenceTubeMap
+4. Pangenome-embedded small variants
+5. Mapping of short-reads data with vg giraffe
+	5.1 align the reads with vg giraffe
+	5.2 Project graph alignments onto a linear reference with vg surject
+	5.3 Visualize aligned reads with SequenceTubeMap6
 
 ## 0. First steps
 
@@ -221,17 +232,17 @@ Additional files and folders:
 
 After the generation of the pangenome, the first thing to do is to check the statistics. This can be done with ```odgi stats``` or ```vg stats```.
 
-#### 2.1 Deactivate the Cactus environment:
+##### Deactivate the Cactus environment:
 
 **RUN:**
 ```deactivate```
 
-#### 2.2 Activate the conda environment with all our commands:
+##### Activate the conda environment with all our commands:
 
 **RUN:**
 ```conda activate SIBE_course```
 
-#### 2.3 Generate graph statistics
+#### 2.1 Generate graph statistics
 
 We will generate general statistics for the pangenome using ```odgi```, starting from the ```.og``` ```clipped``` graph. As a reminder, this graph is the default MC graph and is a subgraph of the ```full``` graph in which sequences bigger than 10kb that were not aligned to the Minigraph SV-only graph and nodes that doesn't have edges on each side are removed. <br />
 
