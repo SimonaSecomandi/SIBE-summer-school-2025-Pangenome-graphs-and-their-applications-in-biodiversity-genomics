@@ -584,6 +584,13 @@ Let's look at biallelic SNPs and INDELS, which are those suitable to generate Pr
 
 Of course, these variants needs to be filtered and validated for downstream analyses, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with ```SequenceTubeMap``` by chunking the graph around the variant coordinates.
 
+#PCA
+
+bcftools view -v snps --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz -Oz -o 3_stats_and_viz/bTaeGut_pangenome.SNPs.vcf.gz
+
+
+plink --vcf 3_stats_and_viz/bTaeGut_pangenome.SNPs.vcf.gz --pca --double-id --make-bed --vcf-half-call haploid --set-missing-var-ids @:# --out 3_stats_and_viz/bTaeGut_pangenome.SNPs.PCA > 3_stats_and_viz/bTaeGut_pangenome.SNPs.PCA.log
+
 _____
 
 ## 5. Mapping of short-reads data with vg giraffe
