@@ -113,8 +113,6 @@ The file is organized like this:
 
 ### 1.3 Running the MC pipeline
 
-*The pipeline will take ~13 minutes to finish using 8 threads and 8 GB RAM.*
-
 #### 1.3.1 Activate the Cactus python environment:
 
 **RUN:**
