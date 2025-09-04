@@ -21,7 +21,8 @@ This practical course will walk you through building, inspecting, and using a sm
 **2. Pangenome evaluation and statistics**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1 Generate graph statistics<br />
 **3. Visualization and subsampling**<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 ```odgi viz```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 ```odgi draw```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 ```odgi viz```<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 ```SequenceTubeMap```<br />
 **4. Pangenome-embedded small variants**<br />
 **5. Mapping of short-reads data with ```vg giraffe```**<br />
@@ -407,21 +408,98 @@ ___
 
 Visualization is important to get an idea of the structure of the graph and the inspection of homology relationships and variation between the genomes, providing insights on the latent biological data.
 
-### 3.1 ```odgi viz```<sup>5</sup>
+### 3.1 ```odgi draw```<sup>5</sup>
+
+In the MC command we specified to generate ```odgi draw``` graphs 2D visualizations and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+
+#### 3.1.1 Let's look at the ```full graph```'s png 
+
+We are looking at the ```full``` graph since ```odgi``` works better with these graphs.
+
+This is a 2D visualization of the overrall layaout of the graph.
+
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+
+The graph is mostly linear. The bubble indicates that here some paths have a divergent sequence or it can represent a repeat region.
+
+Let's zoom a bit into the bubble. It seems to be around 150000-250000 bp.
+
+#### 3.1.2 Extract a subgraph
+
+```
+odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
+             -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og \
+             -r "bTaeGut7_mat#0#chr22:150000-250000"
+```
+
+#### 3.1.3 Sort the subgraph
+
+```odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og```
+
+#### 3.1.4 Generate the 2D layout of the subgraph
+
+```odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay```
+
+#### 3.1.5 Draw the subgraph
+
+```
+odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.draw.png
+```
+
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+
+The bubble is still too big to look at, and it's probably a very complicated area of the graph.
+
+#### 3.1.6 Repeat the commands zooming into a different area
+```
+odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
+             -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og \
+             -r "bTaeGut7_mat#0#chr22:180000-190000"
+```
+
+```
+odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og
+```
+
+```
+odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay
+```
+
+```
+odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.draw.png
+```
+
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+
+#### 3.1.7 Check the VCF file
+
+This area seems to be full of small indels (insertions/deletions). We will look in more detailes at the variants inside the pangenome, but for now let's just check the area for the presence of these indels:
+
+```
+bcftools view -r chr22:180000-190000 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz
+```
+
+As you can see, there are a lot of variants, including SNPs and indels, and some are multiallelic, which creates all those bubbles. These needs further validation and filtering. Here you are just learning how to run the commands and how to inspect a graph.
+
+### 3.2 ```odgi viz```<sup>5</sup>
 
 In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
 
 This visualization is in 1D and it's a linearized rendering of the paths versus the sequence and topology of the graph.
 
-#### 3.1.1 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
+#### 3.2.1 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
+
+We are looking at the ```full``` graph since ```odgi``` works better with these graphs.
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
 
 Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
 
-We are using the ```full``` graph since ```odgi``` works better with these graphs.
+There is definitely some divergence between the paths at the same level of the bubble we saw in the odgi draw 2D visualization.
 
-#### 3.1.2 Change the path order in the .png
+Let's look at the linear alignment between the two individuals we included in the pangenome. To quickly do so, let's use the NCBI [Comparative Genomes Browser](). 
+
+#### 3.2.2 Change the path order in the .png
 
 There is the possibility of ordering the paths as we want, e.g. to have the backbone reference at the top.
 
@@ -461,12 +539,6 @@ Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png`
 
 Now the paths are in the correct order.
 
-### 3.2 ```odgi draw```<sup>5</sup>
-
-```odgi layout --threads=4 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -o 3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay```
-
-```odgi draw --threads=32 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -c=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay --png=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.png```
-
 ### 3.2 ```SequenceTubeMap```<sup>6</sup>
 
 Another useful tool for visualizing pangenome graphs is ```SequenceTubeMap```<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is displayed differently and it can be inspected interactively.
@@ -484,6 +556,8 @@ You can visualize a ```.vg``` graph and it's index ```.xg``` with ```SequenceTub
 **RUN:**
 ```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
 
+```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.vg```
+
 The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context of the chunk this many node steps.
 
 *Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
@@ -491,7 +565,9 @@ The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context 
 #### 3.2.2 Index the new ```.vg``` chunk
 
 **RUN:**
-```vg convert -t 8 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
+```vg convert -t 4 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
+
+```vg convert -t 4 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.xg```
 
 #### 3.2.3 Look at the paths inside the chunk
 
