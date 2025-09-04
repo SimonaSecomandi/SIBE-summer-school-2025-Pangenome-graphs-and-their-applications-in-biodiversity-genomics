@@ -407,21 +407,39 @@ ___
 
 Visualization is important to get an idea of the structure of the graph and the inspection of homology relationships and variation between the genomes, providing insights on the latent biological data.
 
-### 3.1 ```odgi viz```<sup>5</sup>
+### 3.1 ```odgi draw```<sup>5</sup>
+
+In the MC command we specified to generate ```odgi draw``` graphs 2D visualizations and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+
+#### 3.1.1 Let's look at the ```full graph```'s png 
+
+We are looking at the ```full``` graph since ```odgi``` works better with these graphs.
+
+This is a 2D visualization of the overrall layaout of the graph.
+
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+
+The graph is mostly linear. The bubble indicates that here some paths have a divergent sequence or it can represent a repeat region.
+ 
+### 3.2 ```odgi viz```<sup>5</sup>
 
 In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
 
 This visualization is in 1D and it's a linearized rendering of the paths versus the sequence and topology of the graph.
 
-#### 3.1.1 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
+#### 3.2.1 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
+
+We are looking at the ```full``` graph since ```odgi``` works better with these graphs.
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
 
 Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
 
-We are using the ```full``` graph since ```odgi``` works better with these graphs.
+There is definitely some divergence between the paths at the same level of the bubble we saw in the odgi draw 2D visualization.
 
-#### 3.1.2 Change the path order in the .png
+Let's look at the linear alignment between the two individuals we included in the pangenome. To quickly do so, let's use the NCBI [Comparative Genomes Browser](). 
+
+#### 3.2.2 Change the path order in the .png
 
 There is the possibility of ordering the paths as we want, e.g. to have the backbone reference at the top.
 
@@ -460,12 +478,6 @@ Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png`
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png" alt="drawing" width="1000"/> <br/>
 
 Now the paths are in the correct order.
-
-### 3.2 ```odgi draw```<sup>5</sup>
-
-```odgi layout --threads=4 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -o 3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay```
-
-```odgi draw --threads=32 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -c=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay --png=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.png```
 
 ### 3.2 ```SequenceTubeMap```<sup>6</sup>
 
