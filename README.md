@@ -116,9 +116,7 @@ The file is organized like this:
 #### 1.3.1 Activate the Cactus python environment:
 
 **RUN:**
-```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
-
-in my case: source /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate
+```conda activate cactus```
 
 #### 1.3.2 Run the pipeline:
    
@@ -128,6 +126,13 @@ in my case: source /lustre/fs5/vgl/scratch/ssecomandi/BIN/cactus-bin-v2.9.3/venv
 cactus-pangenome \
 2_bTaeGut_pangenome/jobStore \
 1_fasta_files/bTaeGut.seqfile \
+--consMemory 8Gi \
+--indexMemory 8Gi \
+--mgMemory 8Gi \
+--mgCores 4 \
+--mapCores 4 \
+--consCores 4 \
+--indexCores 4 \
 --outDir 2_bTaeGut_pangenome \
 --outName bTaeGut_pangenome \
 --logFile 2_bTaeGut_pangenome/bTaeGut.log \
@@ -142,7 +147,8 @@ cactus-pangenome \
 --xg clip filter \
 --chrom-vg clip filter \
 --odgi clip full \
---viz clip full
+--viz clip full \
+--draw clip full 
 ```
 
 The pipeline will take around 3 minutes to run. You can find the log (the same you saw in stdout) here:  
@@ -156,9 +162,16 @@ cp -r reference_data/2_bTaeGut_pangenome/* 2_bTaeGut_pangenome
 * ```cactus-pangenome```: calls the MC pipeline 
 * ```jobStore```: a directory used by the workflow management system to store intermediate files and job metadata
 * ```bTaeGut.seqfile```: the file containing genomes IDs and fasta paths
-* ```--mgMemory```: memory for minigraph construction. The memory can be a problem especially if you are running the jobs on a SLURM cluster, but we will set it anyways to be sure. Regarding the cores, the pipeline will use all those available.
+
+**Resources:**
+
+* ```--mgMemory```: memory for minigraph construction. The memory can be a problem especially if you are running the jobs on a SLURM cluster, but we will set it anyways to be sure
 * ```--consMemory```: memory for each cactus-consolidated job
 * ```--indexMemory```: memory for indexing
+* ```--mgCores```: number of cores for minigraph construction
+* ```--mapCores``` the number of cores for each minigraph mapping job 
+* ```--consCores``` the number of cores for each cactus-consolidated job 
+* ```--indexCores``` the number of cores for each vg indexing job 
 
 Multiple flags can be set:
 
@@ -183,6 +196,7 @@ In the following tags you can specify on which type of graph you want to operate
 * ```--xg clip filter```: generate the .xg index file for the whole graph. It's a compressed, indexed representation of a variation graph, specifically optimized for fast path and graph traversal operations
 *  ```--og full```: generate the graph in the ```odgi``` format  ```.og```. Usefull when running operations using ```odgi```
 * ```--viz clip full```: generate an ```odgi viz``` 1D .png for each chromosome. ```odgi``` works better with ```full``` graphs, the presence off all sequences doesn't hinder the visualization. We will generate a .png also for the ```clip``` graph as a comparison. 
+* ```--draw clip full```: generate an ```odgi draw``` 2D .png for each chromosome. ```odgi``` works better with ```full``` graphs, the presence off all sequences doesn't hinder the visualization. We will generate a .png also for the ```clip``` graph as a comparison. 
 
 If you forget to set some of these flags don't worry, you can always generate ```.vg```, ```.og```, and other files later on.
 
@@ -233,12 +247,12 @@ After the generation of the pangenome, the first thing to do is to check the sta
 ##### Deactivate the Cactus environment:
 
 **RUN:**
-```deactivate```
+```conda deactivate```
 
 ##### Activate the conda environment with all our commands:
 
 **RUN:**
-```conda activate SIBE_course```
+```conda activate pangenomics_corse```
 
 #### 2.1 Generate graph statistics
 
