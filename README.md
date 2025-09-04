@@ -21,7 +21,8 @@ This practical course will walk you through building, inspecting, and using a sm
 **2. Pangenome evaluation and statistics**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1 Generate graph statistics<br />
 **3. Visualization and subsampling**<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 ```odgi viz```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 ```odgi draw```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 ```odgi viz```<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 ```SequenceTubeMap```<br />
 **4. Pangenome-embedded small variants**<br />
 **5. Mapping of short-reads data with ```vg giraffe```**<br />
