@@ -684,17 +684,9 @@ Let's look at biallelic SNPs and INDELS, which are those suitable to generate Pr
 
 ```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($5) > length($4)' | wc -l```
 
-#### ANSWER: the pangenome contains 12012 biallelic SNPs and 1766 biallelic INDELs, of which 947 are indertions and 827 are deletions.
+#### ANSWER: the pangenome contains 12012 biallelic SNPs and 1766 biallelic INDELs, of which 947 are insertions and 827 are deletions.
 
-Of course, these variants needs to be filtered and validated for downstream analyses, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with ```SequenceTubeMap``` by chunking the graph around the variant coordinates.
-
-#PCA
-
-bcftools view -v snps --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz -Oz -o 3_stats_and_viz/bTaeGut_pangenome.SNPs.vcf.gz
-
-
-plink --vcf 3_stats_and_viz/bTaeGut_pangenome.SNPs.vcf.gz --pca --double-id --make-bed --vcf-half-call haploid --set-missing-var-ids @:# --out 3_stats_and_viz/bTaeGut_pangenome.SNPs.PCA > 3_stats_and_viz/bTaeGut_pangenome.SNPs.PCA.log
-
+Of course, these variants needs to be filtered and validated for downstream analyses, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with ```odgi draw/viz``` and/or ```SequenceTubeMap``` by chunking the graph around the variant coordinates.
 _____
 
 ## 5. Mapping of short-reads data with vg giraffe
