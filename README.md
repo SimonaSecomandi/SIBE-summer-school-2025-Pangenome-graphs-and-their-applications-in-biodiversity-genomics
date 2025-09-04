@@ -451,7 +451,7 @@ Now the paths are in the correct order.
 
 ```odgi layout --threads=4 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -o 3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay```
 
-```odgi draw --threads=4 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -c=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay --png=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.png```
+```odgi draw --threads=32 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -c=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay --png=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.png```
 
 ### 3.2 ```SequenceTubeMap```<sup>6</sup>
 
