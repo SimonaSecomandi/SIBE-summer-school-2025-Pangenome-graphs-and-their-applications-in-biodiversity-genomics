@@ -395,13 +395,19 @@ Visualization is important to get an idea of the structure of the graph and the 
 
 ### 3.1 ```odgi viz```<sup>5</sup>
 
-In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A .png file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+
+This visualization is in 1D and it's a linearized rendering of the paths versus the sequence and topology of the graph.
+
+<img width="516" height="31" alt="image" src="https://github.com/user-attachments/assets/efd9b93a-86fb-4fb7-86a1-af0ccde38f06" />
 
 #### 3.1.1 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
 
 Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
+
+We are using the ```full``` graph since ```odgi``` works better with these graphs.
 
 #### 3.1.2 Change the path order in the .png
 
@@ -442,6 +448,12 @@ Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png`
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png" alt="drawing" width="1000"/> <br/>
 
 Now the paths are in the correct order.
+
+### 3.2 ```odgi draw```<sup>5</sup>
+
+```odgi layout --threads=4 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -o 3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay```
+
+```odgi draw --threads=4 -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og -c=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.lay --png=3_stats_and_viz/bTaeGut_pangenome.full.og.draw.png```
 
 ### 3.2 ```SequenceTubeMap```<sup>6</sup>
 
