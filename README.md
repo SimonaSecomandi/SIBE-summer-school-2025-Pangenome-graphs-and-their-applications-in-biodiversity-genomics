@@ -399,8 +399,6 @@ In the MC command we specified to generate ```odgi viz``` graphs and these can b
 
 This visualization is in 1D and it's a linearized rendering of the paths versus the sequence and topology of the graph.
 
-<img width="516" height="31" alt="image" src="https://github.com/user-attachments/assets/efd9b93a-86fb-4fb7-86a1-af0ccde38f06" />
-
 #### 3.1.1 Let's look at the ```full graph```'s png (```2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png```) 
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
