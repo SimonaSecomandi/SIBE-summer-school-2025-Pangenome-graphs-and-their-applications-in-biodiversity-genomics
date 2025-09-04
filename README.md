@@ -446,7 +446,7 @@ odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
 odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.draw.png
 ```
 
-<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.draw.png" alt="drawing" width="1000"/> <br/>
 
 The bubble is still too big to look at, and it's probably a very complicated area of the graph.
 
