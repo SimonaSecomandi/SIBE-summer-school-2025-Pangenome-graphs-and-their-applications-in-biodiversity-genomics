@@ -420,7 +420,66 @@ This is a 2D visualization of the overrall layaout of the graph.
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
 
 The graph is mostly linear. The bubble indicates that here some paths have a divergent sequence or it can represent a repeat region.
- 
+
+Let's zoom a bit into the bubble. It seems to be around 150000-250000 bp.
+
+#### 3.1.2 Extract a subgraph
+
+```
+odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
+             -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og \
+             -r "bTaeGut7_mat#0#chr22:150000-250000"
+```
+
+#### 3.1.3 Sort the subgraph
+
+```odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og```
+
+#### 3.1.4 Generate the 2D layout of the subgraph
+
+```odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay```
+
+#### 3.1.5 Draw the subgraph
+
+```
+odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.draw.png
+```
+
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+
+The bubble is still too big to look at, and it's probably a very complicated area of the graph.
+
+#### 3.1.6 Repeat the commands zooming into a different area
+```
+odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
+             -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og \
+             -r "bTaeGut7_mat#0#chr22:180000-190000"
+```
+
+```
+odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og
+```
+
+```
+odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay
+```
+
+```
+odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.draw.png
+```
+
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+
+#### 3.1.7 Check the VCF file
+
+This area seems to be full of small indels (insertions/deletions). We will look in more detailes at the variants inside the pangenome, but for now let's just check the area for the presence of these indels:
+
+```
+bcftools view -r chr22:180000-190000 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz
+```
+
+As you can see, there are a lot of variants, including SNPs and indels, and some are multiallelic, which creates all those bubbles. These needs further validation and filtering. Here you are just learning how to run the commands and how to inspect a graph.
+
 ### 3.2 ```odgi viz```<sup>5</sup>
 
 In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
@@ -496,6 +555,8 @@ You can visualize a ```.vg``` graph and it's index ```.xg``` with ```SequenceTub
 **RUN:**
 ```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
 
+```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.vg```
+
 The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context of the chunk this many node steps.
 
 *Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
@@ -503,7 +564,9 @@ The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context 
 #### 3.2.2 Index the new ```.vg``` chunk
 
 **RUN:**
-```vg convert -t 8 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
+```vg convert -t 4 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
+
+```vg convert -t 4 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.xg```
 
 #### 3.2.3 Look at the paths inside the chunk
 
