@@ -55,11 +55,11 @@ Almost all the tools needed for this course are inside a conda environment, exce
 
 Remember to **activate the Cactus environment** before running ```Minigraph-Cactus```:
 
-```source /path/to/cactus-bin-v2.9.3/venv-cactus-v2.9.3/bin/activate```
+```conda activate cactus```
 
 Remember to **activate the conda environment** before running any command after the pangenome construction:
 
-```conda activate SIBE_course```
+```conda activate pangenomics_corse```
 
 You will find these commands throught the excercises when needed. 
 
