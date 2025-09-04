@@ -426,6 +426,7 @@ Let's zoom a bit into the bubble. It seems to be around 150000-250000 bp.
 
 #### 3.1.2 Extract a subgraph
 
+**RUN**:
 ```
 odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
              -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og \
@@ -434,10 +435,12 @@ odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
 
 #### 3.1.3 Sort the subgraph
 
+**RUN**:
 ```odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og```
 
 #### 3.1.4 Generate the 2D layout of the subgraph
 
+**RUN**:
 ```odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay```
 
 #### 3.1.5 Draw the subgraph
@@ -451,29 +454,30 @@ odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.150.2
 The bubble is still too big to look at, and it's probably a very complicated area of the graph.
 
 #### 3.1.6 Repeat the commands zooming into a different area
+
+**RUN**:
 ```
 odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
              -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og \
              -r "bTaeGut7_mat#0#chr22:180000-190000"
 ```
-
 ```
 odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og
 ```
-
 ```
 odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay
 ```
-
 ```
 odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.draw.png
 ```
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.draw.png" alt="drawing" width="1000"/> <br/>
 
+This area seems to be full of small indels (insertions/deletions).
+
 #### 3.1.7 Check the VCF file
 
-This area seems to be full of small indels (insertions/deletions). We will look in more detailes at the variants inside the pangenome, but for now let's just check the area for the presence of these indels:
+We will look in more detailes at the MC VCF files, but for now let's just check the area for the presence of these indels:
 
 ```
 bcftools view -r chr22:180000-190000 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz
