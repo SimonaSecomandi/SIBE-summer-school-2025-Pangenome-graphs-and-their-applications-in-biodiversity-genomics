@@ -34,7 +34,7 @@ This practical course will walk you through building, inspecting, and using a sm
 
 ### 0.1 Files and folders
 
-The main directory of this repository contains all the input files needed for the exercises, as well as empty folders where your outputs will be written. All commands can be run from the main directory and they will output the data in the correct folders automatically.
+The main directory of this repository contains all the input files needed for the exercises, as well as empty folders where your outputs will be written. All commands can be run from the main directory and they will output the data in the correct folders.
 
 A separate folder, [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data), contains all the expected outputs organized using the same folder structure. You can use these reference files to compare results with the expected outcome, complete exercises after the session at home and troubleshoot and debug each step.
 
@@ -52,7 +52,7 @@ Download them and place them in the correct folder ```reference_data/5.1_vg_gira
 
 ### 0.2 Tools
 
-Almost all the tools needed for this course are inside a conda environment, except ```Minigraph-Cactus```.
+All the tools needed for this course are inside two conda environments.
 
 Remember to **activate the Cactus environment** before running ```Minigraph-Cactus```:
 
@@ -68,14 +68,14 @@ You will find these commands throught the excercises when needed.
 
 ## 1. Pangenome construction
 
-To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>2</sup>. The pipeline can be run as a whole or run step by step. 
+To construct the pangenome we will use the [Minigraph-Cactus pipeline](https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md)<sup>2</sup>. The pipeline can be run as a whole (our case) or run step by step. 
 
 #### Main steps of the MC pipeline<sup>2</sup>:
 
 1. A user-selected reference genome is used as the initial backbone
 2. The reference is progressively augmented with structural variation from the other genomes by minigraph<sup>3</sup>, a sequence-to-graph aligner. The resulting graph is SV only (>50 bp) (see **panel c** below)
-3. All assemblies are aligned back to the graph to generates base-level sequence-to-graph alignments for each reference chromosome separately  (see **panel d** below)
-4. The sequence graph is split by chromosome and a modified version of the reference-free aligner Progressive Cactus<sup>4</sup> is used to combine the alignments into base-level pangenome graphs that contain variants of all sizes  (see **panel e** below)
+3. All assemblies are aligned back to the graph to generates base-level sequence-to-graph alignments for each reference chromosome separately (see **panel d** below)
+4. The sequence graph is split by chromosomes and a modified version of the reference-free aligner Progressive Cactus<sup>4</sup> is used to combine the alignments into base-level pangenome graphs that contain variants of all sizes (see **panel e** below)
 6. Chromosome graphs are then combined and post-processed to reduce path complexity by removing ("clipping") unaligned sequences such as the centromeres, leaving only the backbone reference in those regions and the other alleles are split accordingly (see **panel f** below)
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/figures/Figure1_Hickey_G_et_al.jpg" alt="drawing" width="600"/> <br/>
@@ -94,7 +94,7 @@ Differently from ProgressiveCactus, **MC ignores soft-masked bases**, so there i
 
 ### 1.2 bTaeGut.seqfile input file 
 
-The main input file for the MC pipeline is the [bTaeGut.seqfile](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/1_fasta_files/bTaeGut.seqfile) file in the folder ```1_fasta_files/```. Similarly to ```Progressive Cactus```, this text file contains user defined genome IDs and paths to the corresponding fasta file, one assembly per line. The main difference with the Progressive Cactus imput file is the absence of a guide three (```Newick``` format), which is usually the first row in the ```Cactus``` input file. 
+The main input file for the MC pipeline is the [bTaeGut.seqfile](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/1_fasta_files/bTaeGut.seqfile) file in the folder ```1_fasta_files/```. Similarly to ```Progressive Cactus```, this text file contains user defined genome IDs and paths to the corresponding fasta file, one assembly per line. The main difference with the Progressive Cactus input file is the absence of a guide three (in ```Newick``` format), which is usually the first row in the ```Cactus``` input file. 
 
 The file is organized like this:
 
@@ -107,14 +107,14 @@ The file is organized like this:
 
 **IMPORTANT:**
 * Divergent haplotypes from the same individuals must be defined with ".1" and ".2" after the genome ID.
-* The **backbone reference** (we will use *bTaeGut7.hap1*) can only be a single haplotype and **IT NEEDS TO BE CHROMOSOME-LEVEL**. Its chromosomes will be used as a template to align the other's genomes chromosomes/scaffolds and generate chromosomes graphs that will be then merged. This genome will be the main reference for the output VCF (containing the variants inside the pangenome) and will not appear as sample in the VCF. It will be also used as reference for downsteam analyses. 
-* The pipeline currently does not support the presence of both haplotypes of the backbone individual in the form bTaeGut7.1 and bTaeGut7.2. The coordinate space for chromosome compartimentalization can only be based on a single haplotype (the backbone genome). However, the pipeline will work using the IDs **bTaeGut1_mat** (backbone ref) and **bTaeGut1_pat** (divergent haplotype of the backbone genome). You can also use "_hap1" and "_hap2", or what you prefer. These will be considered as separate samples, but it's always convenient to include the alternate haplotype of the main reference as you will retain information about their variability for downstream analyses (e.g. read mapping and variant calling). In the output VCF file, bTaeGut1_pat will appear as haploid (e.g. 0 instead of 1/0).
+* The **backbone reference** (we will use *bTaeGut7.mat*) can only be a single haplotype and **IT NEEDS TO BE CHROMOSOME-LEVEL**. Its chromosomes will be used as a template to align the other's genomes chromosomes/scaffolds and generate chromosomes graphs that will be then merged. This genome will be the main reference for the output VCF (containing the variants inside the pangenome) and will not appear as sample in the VCF. It will be also used as reference for downsteam analyses. 
+* The pipeline currently does not support the presence of both haplotypes of the backbone individual in the form bTaeGut7.1 and bTaeGut7.2. The coordinate space for chromosome compartimentalization can only be based on a single haplotype (the backbone genome). However, the pipeline will work using the IDs **bTaeGut1_mat** (backbone ref) and **bTaeGut1_pat** (divergent haplotype of the backbone reference). You can also use "_hap1" and "_hap2", or what you prefer. These will be considered as separate samples, but it's always convenient to include the alternate haplotype of the main reference as you will retain information about their variability for downstream analyses (e.g. read mapping and variant calling). In the output VCF file, bTaeGut1_pat will appear as haploid (e.g. 0 instead of 1/0).
 
-* In addition to the backbone reference, one may **specify additional assemblies as reference** when running the MC pipeline. The graph will be referenced to the backbone genome, but the additional genome's paths will serve as a reference for graph decomposition, for example, i.e. the pipeline will generate multiple VCF files, one referenced to the backbone reference and the others to the additional references (see below). The chromosome compartimentalization will still rely on the backbone references's chromosomes.
+* In addition to the backbone reference, one may **specify additional assemblies as reference** when running the MC pipeline. The graph will be referenced to the backbone genome, but the additional genomes' paths will serve as a reference for graph decomposition, for example, i.e. the pipeline will generate multiple VCF files, one referenced to the backbone reference and the others to the additional references (see below). The chromosome compartimentalization will still rely on the backbone reference's chromosomes.
 
 ### 1.3 Running the MC pipeline
 
-#### 1.3.1 Activate the Cactus python environment:
+#### 1.3.1 Activate the Cactus environment:
 
 **RUN:**
 ```conda activate cactus```
@@ -127,9 +127,9 @@ The file is organized like this:
 cactus-pangenome \
 2_bTaeGut_pangenome/jobStore \
 1_fasta_files/bTaeGut.seqfile \
---consMemory 8Gi \
---indexMemory 8Gi \
---mgMemory 8Gi \
+--consMemory 6Gi \
+--indexMemory 6Gi \
+--mgMemory 6Gi \
 --mgCores 4 \
 --mapCores 4 \
 --consCores 4 \
@@ -152,10 +152,10 @@ cactus-pangenome \
 --draw clip full 
 ```
 
-The pipeline will take around 3 minutes to run. You can find the log (the same you saw in stdout) here:  
+The pipeline will take around 5 minutes to run. You can find the log (the same you saw in stdout) here:  
 Copy and paste the outputs from the [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/2_bTaeGut_pangenome) folder if there is no time to run the command:
 ```
-cp -r reference_data/2_bTaeGut_pangenome/* 2_bTaeGut_pangenome
+cp -r reference_data/2_bTaeGut_pangenome/* 2_bTaeGut_pangenome/
 ```
 
 **The inputs:**
@@ -180,8 +180,8 @@ Multiple flags can be set:
 * ```--outName```: output prefixes
 * ```--logFile```: path where to store the log file
 * ```--reference```: the reference you want to use as a backbone followed by the other you want to use as reference for the output VCF
-* ```--refContigs```: the reference chromosomes you want MC to base the chromosomes compartimentalization on. In our case it's just ```chr22``` of bTaeGut7_hap1
-* ```--otherContigs``` (optional): tells MC to also consider unassembled scaffolds when generating the graph. They will be grouped in the same subgraph before merging the chromosomes. The name is used-defined. **Here is commented since we only have one chromosome.**
+* ```--refContigs```: the reference chromosomes you want MC to base the chromosomes compartimentalization on. In our case it's just ```chr22``` of bTaeGut7_mat
+* ```--otherContigs``` (optional): tells MC to also consider unassembled scaffolds (or other chrs not listed with ```--refContigs```) when generating the graph. They will be grouped in the same subgraph before merging the chromosomes. The name is used-defined. **We don't need this, we only have 1 chr**
 * ```--vcf```: tells MC to generate VCFs files referenced to the ```--vcfReference``` genomes 
 
 In the following tags you can specify on which type of graph you want to operate on. Three type of graphs can be generated from the MC pipeline: 
@@ -190,14 +190,14 @@ In the following tags you can specify on which type of graph you want to operate
 3. **filter graph**: used for ```vg giraffe```, contains only nodes trasversed by X number of haplotypes (10% in the HPRC human pangenome)
 
 * ```--filter 1```: removes nodes covered by less that 1 haplotype. We will use 1 since the 10% of our 4 haplotypes would be 0.4 
-* ```--gfa clip filter```: output the graphs in the text-based Graphical Fragment Assembly (GFA) format, in addition to Cactus's native alignment format (HAL). This format is typically the most compatible for exchanging graphs between ```vg``` and other pangenome tools
-* ```--gbz filter```: generate the .gbz graph file for these type of graphs. The filter grah in .gbz format is needed for ```vg giraffe```.
-* ```--giraffe filter```: generate ```vg giraffe``` indexes for the filter graph (default)
-* ```--chrom-vg clip filter```: generate the chromosome graphs in the Variation Graph (VG, .vg) format, usefull to use with the ```vg toolkit```. 
-* ```--xg clip filter```: generate the .xg index file for the whole graph. It's a compressed, indexed representation of a variation graph, specifically optimized for fast path and graph traversal operations
+* ```--gfa clip filter```: output the graphs in the text-based Graphical Fragment Assembly (GFA) format, in addition to ```Cactus```'s native alignment format (```HAL```). This format is typically the most compatible for exchanging graphs between ```vg``` and other pangenome tools
+* ```--gbz filter```: generate the ```.gbz``` graph file for these type of graphs. The filter grah in .gbz format is needed for ```vg giraffe```.
+* ```--giraffe filter```: generate ```vg giraffe``` indexes for the ```filter``` graph (default)
+* ```--chrom-vg clip filter```: generate the chromosome graphs in the Variation Graph format (```.vg```), usefull to use with the ```vg toolkit```. 
+* ```--xg clip filter```: generate the ```.xg``` index file for the whole graph. It's a compressed, indexed representation of a variation graph, specifically optimized for fast path and graph traversal operations
 *  ```--og full```: generate the graph in the ```odgi``` format  ```.og```. Usefull when running operations using ```odgi```
-* ```--viz clip full```: generate an ```odgi viz``` 1D .png for each chromosome. ```odgi``` works better with ```full``` graphs, the presence off all sequences doesn't hinder the visualization. We will generate a .png also for the ```clip``` graph as a comparison. 
-* ```--draw clip full```: generate an ```odgi draw``` 2D .png for each chromosome. ```odgi``` works better with ```full``` graphs, the presence off all sequences doesn't hinder the visualization. We will generate a .png also for the ```clip``` graph as a comparison. 
+* ```--viz clip full```: generate an ```odgi viz``` 1D ```.png``` file for each chromosome. ```odgi``` works better with ```full``` graphs, the presence off all sequences doesn't hinder the visualization. We will generate a ```.png``` also for the ```clip``` graph as a comparison. 
+* ```--draw clip full```: generate an ```odgi draw``` 2D ```.png``` file for each chromosome. 
 
 If you forget to set some of these flags don't worry, you can always generate ```.vg```, ```.og```, and other files later on.
 
@@ -206,38 +206,38 @@ If you forget to set some of these flags don't worry, you can always generate ``
 Graphs:
 
 ```bTaeGut_pangenome.sv.gfa.gz```: SV-only graph output by Minigraph<br/>
-```bTaeGut_pangenome.sv.gfa.fa.gz```: SVs included in the above Minigraph  graph in fasta format<br/>
-```bTaeGut_pangenome.full.hal```: Cactus's native alignment format, can be used to convert to MAF (multiple Alignment Files) and use it for liftovers, create tracks on the UCSC browser or perfom conservation analyses, among others<br/>
-```bTaeGut_pangenome.gfa.gz```: default ```clip``` graph in the default GFA format<br/>
-```bTaeGut_pangenome.xg```: .xg index for the default ```clip``` graph<br/>
+```bTaeGut_pangenome.sv.gfa.fa.gz```: SVs included in the above Minigraph graph in ```fasta``` format<br/>
+```bTaeGut_pangenome.full.hal```: ```Cactus```'s native alignment format, can be used to convert to ```MAF``` (multiple Alignment Files) and use it for liftovers, create tracks on the UCSC browser or perfom conservation analyses, among others<br/>
+```bTaeGut_pangenome.gfa.gz```: default ```clip``` graph in the default ```GFA``` format<br/>
+```bTaeGut_pangenome.xg```: ```.xg``` index for the default ```clip``` graph<br/>
 ```bTaeGut_pangenome.og```: default ```clip``` graph in the ```odgi``` format<br/>
 ```bTaeGut_pangenome.full.og```: ```full``` graph in the ```odgi``` format, used for graph visualization with ```odgi```<br/>
 
 ```bTaeGut_pangenome.d1.gfa.gz```: ```filter``` graph in the default GFA format (1 = kept only nodes covered by at least 1 path)<br/>
-```bTaeGut_pangenome.d1.gbz```: ```filter``` graph in GBZ format for ```vg giraffe```<br/>
-```bTaeGut_pangenome.d1.xg```: .xg index for the ```filter``` graph<br/>
+```bTaeGut_pangenome.d1.gbz```: ```filter``` graph in ```GBZ ``` format for ```vg giraffe```<br/>
+```bTaeGut_pangenome.d1.xg```: ```.xg``` index for the ```filter``` graph<br/>
 ```bTaeGut_pangenome.d1.dist```: snarl distance index needed by ```vg giraffe```<br/>
 ```bTaeGut_pangenome.d1.min```: minimizer index needed by ```vg giraffe```<br/>
-```bTaeGut_pangenome.d1.snarls```: end and start nodes for each bubble and nesting informations. Used by ```vg decontruct``` to generate the VCF files<br/>
+```bTaeGut_pangenome.d1.snarls```: end and start nodes for each bubble and nesting informations. Used by ```vg decontruct``` to generate the ```VCF``` files<br/>
 
 VCFs:
 
-```bTaeGut_pangenome.raw.vcf.gz``` : main VCF file referenced to bTaeGut7_mat before normalization<br/>
-```bTaeGut_pangenome.raw.vcf.gz.tbi```: index for the main VCF file referenced o bTaeGut7_mat before normalization<br/>
-```bTaeGut_pangenome.vcf.gz```: final main VCF file referenced to bTaeGut7_mat)<br/>
-```bTaeGut_pangenome.vcf.gz.tbi```: index for the final main VCF file referenced to bTaeGut7_mat<br/>
-```bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz```: VCF file referenced to bTaeGut7_pat before normalization<br/>
-```bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz.tbi```: index for VCF file referenced to bTaeGut7_pat before normalization<br/>
-```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz```: VCF file referenced to bTaeGut7_pat<br/>
-```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz.tbi```: index for VCF file referenced to bTaeGut7_pat<br/>
+```bTaeGut_pangenome.raw.vcf.gz``` : main ```VCF``` file referenced to bTaeGut7_mat before normalization<br/>
+```bTaeGut_pangenome.raw.vcf.gz.tbi```: index for the main ```VCF``` file referenced to bTaeGut7_mat before normalization<br/>
+```bTaeGut_pangenome.vcf.gz```: final main ```VCF``` file referenced to bTaeGut7_mat)<br/>
+```bTaeGut_pangenome.vcf.gz.tbi```: index for the final main ```VCF``` file referenced to bTaeGut7_mat<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz```: ```VCF``` file referenced to bTaeGut7_pat before normalization<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.raw.vcf.gz.tbi```: index for ```VCF``` file referenced to bTaeGut7_pat before normalization<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz```: ```VCF``` file referenced to bTaeGut7_pat<br/>
+```bTaeGut_pangenome.bTaeGut7_pat.vcf.gz.tbi```: index for ```VCF``` file referenced to bTaeGut7_pat<br/>
 
 Additional files and folders:
 
-```bTaeGut.log```: log file of the MC run<br/>
+```bTaeGut.log```: log file of the ```MC``` run<br/>
 ```bTaeGut.seqfile```: copy of the input file<br/>
 ```bTaeGut_pangenome.stats.tgz```: clipping stats<br/>
 ```./bTaeGut_pangenome.chroms```: contains any graph type we speficied in the input for each chromosome<br/>
-```./bTaeGut_pangenome.viz```: contains .png files generated with ```odgi viz```<br/>
+```./bTaeGut_pangenome.viz```: contains ```.png``` files generated with ```odgi viz``` and ```odgi draw``` <br/>
 ```./chrom-alignments```: contains intermediate files<br/>
 ```./chrom-subproblems```: contains intermediate files<br/>
 
@@ -261,8 +261,8 @@ We will generate general statistics for the pangenome using ```odgi```, starting
 
 **If you don't have an .og file** you can generate it as follows
 
-```bgzip -d -@ 8 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa.gz```  <br />
-```odgi build -t 8 -g 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa -o 2_bTaeGut_pangenome/bTaeGut_pangenome.og```
+```bgzip -d -@ 4 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa.gz```  <br />
+```odgi build -t 4 -g 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa -o 2_bTaeGut_pangenome/bTaeGut_pangenome.og```
 
 However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph
 
@@ -283,11 +283,11 @@ You can ```cat``` the output from ```odgi stats``` and look at the content.
 
 | length|nodes|edges|paths|steps|
 | ----- |:----:|:----:|:----:|:----:|
-| 1123880|54958|74832|5|136900
+| 1123880|54958|74832|5|136904
 
 The graph has:
 - **Length ~1.12 Mbp:** this is the pangenome graph sequences length, the sum of the lengths of all nodes in the graph &rarr; if you concatenate all node sequences, you would get ~1.12 Mbp of sequence
-- **~54.9k nodes**: the building blocks of the graph &rarr; each node corresponds to a contiguous DNA sequence
+- **~55k nodes**: the building blocks of the graph &rarr; each node corresponds to a contiguous DNA sequence
 - **~670k edges**:the connections between the nodes &rarr; edges describe how sequences can traverse from one node to another
 - **~5 paths**: a “path” usually corresponds to a genome/assembly/chromosome provided as input. See below for the explanation on why there are 5 paths instead of 4. 
 - **~136k steps**: the total number of node visits across all paths
@@ -304,7 +304,7 @@ ___
 #### 2. Look at the .fai index file:
 
 **RUN:**
-```cat 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta.fai```
+```cat 1_fasta_files/bTaeGut7_mat_chr22_1Mb_NC_133047.1.fasta.fai```
 
 | chr | size   | offset  | linebases | linewidth |
 | ----- |:----:|:----:|:----:|:----:|
@@ -312,8 +312,8 @@ chr22	| 1000000 |	7 | 1000000 | 1000001
 
 In this index file, the chromosome size is in the second column.
 
-* Original size of the backbone chromosome: **1.12 Mbp**
-* Pangenome size: **1 Mbp**
+* Original size of the backbone chromosome: **1 Mbp**
+* Pangenome size: **1.12 Mbp**
 
 #### ANSWER:  The pangenome size is bigger than the original reference. 
 
@@ -328,7 +328,7 @@ ______
 **pangenome length - reference length** <br/>
 1123880 bp - 1000000 bp = 123880 bp
 
-#### ANSWER: The other chromosomes augmented the reference by ~123 Kbp
+#### ANSWER: The other chromosomes augmented the reference by ~124 Kbp
 
 ___
 
@@ -374,7 +374,7 @@ ___
 
 | length|nodes|edges|paths|steps|
 | ----- |:----:|:----:|:----:|:----:|
-| 1150037|55483|75569|4|137676
+| 1150037|55484|75570|4|137680
 
 #### 2. Let's now look at the paths inside the graph. You can list the paths with ```odgi paths```.
 
@@ -393,14 +393,14 @@ bTaeGut7_pat#0#chr22
 
 #### ANSWER: in the full graph we have exactly 4 paths and the sequence length is way bigger than the clipped (6.9 Mbp). 
 
-* **Full graph**: keeps each input chromosome/haplptype as a single continuous path, 4 in total
-* **Clip graph**: removed sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 2 separate path segments. The overall graph length is also smaller than the full (~1.12 Mbp &rarr; ~1.15 Mbp))
+* **Full graph**: keeps each input chromosome/haplotype as a single continuous path, 4 in total
+* **Clip graph**: sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 2 separate path segments. The overall graph length is also smaller than the full (~1.12 Mbp &rarr; ~1.15 Mbp))
 
 ___
 
 #### QUESTION 5: *why is clipping necessary?*
 
-Clipping is necessary to reduce the complexity of the graph and make downstream analyses more feasible. For example, the very repetitive centromeric regions are clipped away and this is necessary to avoid the generation of complex loops that will hinder downstream analyses.
+#### ANSWER: Clipping is necessary to reduce the complexity of the graph and make downstream analyses more feasible. For example, the very repetitive centromeric regions are clipped away and this is necessary to avoid the generation of complex loops that will hinder downstream analyses such as read mapping.
 
 ___
 
@@ -410,13 +410,13 @@ Visualization is important to get an idea of the structure of the graph and the 
 
 ### 3.1 ```odgi draw```<sup>5</sup>
 
-In the MC command we specified to generate ```odgi draw``` graphs 2D visualizations and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+In the MC command we specified to generate ```odgi draw``` graphs 2D visualizations and these can be found in the folder ```2_bTaeGut_pangenome/bTaeGut_pangenome.viz```. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
 
 #### 3.1.1 Let's look at the ```full graph```'s png 
 
 We are looking at the ```full``` graph since ```odgi``` works better with these graphs.
 
-This is a 2D visualization of the overrall layaout of the graph.
+This is a 2D visualization of the overrall layout of the graph.
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
 
@@ -426,54 +426,65 @@ Let's zoom a bit into the bubble. It seems to be around 150000-250000 bp.
 
 #### 3.1.2 Extract a subgraph
 
+**RUN**:
 ```
 odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
              -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og \
              -r "bTaeGut7_mat#0#chr22:150000-250000"
 ```
 
+With ```-r``` you can indicate the path in the PanSN-spec format and start and end coordinates you want to extract.
+
 #### 3.1.3 Sort the subgraph
 
+**RUN**:
 ```odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og```
+
+The graph needs to be sorted for ```odgi layout```. 
 
 #### 3.1.4 Generate the 2D layout of the subgraph
 
+**RUN**:
 ```odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay```
+
+This is necessary for ```odgi draw```.
 
 #### 3.1.5 Draw the subgraph
 
 ```
 odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.draw.png
 ```
+With ```-H``` you can indicate the height of the .png file and with ```-C``` to output coloured nodes.
 
-<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.150.250.kb.sort.og.draw.png" alt="drawing" width="1000"/> <br/>
 
 The bubble is still too big to look at, and it's probably a very complicated area of the graph.
 
 #### 3.1.6 Repeat the commands zooming into a different area
+
+**RUN**:
 ```
 odgi extract -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og \
              -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og \
              -r "bTaeGut7_mat#0#chr22:180000-190000"
 ```
-
 ```
 odgi sort --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.og  -o  3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og
 ```
-
 ```
 odgi layout --threads=4 -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og  -o 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay
 ```
-
 ```
 odgi draw --threads=4 -H 3000 -C -i 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og -c 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.lay -p 3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.draw.png
 ```
 
-<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.draw.png" alt="drawing" width="1000"/> <br/>
+<img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/3_stats_and_viz/bTaeGut_pangenome.full.180.190.kb.sort.og.draw.png" alt="drawing" width="1000"/> <br/>
+
+This area seems to be full of small indels (insertions/deletions).
 
 #### 3.1.7 Check the VCF file
 
-This area seems to be full of small indels (insertions/deletions). We will look in more detailes at the variants inside the pangenome, but for now let's just check the area for the presence of these indels:
+We will look in more detailes at the ```MC``` ```VCF``` files, but for now let's just check the area for the presence of these indels:
 
 ```
 bcftools view -r chr22:180000-190000 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz
@@ -483,7 +494,7 @@ As you can see, there are a lot of variants, including SNPs and indels, and some
 
 ### 3.2 ```odgi viz```<sup>5</sup>
 
-In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder 2_bTaeGut_pangenome/bTaeGut_pangenome.viz. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
+In the MC command we specified to generate ```odgi viz``` graphs and these can be found in the folder ```2_bTaeGut_pangenome/bTaeGut_pangenome.viz```. A ```.png``` file was generated for each chromosome (one in our particular case) starting from the ```full graph``` and the ```clip graph```. 
 
 This visualization is in 1D and it's a linearized rendering of the paths versus the sequence and topology of the graph.
 
@@ -493,11 +504,9 @@ We are looking at the ```full``` graph since ```odgi``` works better with these 
 
 <img src="https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/blob/main/reference_data/2_bTaeGut_pangenome/bTaeGut_pangenome.viz/chr22.full.viz.png" alt="drawing" width="1000"/> <br/>
 
-Each line represents a different chromosome' path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
+Each line represents a different chromosome's path with their genome.ID on the right side. Each path is coloured when passing through a node and edges representing variation are represented by black lines in the bottom of the figure.
 
-There is definitely some divergence between the paths at the same level of the bubble we saw in the odgi draw 2D visualization.
-
-Let's look at the linear alignment between the two individuals we included in the pangenome. To quickly do so, let's use the NCBI [Comparative Genomes Browser](). 
+There is definitely some divergence between the paths at the same level of the bubble we saw in the ```odgi draw``` 2D visualization, but we will not investigate it today.
 
 #### 3.2.2 Change the path order in the .png
 
@@ -541,11 +550,11 @@ Now the paths are in the correct order.
 
 ### 3.2 ```SequenceTubeMap```<sup>6</sup>
 
-Another useful tool for visualizing pangenome graphs is ```SequenceTubeMap```<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same linear visualization as ```odgi viz```, but variability among genomes is displayed differently and it can be inspected interactively.
+Another useful tool for visualizing pangenome graphs is ```SequenceTubeMap```<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same 1D linear visualization as ```odgi viz```, but variability among genomes is displayed differently (as "tubes") and it can be inspected interactively.
 
-There is an [online demo](https://vgteam.github.io/sequenceTubeMap/) that can be used to upload small files. However, sometime it doesn't work (since it's just a demo) and most probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```reference_data/3_stats_and_viz/sequenceTubeMap```:
+There is an [online demo](https://vgteam.github.io/sequenceTubeMap/) that can be used to upload small files. However, sometime it doesn't work (since it's just a demo) and most probably does not support multiple users loading data at the same time. Let's try it. If it doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```reference_data/3_stats_and_viz/sequenceTubeMap```.
 
-To visualize a specific graph file without uploading it on the webpage, it is possible to launch a server which provides the data to ```SequenceTubeMap```<sup>6</sup>. See instructions on the [```SequenceTubeMap``` GitHub page](https://github.com/vgteam/```SequenceTubeMap```). In this course we will just prepare the files and you can try later at home.
+To visualize a specific graph file without uploading it on the webpage, it is possible to launch a server which provides the data to ```SequenceTubeMap```<sup>6</sup>. See instructions on the [SequenceTubeMap GitHub page](https://github.com/vgteam/```SequenceTubeMap```). In this course we will just prepare the files and you can try later at home.
 
 First, we will chunk the graph in a smaller piece to be able to visualize it fast.
 
@@ -567,14 +576,12 @@ The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context 
 **RUN:**
 ```vg convert -t 4 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
 
-```vg convert -t 4 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.xg```
-
 #### 3.2.3 Look at the paths inside the chunk
 
 We can use ```vg path``` since we are looking at the ```.xg``` file.
 
 **RUN:**
-```vg paths -L -x bTaeGut_pangenome.chunk.100Kb.xg```
+```vg paths -L -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
 ```
 bTaeGut7_pat#0#chr22[6348-38182]
 bTaeGut7_pat#0#chr22[38183-91119]
@@ -587,9 +594,9 @@ bTaeGut2#1#chr22#5771[35792-39253]
 bTaeGut2#1#chr22#5771[4542-13552]
 ```
 
-As you can see we have more paths, this happens because the chunk may include disconnected pieces of a path (because nodes outside the requested range were dropped), so each connected run becomes its own [start-end] fragment. ```vg chunk``` splits each original path into the pieces that lie inside the subgraph we extracted. 
+```vg chunk``` splits each original path into the pieces that lie inside the subgraph we extracted. As you can see we have more paths than before, and this happens because the chunk might include disconnected pieces of a path (because nodes outside the requested range were dropped) and each becomes its own start-to-end fragment. 
 
-#### 3.2.4 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/). 
+#### 3.2.4 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/) 
 
 You can find the files in this github repository, download it directly from her the the computer:
 * ```3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
@@ -601,7 +608,7 @@ Follow the instructions:
 
 ## 4. Pangenome-embedded small variants
 
-We looked at the structure of the graph and the variants inside the pangenome, but *how can I look at them in a canonical way and use them for downstream analysis?*
+We looked at the structure of the graph and the variants inside the pangenome, but *how can I look at them in a canonical way and use them for downstream analyses?*
 
 The MC pipeline produces **VCF files** referenced to the backbone reference and other genomes you specified in the command. You can find information about the ```VCF ```format [here](https://samtools.github.io/hts-specs/VCFv4.2.pdf).
 
@@ -609,7 +616,7 @@ The process through which the variants are defined is called **graph decompositi
 
 You might have noticed "raw" ```VCF``` files. These are those directly outputted by ```vg deconstruct``` inside that are then normalized and postprocessed automatically.
 
-Let's look at the ```VCF``` referenced to our backbone reference.
+Let's look at the final ```VCF``` referenced to our backbone reference: ```2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz```
 
 ___
 
@@ -621,7 +628,7 @@ You can find information about the samples in the last row of the ```VCF``` ```h
 ```bcftools view 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | head -20```
 
 ```
-#fileformat=VCFv4.2
+##fileformat=VCFv4.2
 ##FILTER=<ID=PASS,Description="All filters passed">
 ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
 ##INFO=<ID=CONFLICT,Number=.,Type=String,Description="Sample names for which there are multiple paths in the graph with conflicting alleles">
@@ -634,7 +641,7 @@ You can find information about the samples in the last row of the ```VCF``` ```h
 ##INFO=<ID=AT,Number=R,Type=String,Description="Allele Traversal as path in graph">
 ##contig=<ID=chr22,length=1000000>
 ##bcftools_viewVersion=1.21+htslib-1.21
-##bcftools_viewCommand=view 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz; Date=Wed Aug 27 10:29:53 2025
+##bcftools_viewCommand=view 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz; Date=Thu Sep  4 20:42:15 2025
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	bTaeGut2	bTaeGut7_pat
 chr22	14063	>351>354	C	G	60	.	AC=1;AF=0.5;AN=2;AT=>351>352>354,>351>353>354;NS=2;LV=0	GT	1|.	0
 chr22	14268	>354>356	T	TT	60	.	AC=1;AF=0.5;AN=2;AT=>354>356,>354>355>356;NS=2;LV=0	GT	1|.	0
@@ -649,7 +656,7 @@ ___
 
 #### QUESTION 7: *why the diploid individual's genotypes are separed by a "|"?*
 
-Usually, when you call the variants from short-read mapping, for example, you have calls like this one ```1\1```.
+Usually, when you call the variants from short-read mapping you have calls like this one ```1\1```.
 
 in a ```VCF```:
 * ```/``` &rarr; **unphased** = we know the two alleles are present but don’t know which belongs to which haplotype
@@ -661,35 +668,29 @@ ____
 
 #### QUESTION 8: *how many SNPs and how many INDELS our pangenome includes?*
 
-Let's look at biallelic SNPs and INDELS, which are those suitable to generate Principal Component Analysis (PCA) plots and other population genomics analysis.
+Let's look at biallelic SNPs and INDELS, which are those suitable to generate Principal Component Analysis (PCA) plots and other population genomics analyses.
 
 * To count biallelic SNPs **RUN:**
 
 **RUN:**
 ```bcftools view -v snps --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | grep -v "^#" | wc -l```
+```12012```
 
 * To count biallelic INDELs **RUN:**
 
 ```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | grep -v "^#" | wc -l```
 
-* To count the number of insertions and deletions **RUN:**
+* To count the number of insertions (ref allele length < alt allele length) **RUN:**
+
+```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($4) < length($5)' | wc -l```
+
+* To count the number of deletions (ref allele length > alt allele length) **RUN:**
 
 ```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($4) > length($5)' | wc -l```
 
-* To count the number of deletions **RUN:**
+#### ANSWER: the pangenome contains 12012 biallelic SNPs and 1766 biallelic INDELs, of which 827 are insertions and 947 are deletions.
 
-```bcftools view -v indels --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz | awk 'length($5) > length($4)' | wc -l```
-
-#### ANSWER: the pangenome contains 12012 biallelic SNPs and 1766 biallelic INDELs, of which 947 are indertions and 827 are deletions.
-
-Of course, these variants needs to be filtered and validated for downstream analyses, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with ```SequenceTubeMap``` by chunking the graph around the variant coordinates.
-
-#PCA
-
-bcftools view -v snps --max-alleles 2 2_bTaeGut_pangenome/bTaeGut_pangenome.vcf.gz -Oz -o 3_stats_and_viz/bTaeGut_pangenome.SNPs.vcf.gz
-
-
-plink --vcf 3_stats_and_viz/bTaeGut_pangenome.SNPs.vcf.gz --pca --double-id --make-bed --vcf-half-call haploid --set-missing-var-ids @:# --out 3_stats_and_viz/bTaeGut_pangenome.SNPs.PCA > 3_stats_and_viz/bTaeGut_pangenome.SNPs.PCA.log
+Of course, these variants needs to be filtered and validated for downstream analyses, but this can give us an idea of the variability among the individuals included in the graph. You can also look at a particular variant with ```odgi draw/viz``` and/or ```SequenceTubeMap``` by chunking the graph around the variant coordinates.
 
 _____
 
@@ -726,7 +727,7 @@ cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam 5.1_vg_giraffe
 
 #### The inputs
 
-* ```--gbz-name```: the ```filtered .gbz graph``` generated bu the ```MC pipeline```.
+* ```--gbz-name```: the ```filtered .gbz graph``` generated by the ```MC pipeline```.
 * ```-m``` and ```-d```: the two indexes ```.min``` and ```.dist``` generated by the ```MC pipeline```.
 * ```-f```: raw reads to align (forward and reverse)
 * ```-N```: the sample name
@@ -738,15 +739,18 @@ The output of vg giraffe is a ```GAM``` file, which stores alignments in ```vg``
 ```vg giraffe``` log (stdout):
 
 ```
+...
 Using fragment length estimate: 488.569 +/- 128.728
-Mapped 1722530 reads across 4 threads in 203.879 seconds with 7.92238 additional single-threaded seconds.
-Mapping speed: 2091.87 reads per second per thread
-Used 791.928 CPU-seconds (including output).
-Achieved 2175.11 reads per CPU-second (including output)
-Used 3586241473540 CPU instructions (not including output).
-Mapping slowness: 2.08196 M instructions per read at 4528.5 M mapping instructions per inclusive CPU-second
-Memory footprint: 0.339954 GB
+Mapped 1722530 reads across 4 threads in 202.98 seconds with 7.92511 additional single-threaded seconds.
+Mapping speed: 2101.04 reads per second per thread
+Used 788.89 CPU-seconds (including output).
+Achieved 2183.48 reads per CPU-second (including output)
+Used 3587754748337 CPU instructions (not including output).
+Mapping slowness: 2.08284 M instructions per read at 4547.85 M mapping instructions per inclusive CPU-second
+Memory footprint: 0.347534 GB
 ```
+
+This log might change a bit since I tested it on a different computer.
 
 ____
 
@@ -762,11 +766,11 @@ To answer this question we need to generate statistics for the ```GAM``` file. W
 ```
 Total alignments: 1722530
 ...
-Total aligned: 950821
+Total aligned: 950807
 ...
 ```
 
-In the vg stats output, ```total alignments``` are acqually the number of available reads (i.e. possible alignments), while ```total aligned``` are the reads that actually aligned. We have aligned the 55% of the reads, remember we only have the first 1 Mbp of chr22 in the pangenome, while the reads were samples as those aligning to the whole chr22. 
+In the vg stats output, ```total alignments``` are acqually the number of available reads (i.e. possible alignments), while ```total aligned``` are the reads that actually aligned. Remember we only have the first 1 Mbp of chr22 in the pangenome, while the reads were samples as those aligning to the whole chr22. 
 
 #### ANSWER: we have aligned 950 K paired reads
 
@@ -813,11 +817,11 @@ samtools sort -@ 2 \
 -o 5.2_bwa_mem/SRR16569049_bwa_mem_chr22.sort.bam
 ```
 
-This alingments takes around 5.6 minutes to complete.
+This alingment, conversion SAM to BAM, and sorting, takes around 5.6 minutes to complete.
 
 Differently to ```vg giraffe```, ```BWA mem``` outputs secondary alignments by default. Remember to remove them for downstream analyses or for comparisons with the ```vg``` alignments.
 
-2. Check the stats for the linear alignment
+2. Check the stats for the linear alignment to check everything went ok
 ```samtools flagstats -@ 4 5.2_bwa_mem/SRR16569049_bwa_mem_chr22.sort.bam 1>  5.2_bwa_mem/SRR16569049_bwa_mem_chr22.sort.bam.flagstats.out```
 
 3. Estimate the insert size statistics
@@ -838,8 +842,11 @@ vg giraffe -t 4 -p \
     -f 4_short_reads/SRR16569049_2_chr22.fastq.gz \
     -N wildtype10 \
     --fragment-mean 392.291361 --fragment-stdev 264.240795 \
-    > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22_frament_size.gam
+    > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22_fragment_size.gam
 ```
+
+If you want to try this, it will throw an error. Unfortunately the Cactus version we installed has a different ```vg``` version than that in the other conda environment. You can try use the ```vg``` inside the ```Cactus``` alignment.
+
 ___
 
 ### 5.2 Project graph alignments onto a linear reference with ```vg surject```
@@ -878,17 +885,18 @@ Copy and paste the outputs from the [reference_data/](https://github.com/SimonaS
 ```
 cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam 
 ```
+
 #### The inputs
-* ```--xg-name```: ```filtered graph``` in ```.xg``` format. We already ave it since we asked MC to generate an ```.xg``` index for the ```clip``` and ```filter``` graph
+* ```--xg-name```: ```filtered graph``` in ```.xg``` format. We already have it since we asked MC to generate an ```.xg``` index for the ```clip``` and ```filter``` graph
 * ```-F``` : reference paths file
-* ```-R``` : read groups information fow downstream analyses. See below.
+* ```-R``` : read groups information for downstream analyses. See below.
 * ```--interleaved```: to indicate the GAM file contains interleaved paired-end reads
 * ```--bam-output```: to indicate we want a bam file as output
 * the ```GAM``` input file
 
-For downstream analyses and post-processing, such as  ```picard MarkDuplicates ``` or  ```GATK```, read groups are extremely important to distinguish sets of reads that were generated from a single run of a sequencing instrument, being able to track sequencing library artifacts and technical variations that arise during different sequencing runs. More information of read groups can be found [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups).
+For downstream analyses and post-processing, such as  ```picard MarkDuplicates ``` or  ```GATK```, read groups are extremely important to distinguish sets of reads that were generated from a single run of a sequencing instrument, being able to track sequencing library artifacts and technical variations that arose during different sequencing runs. More information on read groups can be found [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups).
 
-However, NCBI ofter removes the read group information from the fastq files, so we had to make up unique names.
+However, NCBI ofter removes the read group information from the fastq files, so we had to make up unique names sometime, like in this case.
 
 ### The output
 
@@ -918,7 +926,7 @@ Check before and after.
 @RG	ID:@RG\tID:SRR16569049\tPL:ILLUMINA\tSM:wildtype10\tPU:SRR16569049\tLB:SRR16569049	SM:wildtype10
 @PG	ID:0	PN:vg
 @PG	ID:samtools	PN:samtools	PP:0	VN:1.22.1	CL:samtools sort -@ 4 -o 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.bam
-@PG	ID:samtools.1	PN:samtools	PP:samtools	VN:1.22.1	CL:samtools view -H 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam
+@PG	ID:samtools.1	PN:samtools	PP:samtools	VN:1.22.1	CL:samtools view -H  5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sort.bam
 ```
 
 **After**
@@ -953,19 +961,19 @@ To answer this question we need to generate statistics for the BAM file. We can 
 ...
 1722530 + 0 in total (QC-passed reads + QC-failed reads)
 ...
-872688 + 0 mapped (50.66% : N/A)
+872676 + 0 mapped (50.66% : N/A)
 ```
 
-#### ANSWER: we have aligned 872 K paired reads
+#### ANSWER: we have aligned wound 873 K paired reads
 
 ___
 
 #### QUESTION 11: *did we lost some read during surjection?*
 
-Aligned reads in the ```GAM``` file: **950821**
-Aligned reads in the ```BAM``` file: **872688**
+Aligned reads in the ```GAM``` file: **950807**
+Aligned reads in the ```BAM``` file: **872676**
 
-#### ANSWER: 78133 reads that were mapped in the graphical alignment ``GAM``, are now stored in the ``BAM`` file as unmapped. These reads couldn't be projected one the linear path we chose because they probably aligned exclusively to an alternative path with no embedding on your chosen paths, i.e. true novel insertions), it only flanks/partially overlaps the path so no continuous projection exists, or the alignment is too complex/ambiguous for a consistent projection.
+#### ANSWER: 78131 (950807-872676) reads that were mapped in the graphical alignment ``GAM``, are now stored in the ``BAM`` file as unmapped. These reads couldn't be projected one the linear path we chose because they probably aligned exclusively to an alternative path with no embedding on your chosen paths, i.e. true novel insertions), it only flanks/partially overlaps the path so no continuous projection exists, or the alignment is too complex/ambiguous for a consistent projection.
 
 *New computational methods and file formats other than the linear binary alignment map (``BAM``) and variant call format (``VCF``) need to be developed to overcome this limitation and represent all the information embedded in the graph<sup>1</sup>.*
 
@@ -982,16 +990,16 @@ First, we will chunk the ```GAM``` and the ```filter``` graph used for the align
 ##### 5.3.1 Sort and index ```GAM```
 
 **RUN:**
-```vg gamsort -t 4 -i 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam  > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam```
+```vg gamsort -t 4 -i 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam```
 
 This will take around 3 minutes to run.
-Copy and paste the outputs from the [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/5.1_vg_giraffe) folder if there is no time to run the command:
+Copy and paste the outputs from the [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/5.1_vg_giraffe) folder if there is no time to run the command or the command gets killed (killed with 6 GB RAM, needs at least 8GB):
 ```
 cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam
 cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai
 ```
 
-##### 5.3.2 Chunk the sorted ```GAM``` and the ```filter``` graph
+##### 5.3.2 Chunk the sorted ```GAM``` and the ```filter``` graph we used as reference
 
 **RUN:**
 ```vg chunk -t 4 -c 1 -p bTaeGut7_mat#0#chr22:0-100000 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.d1.xg -a 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam -g -O vg --prefix 6_vg_giraffe_viz/bTaeGut_pangenome > 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg```
@@ -1000,10 +1008,10 @@ cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1
 
 **Inputs:**
 * ```-p```: the coordinates to chunk
-* ```-x```: the ```.xg``` graph
+* ```-x```: the ```.xg``` ```filtered``` graph
 * ```-a```: the sorted and indexed ```.gam``` file
 * ```-g```: tells the program to chunk both the graph and the ```.gam```
-* ```-O``` specifies the file name for the chunked graph (```.vg``` format)
+* ```-O```: specifies the file name for the chunked graph (```.vg``` format)
 * ```--prefix```: specifies the chunked ```.gam``` path and prefix
   
 **Outputs:**
@@ -1015,7 +1023,7 @@ cp reference_data/5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.sorted.gam.gai 5.1
 **RUN:**
 ```vg convert -t 4 -x 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.vg > 6_vg_giraffe_viz/bTaeGut_pangenome.d1.chunk.100k.xg```
 **RUN:**
-```vg gamsort -t 4 -i 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam.gai 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.gam  >  6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam ```
+```vg gamsort -t 4 -i 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam.gai 6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.gam  >  6_vg_giraffe_viz/bTaeGut_pangenome_0_bTaeGut7_mat#0#chr22_0_100016.sorted.gam```
 
 This will take a couple of minutes to run.
 Copy and paste the outputs from the [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/6_vg_giraffe_viz) folder if there is no time to run the command:
@@ -1037,50 +1045,7 @@ Follow the instructions:
 * Select "Custom" from the "Data" drop down menu > Click on "Configure Tracks" > click the "+" button > leave "graph" but change "mounted" with "upload" > select the .xg file from the Download folder > close using the "x" in the upper right corner
 * Click "+" > change "graph" with "read" > change "mounted" with "upload" > select the .gam file from the Download folder
   
-If the online demo doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```6_vg_giraffe_viz/sequenceTubeMap/```:
-
-
-
-
-
-##other things
-
-
-### 4.5 align reads against the linear reference
-
-bwa index 1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta
-
-bwa mem -t 16 -M \
--R "@RG\tID:SRR16569049\tPL:ILLUMINA\tSM:wildtype10\tPU:SRR16569049\tLB:SRR16569049" \
-1_fasta_files/bTaeGut7_mat_chr22_NC_133047.1.fasta \
-4_short_reads/SRR16569049_1_chr22.fastq.gz \
-4_short_reads/SRR16569049_2_chr22.fastq.gz | \
-samtools view -@ 16 -bS |
-samtools sort -@ 16 \
--o 5.2_bwa_mem/SRR16569049_bwa_mem_chr22.bam
-
-BWAmem outputs secondary alignments, remember to remove also those to match BWAmem and vg safari
-
-### 4.5 generate statistics for the linear BAM
-
-samtools flagstats -@ 32 5.2_bwa_mem/SRR16569049_bwa_mem_chr22.bam 1> 5.2_bwa_mem/SRR16569049_bwa_mem_chr22.bam.flagstats.out 
-
-#to get insert size
-
-picard CollectInsertSizeMetrics I=5.2_bwa_mem/SRR16569049_bwa_mem.sort.bam O=5.2_bwa_mem/insert_metrics.txt H=5.2_bwa_mem/insert_hist.pdf M=0.5 VALIDATION_STRINGENCY=SILENT
-grep -A1 "^MEDIAN_INSERT_SIZE" 5.2_bwa_mem/insert_metrics.txt | tail -n1 | awk -F'\t' '{printf("--fragment-mean %s --fragment-stdev %s\n",$6,$7)}'
---fragment-mean 429.131808 --fragment-stdev 231.084784
-
-### 4.5 remove secondary and supplementary alignments and unmapped reads
-
-While for vg giraffe and surject you need to specify that you also want supplementary and secondary alignments, BWA meme does it by default, so we need to remove those.
-
-samtools view -@ 16 -bF 2308  5.2_bwa_mem/SRR16569049_bwa_mem.sort.bam | samtools sort -@ 16 -o  5.2_bwa_mem/SRR16569049_bwa_mem_mapped.sort.bam
-samtools flagstats -@ 32 5.2_bwa_mem/SRR16569049_bwa_mem_mapped.sort.bam 1> 5.2_bwa_mem/SRR16569049_bwa_mem_mapped.sort.bam.flagstats.out 
-
-
-
-
+If the online demo doesn't work, you can look at my screen and the screenshots and videos I uploaded in the folder ```6_vg_giraffe_viz/sequenceTubeMap/```.
 
 # References
 
