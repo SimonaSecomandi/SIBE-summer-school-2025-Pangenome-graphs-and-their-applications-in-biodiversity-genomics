@@ -152,7 +152,8 @@ cactus-pangenome \
 --draw clip full 
 ```
 
-The pipeline will take around 5 minutes to run. You can find the log (the same you saw in stdout) here: ```2_bTaeGut_pangenome/bTaeGut.log``` <\ br>
+The pipeline will take around 5 minutes to run. You can find the log (the same you saw in stdout) here: ```2_bTaeGut_pangenome/bTaeGut.log``` <br />
+
 Copy and paste the outputs from the [reference_data/](https://github.com/SimonaSecomandi/SIBE-summer-school-2025-Pangenome-graphs-and-their-applications-in-biodiversity-genomics/tree/main/reference_data/2_bTaeGut_pangenome) folder if there is no time to run the command or there are issues with the Cactus environment:
 
 **RUN:**
