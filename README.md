@@ -1,6 +1,6 @@
 # Day1: Pangenome graphs and their application to biodiversity genomics
 
-This repository contains the script and files for the pratical part of the course "Pangenome graphs and their application to biodiversity genomics" held the 8th of September 2025 in Ferrara, Italy, as part of the [SIBE summer school](https://sites.google.com/view/sibesummerschool/home-page).
+This repository contains the scripts and files for the pratical part of the course "Pangenome graphs and their application to biodiversity genomics" held the 8th of September 2025 in Ferrara, Italy, as part of the [SIBE summer school](https://sites.google.com/view/sibesummerschool/home-page).
 
 The title of this course recalls our recent pangenomics review:
 [Secomandi, S., Gallo, G., et al. Pangenome graphs and their applications in biodiversity genomics. Nat. Genet. 57, 13–26 (2025)](https://www.nature.com/articles/s41588-024-02029-6)
