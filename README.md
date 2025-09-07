@@ -395,7 +395,7 @@ bTaeGut7_mat#0#chr22
 bTaeGut7_pat#0#chr22
 ```
 
-#### ANSWER: in the full graph we have exactly 4 paths and the sequence length is way bigger than the clipped (6.9 Mbp). 
+#### ANSWER: in the full graph we have exactly 4 paths and the sequence length is way bigger than the clipped (1.15 Mbp). 
 
 * **Full graph**: keeps each input chromosome/haplotype as a single continuous path, 4 in total
 * **Clip graph**: sequences that don't overlap across genomes and long chromosomes get split into multiple segments and that's why bTaeGut2#1#chr22#0 appears in 2 separate path segments. The overall graph length is also smaller than the full (~1.12 Mbp &rarr; ~1.15 Mbp))
