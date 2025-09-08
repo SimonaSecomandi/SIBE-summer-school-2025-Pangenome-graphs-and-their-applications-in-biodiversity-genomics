@@ -762,6 +762,7 @@ To answer this question we need to generate statistics for the ```GAM``` file. W
 
 **RUN:**
 ```vg stats --threads 4 -a 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam > 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam.stats```
+
 **RUN:**
 ```cat 5.1_vg_giraffe/SRR16569049_vg_giraffe_chr22.gam.stats```
 
