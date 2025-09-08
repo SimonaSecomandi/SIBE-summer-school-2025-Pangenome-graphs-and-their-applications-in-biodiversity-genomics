@@ -552,7 +552,7 @@ Look at the new .png (```3_stats_and_viz/bTaeGut_pangenome.full.og.sort.viz.png`
 
 Now the paths are in the correct order.
 
-### 3.2 ```SequenceTubeMap```<sup>6</sup>
+### 3.3 ```SequenceTubeMap```<sup>6</sup>
 
 Another useful tool for visualizing pangenome graphs is ```SequenceTubeMap```<sup>6</sup>. It visualizes the graph in ```.vg``` format using the same 1D linear visualization as ```odgi viz```, but variability among genomes is displayed differently (as "tubes") and it can be inspected interactively.
 
@@ -562,7 +562,7 @@ To visualize a specific graph file without uploading it on the webpage, it is po
 
 First, we will chunk the graph in a smaller piece to be able to visualize it fast.
 
-#### 3.2.1 Chunk the graph 
+#### 3.3.1 Chunk the graph 
 
 You can visualize a ```.vg``` graph and it's index ```.xg``` with ```SequenceTubeMap```. To aid visualization and avoid using too much memory, we will subsample the graph at specific coordinates using ```vg chunk```<sup>7</sup>.
 
@@ -575,12 +575,12 @@ The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context 
 
 *Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
 
-#### 3.2.2 Index the new ```.vg``` chunk
+#### 3.3.2 Index the new ```.vg``` chunk
 
 **RUN:**
 ```vg convert -t 4 -x 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.xg```
 
-#### 3.2.3 Look at the paths inside the chunk
+#### 3.3.3 Look at the paths inside the chunk
 
 We can use ```vg path``` since we are looking at the ```.xg``` file.
 
@@ -600,7 +600,7 @@ bTaeGut2#1#chr22#5771[4542-13552]
 
 ```vg chunk``` splits each original path into the pieces that lie inside the subgraph we extracted. As you can see we have more paths than before, and this happens because the chunk might include disconnected pieces of a path (because nodes outside the requested range were dropped) and each becomes its own start-to-end fragment. 
 
-#### 3.2.4 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/) 
+#### 3.3.4 Upload the files in the [online demo](https://vgteam.github.io/SequenceTubeMap/) 
 
 You can find the files in this github repository, download it directly from her the the computer:
 * ```3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
