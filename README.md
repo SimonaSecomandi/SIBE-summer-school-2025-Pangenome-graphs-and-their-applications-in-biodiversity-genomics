@@ -257,7 +257,7 @@ After the generation of the pangenome, the first thing to do is to check the sta
 ##### Activate the conda environment with all our commands:
 
 **RUN:**
-```conda activate pangenomics_corse```
+```conda activate pangenomics_course```
 
 #### 2.1 Generate graph statistics
 
