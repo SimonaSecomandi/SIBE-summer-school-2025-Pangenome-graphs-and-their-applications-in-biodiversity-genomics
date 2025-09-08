@@ -23,7 +23,7 @@ This practical course will walk you through building, inspecting, and using a sm
 **3. Visualization and subsampling**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 ```odgi draw```<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 ```odgi viz```<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 ```SequenceTubeMap```<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3 ```SequenceTubeMap```<br />
 **4. Pangenome-embedded small variants**<br />
 **5. Mapping of short-reads data with ```vg giraffe```**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 Align the reads with ```vg giraffe```<br />
