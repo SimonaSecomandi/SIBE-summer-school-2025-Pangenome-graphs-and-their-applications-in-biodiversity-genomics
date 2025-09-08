@@ -199,7 +199,7 @@ In the following tags you can specify on which type of graph you want to operate
 * ```--giraffe filter```: generate ```vg giraffe``` indexes for the ```filter``` graph (default)
 * ```--chrom-vg clip filter```: generate the chromosome graphs in the Variation Graph format (```.vg```), usefull to use with the ```vg toolkit```. 
 * ```--xg clip filter```: generate the ```.xg``` index file for the whole graph. It's a compressed, indexed representation of a variation graph, specifically optimized for fast path and graph traversal operations
-*  ```--og full```: generate the graph in the ```odgi``` format  ```.og```. Usefull when running operations using ```odgi```
+*  ```--odgi full```: generate the graph in the ```odgi``` format  ```.og```. Usefull when running operations using ```odgi```
 * ```--viz clip full```: generate an ```odgi viz``` 1D ```.png``` file for each chromosome. ```odgi``` works better with ```full``` graphs, the presence off all sequences doesn't hinder the visualization. We will generate a ```.png``` also for the ```clip``` graph as a comparison. 
 * ```--draw clip full```: generate an ```odgi draw``` 2D ```.png``` file for each chromosome. 
 
@@ -268,7 +268,7 @@ We will generate general statistics for the pangenome using ```odgi```, starting
 ```bgzip -d -@ 4 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa.gz```  <br />
 ```odgi build -t 4 -g 2_bTaeGut_pangenome/bTaeGut_pangenome.gfa -o 2_bTaeGut_pangenome/bTaeGut_pangenome.og```
 
-However, we asked MC to generate an odgi file with ```--og full clip```, so **we can directly generate statistics** for the ```clipped``` graph
+However, we asked MC to generate an odgi file with ```--odgi full clip```, so **we can directly generate statistics** for the ```clipped``` graph
 
 **RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.og > 3_stats_and_viz/bTaeGut_pangenome.og.stats```
@@ -368,7 +368,7 @@ ___
 
 #### QUESTION 4: *Does this occur in the full graph too, or is this a result of clipping?*
 
-#### 1. Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--og full clip```).
+#### 1. Generate the stats for the ```full``` graph (we already have a ```.full.og``` file, we asked MC to generate it with ```--odgi full clip```).
 
 **RUN:**
 ```odgi stats -S -i 2_bTaeGut_pangenome/bTaeGut_pangenome.full.og > 3_stats_and_viz/bTaeGut_pangenome.full.og.stats```
