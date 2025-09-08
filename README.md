@@ -569,8 +569,6 @@ You can visualize a ```.vg``` graph and it's index ```.xg``` with ```SequenceTub
 **RUN:**
 ```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.100Kb.vg```
 
-```vg chunk -t 4 -c 1 -x 2_bTaeGut_pangenome/bTaeGut_pangenome.xg -p bTaeGut7_mat#0#chr22:0-100000 -O vg > 3_stats_and_viz/bTaeGut_pangenome.chunk.150.250.Kb.vg```
-
 The flag ```-c, --context-steps N``` tells ```vg chunk``` to expand the context of the chunk this many node steps.
 
 *Ignore the warning: "warning[vg chunk]: the vg-protobuf format is DEPRECATED. you probably want to use PackedGraph (pg) instead"*
